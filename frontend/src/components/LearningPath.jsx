@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { BookOpen, Star, Lock } from 'lucide-react';
+import { BookOpen, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import LearningNode from '@/components/LearningNode';
 import LessonModal from '@/components/LessonModal';
+import TextbookViewer from '@/components/TextbookViewer';
 import { toast } from 'sonner';
 import {
   Select,
@@ -38,22 +39,34 @@ export default function LearningPath() {
   const [selectedChapter, setSelectedChapter] = useState('');
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showTextbook, setShowTextbook] = useState(false);
+  const [currentTextbookLesson, setCurrentTextbookLesson] = useState(null);
 
   const handleSubjectChange = (value) => {
     setSelectedSubject(value);
-    setSelectedChapter(''); // Reset chapter when subject changes
+    setSelectedChapter('');
+    setShowTextbook(false); // Reset textbook view when subject changes
   };
 
   const currentChapters = chaptersBySubject[selectedSubject] || [];
 
+  const handleStartLesson = (lesson) => {
+    setCurrentTextbookLesson(lesson);
+    setShowTextbook(true);
+    setIsModalOpen(false);
+  };
+
+  const handleCloseTextbook = () => {
+    setShowTextbook(false);
+    setCurrentTextbookLesson(null);
+  };
+
   // Generate nodes based on selected chapter
   const getNodes = () => {
-    // START with Welcome Lesson as first node
     const nodes = [
-      { ...genericNodes[0], showTitle: true, position: 'center' }, // Welcome - START node
+      { ...genericNodes[0], showTitle: true, position: 'center' },
     ];
     
-    // Add chapter-specific subsection nodes in vertical stack (all centered)
     if (selectedSubject && selectedChapter && chapterContent[selectedSubject]?.[selectedChapter]) {
       const subsections = chapterContent[selectedSubject][selectedChapter].subsections;
       subsections.forEach((subsection) => {
@@ -61,9 +74,9 @@ export default function LearningPath() {
           id: subsection.id,
           type: 'chapter-section',
           status: subsection.status,
-          position: 'center', // All centered for vertical stack
-          customIcon: subsection.icon, // Topic-specific icon
-          showTitle: false, // Don't show text label
+          position: 'center',
+          customIcon: subsection.icon,
+          showTitle: false,
           fullData: subsection
         });
       });
@@ -72,21 +85,18 @@ export default function LearningPath() {
     return nodes;
   };
   
-  // Floating generic nodes (not in main path) - Only 4 nodes now
   const floatingNodes = [
-    { ...genericNodes[1], showTitle: true }, // Basic Concepts
-    { ...genericNodes[2], showTitle: true }, // Practice Session
+    { ...genericNodes[1], showTitle: true },
+    { ...genericNodes[2], showTitle: true },
     { id: 'advanced', type: 'locked', status: 'locked', title: 'Advanced Topics', showTitle: true },
     { id: 'assessment', type: 'locked', status: 'locked', title: 'Final Assessment', showTitle: true }
   ];
 
   const handleNodeClick = (node) => {
     if (node.fullData) {
-      // Chapter subsection node - open modal
       setSelectedLesson(node.fullData);
       setIsModalOpen(true);
     } else {
-      // Generic node - show toast
       if (node.status === 'locked') {
         toast.info('Complete previous lessons to unlock!');
       } else if (node.status === 'active') {
@@ -107,14 +117,11 @@ export default function LearningPath() {
       <div className="max-w-3xl mx-auto mb-12">
         <Card className="bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] border-0 p-6 shadow-2xl">
           <div className="space-y-4">
-            {/* Title */}
             <h2 className="text-xl font-bold text-[hsl(var(--main-bg))] mb-4">
               Select Your Learning Focus
             </h2>
             
-            {/* Dropdowns Row */}
             <div className="flex items-center gap-4">
-              {/* Subject Dropdown */}
               <div className="flex-1">
                 <Select value={selectedSubject} onValueChange={handleSubjectChange}>
                   <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
@@ -137,7 +144,6 @@ export default function LearningPath() {
                 </Select>
               </div>
 
-              {/* Chapter Dropdown */}
               <div className="flex-1">
                 <Select 
                   value={selectedChapter} 
@@ -167,7 +173,6 @@ export default function LearningPath() {
                 </Select>
               </div>
 
-              {/* Guidebook Button */}
               <Button
                 size="lg"
                 variant="outline"
@@ -181,68 +186,56 @@ export default function LearningPath() {
         </Card>
       </div>
 
-      {/* Learning Path - Only Chapter Subsections */}
-      <div className="max-w-2xl mx-auto space-y-8 relative z-10">
-        {nodes.map((node, index) => (
-          <div
-            key={node.id}
-            className="flex justify-center"
-          >
-            <LearningNode
-              node={node}
-              onClick={() => handleNodeClick(node)}
-              delay={index * 100}
-            />
+      {/* Conditional Rendering: Textbook Viewer OR Learning Path */}
+      {showTextbook && currentTextbookLesson ? (
+        <TextbookViewer 
+          lesson={currentTextbookLesson} 
+          onClose={handleCloseTextbook}
+        />
+      ) : (
+        <>
+          {/* Learning Path - Only Chapter Subsections */}
+          <div className="max-w-2xl mx-auto space-y-8 relative z-10">
+            {nodes.map((node, index) => (
+              <div key={node.id} className="flex justify-center">
+                <LearningNode
+                  node={node}
+                  onClick={() => handleNodeClick(node)}
+                  delay={index * 100}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {/* Floating Generic Nodes - Scattered in Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Basic Concepts - Left Middle */}
-        <div className="absolute top-1/3 left-20 pointer-events-auto">
-          <LearningNode
-            node={floatingNodes[0]}
-            onClick={() => handleNodeClick(floatingNodes[0])}
-          />
-        </div>
-        
-        {/* Practice Session - Right Side, Below Welcome Lesson */}
-        <div className="absolute top-96 right-32 pointer-events-auto">
-          <LearningNode
-            node={floatingNodes[1]}
-            onClick={() => handleNodeClick(floatingNodes[1])}
-          />
-        </div>
-        
-        {/* Advanced Topics - Left Bottom */}
-        <div className="absolute bottom-48 left-16 pointer-events-auto">
-          <LearningNode
-            node={floatingNodes[2]}
-            onClick={() => handleNodeClick(floatingNodes[2])}
-          />
-        </div>
-        
-        {/* Final Assessment - Right Side, Below Practice Session, Above Mascot */}
-        <div className="absolute top-[280px] right-32 pointer-events-auto">
-          <LearningNode
-            node={floatingNodes[3]}
-            onClick={() => handleNodeClick(floatingNodes[3])}
-          />
-        </div>
-      </div>
+          {/* Floating Generic Nodes */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/3 left-20 pointer-events-auto">
+              <LearningNode node={floatingNodes[0]} onClick={() => handleNodeClick(floatingNodes[0])} />
+            </div>
+            <div className="absolute top-96 right-32 pointer-events-auto">
+              <LearningNode node={floatingNodes[1]} onClick={() => handleNodeClick(floatingNodes[1])} />
+            </div>
+            <div className="absolute bottom-48 left-16 pointer-events-auto">
+              <LearningNode node={floatingNodes[2]} onClick={() => handleNodeClick(floatingNodes[2])} />
+            </div>
+            <div className="absolute top-[280px] right-32 pointer-events-auto">
+              <LearningNode node={floatingNodes[3]} onClick={() => handleNodeClick(floatingNodes[3])} />
+            </div>
+          </div>
 
-      {/* Mascot - Floating Character (Bottom Right, Before Sidebar) */}
-      <div className="fixed bottom-8 right-[420px] z-20">
-        <div className="relative animate-float">
-          <div className="w-32 h-32 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl glow-green">
-            <Star className="w-16 h-16 text-[hsl(var(--main-bg))]" />
+          {/* Mascot */}
+          <div className="fixed bottom-8 right-[420px] z-20">
+            <div className="relative animate-float">
+              <div className="w-32 h-32 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl glow-green">
+                <Star className="w-16 h-16 text-[hsl(var(--main-bg))]" />
+              </div>
+              <div className="absolute -top-2 -right-2 w-8 h-8 bg-[hsl(var(--orange-warm))] rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-[hsl(var(--main-bg))] text-xs font-bold">Hi!</span>
+              </div>
+            </div>
           </div>
-          <div className="absolute -top-2 -right-2 w-8 h-8 bg-[hsl(var(--orange-warm))] rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-[hsl(var(--main-bg))] text-xs font-bold">Hi!</span>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
       
       {/* Lesson Modal */}
       <LessonModal
@@ -252,6 +245,7 @@ export default function LearningPath() {
           setIsModalOpen(false);
           setSelectedLesson(null);
         }}
+        onStartLesson={handleStartLesson}
       />
     </div>
   );
