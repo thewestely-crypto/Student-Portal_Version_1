@@ -93,15 +93,10 @@ export default function LearningPath() {
   ];
 
   const handleNodeClick = (node) => {
-    console.log('Node clicked:', node);
-    console.log('Has fullData:', !!node.fullData);
-    
     if (node.fullData) {
-      console.log('Opening modal with lesson:', node.fullData);
       setSelectedLesson(node.fullData);
       setIsModalOpen(true);
     } else {
-      console.log('No fullData, showing toast for status:', node.status);
       if (node.status === 'locked') {
         toast.info('Complete previous lessons to unlock!');
       } else if (node.status === 'active') {
