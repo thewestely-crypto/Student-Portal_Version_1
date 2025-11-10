@@ -80,15 +80,15 @@ export default function LearningPath() {
               {/* Subject Dropdown */}
               <div className="flex-1">
                 <Select value={selectedSubject} onValueChange={handleSubjectChange}>
-                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-foreground hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
-                    <SelectValue />
+                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
+                    <SelectValue placeholder="Subject" />
                   </SelectTrigger>
                   <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
                     {subjects.map((subject) => (
                       <SelectItem 
                         key={subject.value} 
                         value={subject.value}
-                        className="text-foreground hover:bg-[hsl(var(--sidebar-hover))] cursor-pointer font-medium"
+                        className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white"
                       >
                         <span className="flex items-center gap-2">
                           <span className="text-xl">{subject.icon}</span>
