@@ -1,4 +1,4 @@
-import { Star, Lock, CheckCircle2, Play } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 
@@ -10,24 +10,27 @@ export default function LearningNode({ node, onClick, delay = 0 }) {
           bg: 'bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))]',
           border: 'border-[hsl(var(--green-bright))]',
           shadow: 'shadow-2xl glow-green animate-pulse-glow',
-          icon: Star,
+          defaultIcon: 'Star',
           iconClass: 'text-[hsl(var(--main-bg))]',
+          size: 'w-16 h-16', // Smaller size
         };
       case 'completed':
         return {
           bg: 'bg-[hsl(var(--card-bg))]',
           border: 'border-[hsl(var(--teal-vivid))]',
           shadow: 'shadow-lg',
-          icon: CheckCircle2,
+          defaultIcon: 'CheckCircle2',
           iconClass: 'text-[hsl(var(--teal-vivid))]',
+          size: 'w-16 h-16',
         };
       case 'available':
         return {
           bg: 'bg-[hsl(var(--card-bg))]',
           border: 'border-[hsl(var(--card-border))]',
           shadow: 'shadow-md',
-          icon: Play,
+          defaultIcon: 'Play',
           iconClass: 'text-[hsl(var(--primary))]',
+          size: 'w-16 h-16',
         };
       case 'locked':
       default:
@@ -35,14 +38,19 @@ export default function LearningNode({ node, onClick, delay = 0 }) {
           bg: 'bg-[hsl(var(--locked-dark))]',
           border: 'border-[hsl(var(--locked-gray))]',
           shadow: 'shadow-sm',
-          icon: Lock,
+          defaultIcon: 'Lock',
           iconClass: 'text-[hsl(var(--locked-gray))]',
+          size: 'w-16 h-16',
         };
     }
   };
 
   const style = getNodeStyle();
-  const Icon = style.icon;
+  
+  // Get the icon - use custom icon if provided, otherwise use default
+  const iconName = node.customIcon || style.defaultIcon;
+  const Icon = LucideIcons[iconName] || LucideIcons.Star;
+  
   const isInteractive = node.status !== 'locked';
 
   return (
@@ -54,7 +62,8 @@ export default function LearningNode({ node, onClick, delay = 0 }) {
         onClick={onClick}
         disabled={!isInteractive}
         className={cn(
-          'relative w-24 h-24 rounded-full border-4 flex items-center justify-center transition-all duration-300',
+          'relative rounded-full border-4 flex items-center justify-center transition-all duration-300',
+          style.size,
           style.bg,
           style.border,
           style.shadow,
@@ -62,7 +71,7 @@ export default function LearningNode({ node, onClick, delay = 0 }) {
           !isInteractive && 'cursor-not-allowed opacity-60'
         )}
       >
-        <Icon className={cn('w-12 h-12', style.iconClass)} />
+        <Icon className={cn('w-8 h-8', style.iconClass)} />
         
         {node.status === 'active' && (
           <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -73,7 +82,8 @@ export default function LearningNode({ node, onClick, delay = 0 }) {
         )}
       </button>
       
-      {node.title && (
+      {/* Only show title for generic nodes, not chapter subsections */}
+      {node.showTitle && node.title && (
         <div className="absolute top-full mt-3 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
           <span className="text-xs text-muted-foreground text-center block">
             {node.title}
