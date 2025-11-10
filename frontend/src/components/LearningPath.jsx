@@ -48,7 +48,10 @@ export default function LearningPath() {
 
   // Generate nodes based on selected chapter
   const getNodes = () => {
-    const nodes = [];
+    // START with Welcome Lesson as first node
+    const nodes = [
+      { ...genericNodes[0], showTitle: true, position: 'center' }, // Welcome - START node
+    ];
     
     // Add chapter-specific subsection nodes in vertical stack (all centered)
     if (selectedSubject && selectedChapter && chapterContent[selectedSubject]?.[selectedChapter]) {
@@ -69,9 +72,8 @@ export default function LearningPath() {
     return nodes;
   };
   
-  // Floating generic nodes (not in main path)
+  // Floating generic nodes (not in main path) - Only 4 nodes now
   const floatingNodes = [
-    { ...genericNodes[0], showTitle: true }, // Welcome
     { ...genericNodes[1], showTitle: true }, // Basic Concepts
     { ...genericNodes[2], showTitle: true }, // Practice Session
     { id: 'advanced', type: 'locked', status: 'locked', title: 'Advanced Topics', showTitle: true },
