@@ -15,16 +15,10 @@ export default function RightPanel() {
   return (
     <div className="w-96 bg-[hsl(var(--sidebar-bg))] border-l border-[hsl(var(--card-border))] overflow-y-auto">
       <div className="p-6 space-y-6">
-        {/* Stats Card - NEW POSITION */}
+        {/* Stats Card - COMPACT VERSION */}
         <Card className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] overflow-hidden">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[hsl(var(--teal-vivid))]" />
-              Your Progress
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4">
+          <CardContent className="p-4">
+            <div className="grid grid-cols-2 gap-3">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
@@ -33,25 +27,25 @@ export default function RightPanel() {
                     className="relative group cursor-pointer"
                   >
                     {/* Stat Item */}
-                    <div className="bg-[hsl(var(--sidebar-hover))] rounded-xl p-4 border-2 border-[hsl(var(--card-border))] hover:border-[hsl(var(--teal-vivid))]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <div className="bg-[hsl(var(--sidebar-hover))] rounded-lg p-3 border-2 border-[hsl(var(--card-border))] hover:border-[hsl(var(--teal-vivid))]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                       {/* Icon with gradient background */}
-                      <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
-                        <Icon className="w-6 h-6 text-white" />
+                      <div className={`w-10 h-10 mx-auto mb-2 rounded-full bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow duration-300`}>
+                        <Icon className="w-5 h-5 text-white" />
                       </div>
                       
                       {/* Value */}
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-foreground mb-1">
+                        <div className="text-xl font-bold text-foreground mb-0.5">
                           {stat.value}
                         </div>
-                        <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                        <div className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">
                           {stat.label}
                         </div>
                       </div>
                     </div>
                     
                     {/* Hover glow effect */}
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[hsl(var(--teal-vivid))]/10 to-[hsl(var(--green-bright))]/10 -z-10 blur-xl" />
+                    <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[hsl(var(--teal-vivid))]/10 to-[hsl(var(--green-bright))]/10 -z-10 blur-xl" />
                   </div>
                 );
               })}
