@@ -48,18 +48,23 @@ export default function LearningPath() {
 
   // Generate nodes based on selected chapter
   const getNodes = () => {
-    const nodes = [...genericNodes];
+    const nodes = [
+      { ...genericNodes[0], showTitle: true }, // Welcome - with title
+      { ...genericNodes[1], showTitle: true }, // Basic Concepts - with title
+      { ...genericNodes[2], showTitle: true }, // Practice Session - with title
+    ];
     
-    // Add chapter-specific subsection nodes
+    // Add chapter-specific subsection nodes with S-shaped flow
     if (selectedSubject && selectedChapter && chapterContent[selectedSubject]?.[selectedChapter]) {
       const subsections = chapterContent[selectedSubject][selectedChapter].subsections;
-      subsections.forEach((subsection, index) => {
+      subsections.forEach((subsection) => {
         nodes.push({
           id: subsection.id,
           type: 'chapter-section',
           status: subsection.status,
-          position: index % 2 === 0 ? 'center' : (index % 3 === 0 ? 'left' : 'right'),
-          title: subsection.shortLabel,
+          position: subsection.position, // Use position from data (left/right for S-shape)
+          customIcon: subsection.icon, // Topic-specific icon
+          showTitle: false, // Don't show text label
           fullData: subsection
         });
       });
@@ -67,8 +72,8 @@ export default function LearningPath() {
     
     // Add generic locked nodes at the end
     nodes.push(
-      { id: 'advanced', type: 'locked', status: 'locked', position: 'right', title: 'Advanced Topics' },
-      { id: 'assessment', type: 'locked', status: 'locked', position: 'center', title: 'Final Assessment' }
+      { id: 'advanced', type: 'locked', status: 'locked', position: 'right', title: 'Advanced Topics', showTitle: true },
+      { id: 'assessment', type: 'locked', status: 'locked', position: 'center', title: 'Final Assessment', showTitle: true }
     );
     
     return nodes;
