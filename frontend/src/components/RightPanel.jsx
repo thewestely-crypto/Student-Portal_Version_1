@@ -63,7 +63,7 @@ export default function RightPanel() {
             <Badge className="w-fit bg-gradient-to-r from-[hsl(var(--purple-accent))] to-[hsl(var(--primary))] text-foreground border-0 font-bold uppercase text-xs px-3 py-1">
               START FRESH
             </Badge>
-            <CardTitle className="text-2xl font-bold text-foreground mt-3">
+            <CardTitle className="text-xl font-bold text-foreground mt-3">
               Learn this chapter from start
             </CardTitle>
           </CardHeader>
