@@ -179,12 +179,12 @@ export default function LearningPath() {
         </Card>
       </div>
 
-      {/* Learning Path */}
-      <div className="max-w-2xl mx-auto space-y-8">
+      {/* Learning Path - Only Chapter Subsections */}
+      <div className="max-w-2xl mx-auto space-y-8 relative z-10">
         {nodes.map((node, index) => (
           <div
             key={node.id}
-            className={`flex justify-${node.position === 'center' ? 'center' : node.position === 'left' ? 'start' : 'end'}`}
+            className="flex justify-center"
           >
             <LearningNode
               node={node}
@@ -195,8 +195,51 @@ export default function LearningPath() {
         ))}
       </div>
 
-      {/* Mascot - Floating Character */}
-      <div className="fixed right-20 top-1/2 transform -translate-y-1/2 z-10">
+      {/* Floating Generic Nodes - Scattered in Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Welcome - Top Left */}
+        <div className="absolute top-32 left-12 pointer-events-auto">
+          <LearningNode
+            node={floatingNodes[0]}
+            onClick={() => handleNodeClick(floatingNodes[0])}
+          />
+        </div>
+        
+        {/* Basic Concepts - Left Middle */}
+        <div className="absolute top-1/3 left-20 pointer-events-auto">
+          <LearningNode
+            node={floatingNodes[1]}
+            onClick={() => handleNodeClick(floatingNodes[1])}
+          />
+        </div>
+        
+        {/* Practice Session - Right Top */}
+        <div className="absolute top-48 right-32 pointer-events-auto">
+          <LearningNode
+            node={floatingNodes[2]}
+            onClick={() => handleNodeClick(floatingNodes[2])}
+          />
+        </div>
+        
+        {/* Advanced Topics - Left Bottom */}
+        <div className="absolute bottom-48 left-16 pointer-events-auto">
+          <LearningNode
+            node={floatingNodes[3]}
+            onClick={() => handleNodeClick(floatingNodes[3])}
+          />
+        </div>
+        
+        {/* Final Assessment - Right Bottom */}
+        <div className="absolute bottom-32 right-28 pointer-events-auto">
+          <LearningNode
+            node={floatingNodes[4]}
+            onClick={() => handleNodeClick(floatingNodes[4])}
+          />
+        </div>
+      </div>
+
+      {/* Mascot - Floating Character (Bottom Right, Before Sidebar) */}
+      <div className="fixed bottom-8 right-[420px] z-20">
         <div className="relative animate-float">
           <div className="w-32 h-32 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl glow-green">
             <Star className="w-16 h-16 text-[hsl(var(--main-bg))]" />
