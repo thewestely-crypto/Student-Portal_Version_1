@@ -105,10 +105,10 @@ export default function LearningPath() {
                 <Select 
                   value={selectedChapter} 
                   onValueChange={setSelectedChapter}
-                  disabled={currentChapters.length === 0}
+                  disabled={!selectedSubject || currentChapters.length === 0}
                 >
-                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-foreground hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
-                    <SelectValue placeholder="Select chapter..." />
+                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
+                    <SelectValue placeholder="Chapter" />
                   </SelectTrigger>
                   <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
                     {currentChapters.length > 0 ? (
@@ -116,13 +116,13 @@ export default function LearningPath() {
                         <SelectItem 
                           key={chapter.value} 
                           value={chapter.value}
-                          className="text-foreground hover:bg-[hsl(var(--sidebar-hover))] cursor-pointer font-medium"
+                          className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white"
                         >
                           {chapter.label}
                         </SelectItem>
                       ))
                     ) : (
-                      <div className="px-2 py-6 text-center text-muted-foreground text-sm">
+                      <div className="px-2 py-6 text-center text-gray-400 text-sm">
                         No chapters available for this subject yet
                       </div>
                     )}
