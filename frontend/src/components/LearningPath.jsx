@@ -3,6 +3,7 @@ import { BookOpen, Star, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import LearningNode from '@/components/LearningNode';
+import LessonModal from '@/components/LessonModal';
 import { toast } from 'sonner';
 import {
   Select,
@@ -11,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { chapterContent, genericNodes } from '@/data/chapterContent';
 
 const subjects = [
   { value: 'physics', label: 'Science (Physics)', icon: '🔬' },
@@ -34,6 +36,8 @@ const chaptersBySubject = {
 export default function LearningPath() {
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedChapter, setSelectedChapter] = useState('');
+  const [selectedLesson, setSelectedLesson] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubjectChange = (value) => {
     setSelectedSubject(value);
@@ -41,28 +45,55 @@ export default function LearningPath() {
   };
 
   const currentChapters = chaptersBySubject[selectedSubject] || [];
-  const selectedSubjectData = subjects.find(s => s.value === selectedSubject);
-  const selectedChapterData = currentChapters.find(c => c.value === selectedChapter);
 
-  const nodes = [
-    { id: 1, type: 'start', status: 'active', position: 'center', title: 'Welcome Lesson' },
-    { id: 2, type: 'lesson', status: 'completed', position: 'left', title: 'Basic Concepts' },
-    { id: 3, type: 'practice', status: 'available', position: 'center', title: 'Practice Session' },
-    { id: 4, type: 'locked', status: 'locked', position: 'right', title: 'Advanced Topics' },
-    { id: 5, type: 'locked', status: 'locked', position: 'center', title: 'Final Assessment' },
-  ];
+  // Generate nodes based on selected chapter
+  const getNodes = () => {
+    const nodes = [...genericNodes];
+    
+    // Add chapter-specific subsection nodes
+    if (selectedSubject && selectedChapter && chapterContent[selectedSubject]?.[selectedChapter]) {
+      const subsections = chapterContent[selectedSubject][selectedChapter].subsections;
+      subsections.forEach((subsection, index) => {
+        nodes.push({
+          id: subsection.id,
+          type: 'chapter-section',
+          status: subsection.status,
+          position: index % 2 === 0 ? 'center' : (index % 3 === 0 ? 'left' : 'right'),
+          title: subsection.shortLabel,
+          fullData: subsection
+        });
+      });
+    }
+    
+    // Add generic locked nodes at the end
+    nodes.push(
+      { id: 'advanced', type: 'locked', status: 'locked', position: 'right', title: 'Advanced Topics' },
+      { id: 'assessment', type: 'locked', status: 'locked', position: 'center', title: 'Final Assessment' }
+    );
+    
+    return nodes;
+  };
 
   const handleNodeClick = (node) => {
-    if (node.status === 'locked') {
-      toast.info('Complete previous lessons to unlock!');
-    } else if (node.status === 'active') {
-      toast.success('Starting lesson...');
-    } else if (node.status === 'completed') {
-      toast.success('Lesson already completed!');
+    if (node.fullData) {
+      // Chapter subsection node - open modal
+      setSelectedLesson(node.fullData);
+      setIsModalOpen(true);
     } else {
-      toast.info('Lesson available - click to start!');
+      // Generic node - show toast
+      if (node.status === 'locked') {
+        toast.info('Complete previous lessons to unlock!');
+      } else if (node.status === 'active') {
+        toast.success('Starting lesson...');
+      } else if (node.status === 'completed') {
+        toast.success('Lesson already completed!');
+      } else {
+        toast.info('Lesson available - click to start!');
+      }
     }
   };
+
+  const nodes = getNodes();
 
   return (
     <div className="relative min-h-full p-8">
@@ -171,6 +202,16 @@ export default function LearningPath() {
           </div>
         </div>
       </div>
+      
+      {/* Lesson Modal */}
+      <LessonModal
+        lesson={selectedLesson}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedLesson(null);
+        }}
+      />
     </div>
   );
 }
