@@ -199,43 +199,35 @@ export default function LearningPath() {
 
       {/* Floating Generic Nodes - Scattered in Background */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Welcome - Top Left */}
-        <div className="absolute top-32 left-12 pointer-events-auto">
+        {/* Basic Concepts - Left Middle */}
+        <div className="absolute top-1/3 left-20 pointer-events-auto">
           <LearningNode
             node={floatingNodes[0]}
             onClick={() => handleNodeClick(floatingNodes[0])}
           />
         </div>
         
-        {/* Basic Concepts - Left Middle */}
-        <div className="absolute top-1/3 left-20 pointer-events-auto">
+        {/* Practice Session - Right Top */}
+        <div className="absolute top-48 right-32 pointer-events-auto">
           <LearningNode
             node={floatingNodes[1]}
             onClick={() => handleNodeClick(floatingNodes[1])}
           />
         </div>
         
-        {/* Practice Session - Right Top */}
-        <div className="absolute top-48 right-32 pointer-events-auto">
+        {/* Advanced Topics - Left Bottom */}
+        <div className="absolute bottom-48 left-16 pointer-events-auto">
           <LearningNode
             node={floatingNodes[2]}
             onClick={() => handleNodeClick(floatingNodes[2])}
           />
         </div>
         
-        {/* Advanced Topics - Left Bottom */}
-        <div className="absolute bottom-48 left-16 pointer-events-auto">
+        {/* Final Assessment - Top Left (moved away from mascot) */}
+        <div className="absolute top-32 left-12 pointer-events-auto">
           <LearningNode
             node={floatingNodes[3]}
             onClick={() => handleNodeClick(floatingNodes[3])}
-          />
-        </div>
-        
-        {/* Final Assessment - Right Bottom */}
-        <div className="absolute bottom-32 right-28 pointer-events-auto">
-          <LearningNode
-            node={floatingNodes[4]}
-            onClick={() => handleNodeClick(floatingNodes[4])}
           />
         </div>
       </div>
