@@ -93,10 +93,19 @@ export default function LearningPath() {
   ];
 
   const handleNodeClick = (node) => {
+    // START node - open textbook directly (no modal)
+    if (node.id === 'welcome') {
+      setCurrentTextbookLesson(node);
+      setShowTextbook(true);
+      return;
+    }
+    
+    // Chapter subsection nodes - open modal first
     if (node.fullData) {
       setSelectedLesson(node.fullData);
       setIsModalOpen(true);
     } else {
+      // Other generic nodes - show toast
       if (node.status === 'locked') {
         toast.info('Complete previous lessons to unlock!');
       } else if (node.status === 'active') {
