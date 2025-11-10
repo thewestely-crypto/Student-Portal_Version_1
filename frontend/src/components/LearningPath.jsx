@@ -140,13 +140,6 @@ export default function LearningPath() {
                 Guidebook
               </Button>
             </div>
-
-            {/* Selected Info */}
-            {selectedSubjectData && selectedChapterData && (
-              <div className="text-[hsl(var(--main-bg))]/80 text-sm font-medium">
-                Currently Learning: {selectedSubjectData.label} - {selectedChapterData.label}
-              </div>
-            )}
           </div>
         </Card>
       </div>
