@@ -11,18 +11,22 @@ import { Badge } from '@/components/ui/badge';
 import { Lock, PlayCircle, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
 
-export default function LessonModal({ lesson, isOpen, onClose }) {
+export default function LessonModal({ lesson, isOpen, onClose, onStartLesson }) {
   if (!lesson) return null;
 
   const handleStartLesson = () => {
     if (lesson.status === 'locked') {
       toast.info('Complete previous lessons to unlock!');
+      onClose();
     } else if (lesson.status === 'completed') {
       toast.success('Lesson already completed! Review anytime.');
+      onClose();
     } else {
-      toast.success(`Starting: ${lesson.fullTitle}`);
+      // Call the parent's onStartLesson to open textbook
+      if (onStartLesson) {
+        onStartLesson(lesson);
+      }
     }
-    onClose();
   };
 
   const getStatusConfig = () => {
