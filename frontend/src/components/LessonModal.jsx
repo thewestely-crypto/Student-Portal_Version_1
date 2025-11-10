@@ -106,7 +106,7 @@ export default function LessonModal({ lesson, isOpen, onClose }) {
           <Button
             variant="outline"
             onClick={onClose}
-            className="mr-2 bg-[hsl(var(--sidebar-hover))] border-[hsl(var(--card-border))] hover:bg-[hsl(var(--card-bg))]"
+            className="mr-2 bg-[hsl(var(--sidebar-hover))] border-[hsl(var(--card-border))] hover:bg-[hsl(var(--card-bg))] text-white hover:text-white"
           >
             Close
           </Button>
