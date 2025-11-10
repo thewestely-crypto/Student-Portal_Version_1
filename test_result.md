@@ -190,13 +190,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Sidebar Navigation"
-    - "Learning Nodes Interaction"
-    - "Stats Bar Hover Effects"
-    - "Right Panel Cards"
-    - "Visual Effects"
+    - "Updated Sidebar Navigation Structure"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
