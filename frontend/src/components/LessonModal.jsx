@@ -61,16 +61,17 @@ export default function LessonModal({ lesson, isOpen, onClose }) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
         <DialogHeader>
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex-1">
-              <DialogTitle className="text-2xl font-bold text-foreground mb-2">
-                {lesson.fullTitle}
-              </DialogTitle>
-              <Badge className={`${config.badgeClass} border font-bold uppercase text-xs px-3 py-1`}>
-                <StatusIcon className="w-3 h-3 mr-1" />
-                {config.badge}
-              </Badge>
-            </div>
+          {/* Lesson Title (Heading) */}
+          <DialogTitle className="text-3xl font-bold text-foreground mb-3">
+            {lesson.fullTitle}
+          </DialogTitle>
+          
+          {/* Status Badge */}
+          <div className="flex items-center gap-2 mb-4">
+            <Badge className={`${config.badgeClass} border font-bold uppercase text-xs px-3 py-1`}>
+              <StatusIcon className="w-3 h-3 mr-1" />
+              {config.badge}
+            </Badge>
           </div>
           
           {/* Lesson Image */}
