@@ -17,9 +17,81 @@ export default function Dashboard() {
         {/* Top Stats Bar */}
         <StatsBar />
         
-        {/* Learning Path */}
+        {/* Content based on active section */}
         <div className="flex-1 overflow-y-auto">
-          <LearningPath />
+          {activeSection === 'learn' && <LearningPath />}
+          {activeSection === 'chat' && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-4">
+                <div className="text-6xl">💬</div>
+                <h2 className="text-3xl font-bold text-foreground">Chat</h2>
+                <p className="text-muted-foreground">AI-powered tutor coming soon</p>
+              </div>
+            </div>
+          )}
+          {activeSection === 'quests' && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-4">
+                <div className="text-6xl">🎯</div>
+                <h2 className="text-3xl font-bold text-foreground">Quests</h2>
+                <p className="text-muted-foreground">Daily challenges and missions</p>
+              </div>
+            </div>
+          )}
+          {activeSection === 'curiosity' && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-4">
+                <div className="text-6xl">✨</div>
+                <h2 className="text-3xl font-bold text-foreground">Curiosity Centre</h2>
+                <p className="text-muted-foreground">Extended learning beyond school curriculum</p>
+              </div>
+            </div>
+          )}
+          {activeSection === 'leaderboard' && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-4">
+                <div className="text-6xl">🏆</div>
+                <h2 className="text-3xl font-bold text-foreground">Leaderboard</h2>
+                <p className="text-muted-foreground">Compete with other learners</p>
+              </div>
+            </div>
+          )}
+          {activeSection === 'shop' && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-4">
+                <div className="text-6xl">🛍️</div>
+                <h2 className="text-3xl font-bold text-foreground">Shop</h2>
+                <p className="text-muted-foreground">Rewards and customizations</p>
+              </div>
+            </div>
+          )}
+          {activeSection === 'profile' && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-4">
+                <div className="text-6xl">👤</div>
+                <h2 className="text-3xl font-bold text-foreground">Profile</h2>
+                <p className="text-muted-foreground">Your learning journey and stats</p>
+              </div>
+            </div>
+          )}
+          {activeSection === 'community' && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-4">
+                <div className="text-6xl">🌍</div>
+                <h2 className="text-3xl font-bold text-foreground">Community</h2>
+                <p className="text-muted-foreground">Connect with other learners</p>
+              </div>
+            </div>
+          )}
+          {activeSection === 'settings' && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center space-y-4">
+                <div className="text-6xl">⚙️</div>
+                <h2 className="text-3xl font-bold text-foreground">Settings</h2>
+                <p className="text-muted-foreground">Customize your experience</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       
