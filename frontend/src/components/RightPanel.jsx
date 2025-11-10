@@ -15,51 +15,40 @@ export default function RightPanel() {
   return (
     <div className="w-96 bg-[hsl(var(--sidebar-bg))] border-l border-[hsl(var(--card-border))] overflow-y-auto">
       <div className="p-6 space-y-6">
-        {/* Stats Card - ENHANCED & POLISHED VERSION */}
-        <Card className="bg-gradient-to-br from-[hsl(var(--card-bg))] to-[hsl(var(--card-bg))]/80 border-[hsl(var(--card-border))] overflow-hidden shadow-lg">
-          <CardContent className="p-4">
-            <div className="grid grid-cols-2 gap-3">
+        {/* Stats Bar - COMPACT HORIZONTAL VERSION */}
+        <Card className="bg-gradient-to-r from-[hsl(var(--card-bg))] to-[hsl(var(--card-bg))]/80 border-[hsl(var(--card-border))] overflow-hidden shadow-lg">
+          <CardContent className="p-3">
+            <div className="flex items-center justify-between gap-2">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
                   <div
                     key={index}
-                    className="relative group cursor-pointer"
+                    className="relative group cursor-pointer flex items-center gap-2"
                   >
-                    {/* Stat Item */}
-                    <div className="bg-gradient-to-br from-[hsl(var(--sidebar-hover))] to-[hsl(var(--sidebar-hover))]/90 rounded-xl p-3 border-2 border-[hsl(var(--card-border))] hover:border-[hsl(var(--teal-vivid))]/60 transition-all duration-300 hover:scale-110 hover:shadow-2xl shadow-inner">
-                      {/* Icon with enhanced gradient background */}
-                      <div className={`relative w-11 h-11 mx-auto mb-2 rounded-full bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-all duration-300 ${stat.shine ? 'animate-pulse' : ''}`}>
-                        <Icon className={`w-5 h-5 text-white drop-shadow-lg ${stat.shine ? 'animate-pulse' : ''}`} />
-                        
-                        {/* Sparkle effect for Gems */}
-                        {stat.shine && (
-                          <>
-                            <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-yellow-300 animate-pulse" />
-                            <Sparkles className="absolute -bottom-0.5 -left-0.5 w-2.5 h-2.5 text-pink-300 animate-pulse" style={{ animationDelay: '0.5s' }} />
-                          </>
-                        )}
-                        
-                        {/* Inner glow */}
-                        <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-40 blur-sm transition-opacity duration-300`} />
-                      </div>
+                    {/* Icon with gradient background */}
+                    <div className={`relative w-9 h-9 rounded-full bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-md group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 ${stat.shine ? 'animate-pulse' : ''}`}>
+                      <Icon className={`w-4 h-4 text-white drop-shadow-lg ${stat.shine ? 'animate-pulse' : ''}`} />
                       
-                      {/* Value with enhanced styling */}
-                      <div className="text-center">
-                        <div className="text-xl font-bold text-foreground mb-0.5 drop-shadow-sm">
-                          {stat.value}
-                        </div>
-                        <div className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">
-                          {stat.label}
-                        </div>
-                      </div>
+                      {/* Sparkle effect for Gems */}
+                      {stat.shine && (
+                        <>
+                          <Sparkles className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 text-yellow-300 animate-pulse" />
+                          <Sparkles className="absolute -bottom-0.5 -left-0.5 w-2 h-2 text-pink-300 animate-pulse" style={{ animationDelay: '0.5s' }} />
+                        </>
+                      )}
+                      
+                      {/* Inner glow on hover */}
+                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-40 blur-sm transition-opacity duration-300`} />
                     </div>
                     
-                    {/* Enhanced hover glow effect */}
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[hsl(var(--teal-vivid))]/20 to-[hsl(var(--green-bright))]/20 -z-10 blur-2xl" />
+                    {/* Value only (no label) */}
+                    <div className="text-lg font-bold text-foreground drop-shadow-sm">
+                      {stat.value}
+                    </div>
                     
-                    {/* Subtle shimmer on hover */}
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-tr from-transparent via-white to-transparent -z-10" />
+                    {/* Hover glow effect */}
+                    <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[hsl(var(--teal-vivid))]/10 to-[hsl(var(--green-bright))]/10 -z-10 blur-xl" />
                   </div>
                 );
               })}
