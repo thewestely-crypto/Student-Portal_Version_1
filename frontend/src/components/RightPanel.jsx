@@ -2,14 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Sparkles, Lock, Zap, ArrowRight, Flag, Flame, Shield, Heart } from 'lucide-react';
+import { Sparkles, Lock, Zap, ArrowRight, Flag, Flame, Diamond, Heart } from 'lucide-react';
 
 export default function RightPanel() {
   const stats = [
-    { icon: Flag, value: 2, label: 'Lessons', gradient: 'from-blue-400 to-blue-600' },
-    { icon: Flame, value: 2, label: 'Day Streak', gradient: 'from-orange-400 to-red-500' },
-    { icon: Shield, value: 505, label: 'XP', gradient: 'from-cyan-400 to-teal-500' },
-    { icon: Heart, value: 5, label: 'Lives', gradient: 'from-pink-400 to-rose-500' },
+    { icon: Flag, value: 2, label: 'Lessons', gradient: 'from-blue-400 via-blue-500 to-blue-600', shine: false },
+    { icon: Flame, value: 2, label: 'Day Streak', gradient: 'from-orange-400 via-orange-500 to-red-500', shine: false },
+    { icon: Diamond, value: 505, label: 'Gems', gradient: 'from-purple-400 via-fuchsia-500 to-pink-500', shine: true },
+    { icon: Heart, value: 5, label: 'Lives', gradient: 'from-pink-400 via-rose-500 to-rose-600', shine: false },
   ];
 
   return (
