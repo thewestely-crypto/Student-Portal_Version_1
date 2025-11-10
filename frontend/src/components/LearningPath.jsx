@@ -49,12 +49,12 @@ export default function LearningPath() {
   // Generate nodes based on selected chapter
   const getNodes = () => {
     const nodes = [
-      { ...genericNodes[0], showTitle: true }, // Welcome - with title
-      { ...genericNodes[1], showTitle: true }, // Basic Concepts - with title
-      { ...genericNodes[2], showTitle: true }, // Practice Session - with title
+      { ...genericNodes[0], showTitle: true, position: 'center' }, // Welcome - with title
+      { ...genericNodes[1], showTitle: true, position: 'center' }, // Basic Concepts - with title
+      { ...genericNodes[2], showTitle: true, position: 'center' }, // Practice Session - with title
     ];
     
-    // Add chapter-specific subsection nodes with S-shaped flow
+    // Add chapter-specific subsection nodes in vertical stack (all centered)
     if (selectedSubject && selectedChapter && chapterContent[selectedSubject]?.[selectedChapter]) {
       const subsections = chapterContent[selectedSubject][selectedChapter].subsections;
       subsections.forEach((subsection) => {
@@ -62,7 +62,7 @@ export default function LearningPath() {
           id: subsection.id,
           type: 'chapter-section',
           status: subsection.status,
-          position: subsection.position, // Use position from data (left/right for S-shape)
+          position: 'center', // All centered for vertical stack
           customIcon: subsection.icon, // Topic-specific icon
           showTitle: false, // Don't show text label
           fullData: subsection
@@ -72,7 +72,7 @@ export default function LearningPath() {
     
     // Add generic locked nodes at the end
     nodes.push(
-      { id: 'advanced', type: 'locked', status: 'locked', position: 'right', title: 'Advanced Topics', showTitle: true },
+      { id: 'advanced', type: 'locked', status: 'locked', position: 'center', title: 'Advanced Topics', showTitle: true },
       { id: 'assessment', type: 'locked', status: 'locked', position: 'center', title: 'Final Assessment', showTitle: true }
     );
     
