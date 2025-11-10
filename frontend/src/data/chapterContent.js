@@ -76,7 +76,15 @@ export const chapterContent = {
 
 // Generic nodes that always appear
 export const genericNodes = [
-  { id: 'welcome', type: 'start', status: 'active', position: 'center', title: 'Welcome Lesson' },
+  { 
+    id: 'welcome', 
+    type: 'start', 
+    status: 'active', 
+    position: 'center', 
+    title: 'Welcome Lesson',
+    fullTitle: 'Welcome to Chapter 8: Force and Laws of Motion',
+    textbookImage: 'https://customer-assets.emergentagent.com/job_smart-edu-portal-9/artifacts/lu9ucc9u_Screenshot%202025-11-10%20180322.png'
+  },
   { id: 'basics', type: 'lesson', status: 'completed', position: 'left', title: 'Basic Concepts' },
   { id: 'practice', type: 'practice', status: 'available', position: 'center', title: 'Practice Session' },
 ];
