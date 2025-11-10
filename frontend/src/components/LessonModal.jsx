@@ -61,8 +61,8 @@ export default function LessonModal({ lesson, isOpen, onClose }) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
         <DialogHeader>
-          {/* Lesson Title (Heading) */}
-          <DialogTitle className="text-3xl font-bold text-foreground mb-3">
+          {/* Lesson Title (Heading) - White Color */}
+          <DialogTitle className="text-3xl font-bold text-white mb-3">
             {lesson.fullTitle}
           </DialogTitle>
           
