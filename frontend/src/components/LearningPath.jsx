@@ -197,7 +197,7 @@ export default function LearningPath() {
       </div>
 
       {/* Mascot - Floating Character */}
-      <div className="absolute right-20 bottom-20">
+      <div className="fixed right-20 top-1/2 transform -translate-y-1/2 z-10">
         <div className="relative animate-float">
           <div className="w-32 h-32 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl glow-green">
             <Star className="w-16 h-16 text-[hsl(var(--main-bg))]" />
