@@ -48,11 +48,7 @@ export default function LearningPath() {
 
   // Generate nodes based on selected chapter
   const getNodes = () => {
-    const nodes = [
-      { ...genericNodes[0], showTitle: true, position: 'center' }, // Welcome - with title
-      { ...genericNodes[1], showTitle: true, position: 'center' }, // Basic Concepts - with title
-      { ...genericNodes[2], showTitle: true, position: 'center' }, // Practice Session - with title
-    ];
+    const nodes = [];
     
     // Add chapter-specific subsection nodes in vertical stack (all centered)
     if (selectedSubject && selectedChapter && chapterContent[selectedSubject]?.[selectedChapter]) {
@@ -70,14 +66,17 @@ export default function LearningPath() {
       });
     }
     
-    // Add generic locked nodes at the end
-    nodes.push(
-      { id: 'advanced', type: 'locked', status: 'locked', position: 'center', title: 'Advanced Topics', showTitle: true },
-      { id: 'assessment', type: 'locked', status: 'locked', position: 'center', title: 'Final Assessment', showTitle: true }
-    );
-    
     return nodes;
   };
+  
+  // Floating generic nodes (not in main path)
+  const floatingNodes = [
+    { ...genericNodes[0], showTitle: true }, // Welcome
+    { ...genericNodes[1], showTitle: true }, // Basic Concepts
+    { ...genericNodes[2], showTitle: true }, // Practice Session
+    { id: 'advanced', type: 'locked', status: 'locked', title: 'Advanced Topics', showTitle: true },
+    { id: 'assessment', type: 'locked', status: 'locked', title: 'Final Assessment', showTitle: true }
+  ];
 
   const handleNodeClick = (node) => {
     if (node.fullData) {
