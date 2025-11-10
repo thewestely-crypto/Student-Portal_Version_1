@@ -32,8 +32,8 @@ const chaptersBySubject = {
 };
 
 export default function LearningPath() {
-  const [selectedSubject, setSelectedSubject] = useState('physics');
-  const [selectedChapter, setSelectedChapter] = useState('ch7');
+  const [selectedSubject, setSelectedSubject] = useState('');
+  const [selectedChapter, setSelectedChapter] = useState('');
 
   const handleSubjectChange = (value) => {
     setSelectedSubject(value);
