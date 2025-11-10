@@ -102,16 +102,16 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the Homie.ai dashboard with sidebar navigation, learning nodes interaction, stats bar hover effects, right panel cards, and visual effects including floating mascot and glowing animations."
+user_problem_statement: "Test the updated Homie.ai sidebar with new navigation structure including LEARNING section (Learn, Chat, Quests), DISCOVERY section (Curiosity Centre, Leaderboard, Shop), bottom section (Profile, More), and Community in footer with neon gradient effects."
 
 frontend:
-  - task: "Sidebar Navigation"
+  - task: "Updated Sidebar Navigation Structure"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/Sidebar.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "testing"
@@ -119,6 +119,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ PASSED: All sidebar menu items (LEARN, LETTERS, LEADERBOARDS, QUESTS, SHOP, PROFILE, MORE) are present and functional. Active state changes work correctly with border highlight (border-2 border-[hsl(var(--primary))]). Navigation between sections works smoothly."
+      - working: "NA"
+        agent: "testing"
+        comment: "UPDATED SIDEBAR STRUCTURE: Need to test new navigation structure with LEARNING section (Learn, Chat, Quests), DISCOVERY section (Curiosity Centre, Leaderboard, Shop), bottom section (Profile, More), and Community in footer with neon gradient border effects and special orange/amber styling for Community."
 
   - task: "Learning Nodes Interaction"
     implemented: true
