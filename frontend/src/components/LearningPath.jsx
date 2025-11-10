@@ -207,8 +207,8 @@ export default function LearningPath() {
           />
         </div>
         
-        {/* Practice Session - Right Top */}
-        <div className="absolute top-48 right-32 pointer-events-auto">
+        {/* Practice Session - Right Side, Below Welcome Lesson */}
+        <div className="absolute top-96 right-32 pointer-events-auto">
           <LearningNode
             node={floatingNodes[1]}
             onClick={() => handleNodeClick(floatingNodes[1])}
@@ -223,8 +223,8 @@ export default function LearningPath() {
           />
         </div>
         
-        {/* Final Assessment - Top Left (moved away from mascot) */}
-        <div className="absolute top-32 left-12 pointer-events-auto">
+        {/* Final Assessment - Right Side, Below Practice Session, Above Mascot */}
+        <div className="absolute top-[280px] right-32 pointer-events-auto">
           <LearningNode
             node={floatingNodes[3]}
             onClick={() => handleNodeClick(floatingNodes[3])}
