@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import LearningPath from '@/components/LearningPath';
-import StatsBar from '@/components/StatsBar';
 import RightPanel from '@/components/RightPanel';
 
 export default function Dashboard() {
@@ -14,9 +13,6 @@ export default function Dashboard() {
       
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Stats Bar */}
-        <StatsBar />
-        
         {/* Content based on active section */}
         <div className="flex-1 overflow-y-auto">
           {activeSection === 'learn' && <LearningPath />}

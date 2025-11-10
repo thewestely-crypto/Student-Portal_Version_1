@@ -1,19 +1,48 @@
 import { useState } from 'react';
-import { ChevronLeft, BookOpen, Star, Lock } from 'lucide-react';
+import { BookOpen, Star, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import LearningNode from '@/components/LearningNode';
 import { toast } from 'sonner';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+const subjects = [
+  { value: 'physics', label: 'Science (Physics)', icon: '🔬' },
+  { value: 'chemistry', label: 'Science (Chemistry)', icon: '⚗️' },
+  { value: 'biology', label: 'Science (Biology)', icon: '🧬' },
+  { value: 'mathematics', label: 'Mathematics', icon: '📐' },
+];
+
+const chaptersBySubject = {
+  physics: [
+    { value: 'ch7', label: 'Chapter 7: Motion' },
+    { value: 'ch8', label: 'Chapter 8: Force and Laws of Motion' },
+    { value: 'ch9', label: 'Chapter 9: Gravitation' },
+    { value: 'ch11', label: 'Chapter 11: Sound' },
+  ],
+  chemistry: [],
+  biology: [],
+  mathematics: [],
+};
 
 export default function LearningPath() {
-  const [selectedLesson, setSelectedLesson] = useState(null);
+  const [selectedSubject, setSelectedSubject] = useState('physics');
+  const [selectedChapter, setSelectedChapter] = useState('ch7');
 
-  const currentLesson = {
-    section: 'SECTION 1, UNIT 1',
-    title: 'Introduction to Learning',
-    description: 'Begin your learning journey'
+  const handleSubjectChange = (value) => {
+    setSelectedSubject(value);
+    setSelectedChapter(''); // Reset chapter when subject changes
   };
+
+  const currentChapters = chaptersBySubject[selectedSubject] || [];
+  const selectedSubjectData = subjects.find(s => s.value === selectedSubject);
+  const selectedChapterData = currentChapters.find(c => c.value === selectedChapter);
 
   const nodes = [
     { id: 1, type: 'start', status: 'active', position: 'center', title: 'Welcome Lesson' },
@@ -27,7 +56,6 @@ export default function LearningPath() {
     if (node.status === 'locked') {
       toast.info('Complete previous lessons to unlock!');
     } else if (node.status === 'active') {
-      setSelectedLesson(node);
       toast.success('Starting lesson...');
     } else if (node.status === 'completed') {
       toast.success('Lesson already completed!');
@@ -38,32 +66,87 @@ export default function LearningPath() {
 
   return (
     <div className="relative min-h-full p-8">
-      {/* Current Lesson Card */}
+      {/* Subject & Chapter Selection Card */}
       <div className="max-w-3xl mx-auto mb-12">
         <Card className="bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] border-0 p-6 shadow-2xl">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <ChevronLeft className="w-5 h-5 text-[hsl(var(--main-bg))]" />
-                <span className="text-sm font-bold text-[hsl(var(--main-bg))] uppercase tracking-wider">
-                  {currentLesson.section}
-                </span>
+          <div className="space-y-4">
+            {/* Title */}
+            <h2 className="text-xl font-bold text-[hsl(var(--main-bg))] mb-4">
+              Select Your Learning Focus
+            </h2>
+            
+            {/* Dropdowns Row */}
+            <div className="flex items-center gap-4">
+              {/* Subject Dropdown */}
+              <div className="flex-1">
+                <Select value={selectedSubject} onValueChange={handleSubjectChange}>
+                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-foreground hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+                    {subjects.map((subject) => (
+                      <SelectItem 
+                        key={subject.value} 
+                        value={subject.value}
+                        className="text-foreground hover:bg-[hsl(var(--sidebar-hover))] cursor-pointer font-medium"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="text-xl">{subject.icon}</span>
+                          <span>{subject.label}</span>
+                        </span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-              <h2 className="text-3xl font-bold text-[hsl(var(--main-bg))] mb-1">
-                {currentLesson.title}
-              </h2>
-              <p className="text-[hsl(var(--main-bg))]/80 text-lg">
-                {currentLesson.description}
-              </p>
+
+              {/* Chapter Dropdown */}
+              <div className="flex-1">
+                <Select 
+                  value={selectedChapter} 
+                  onValueChange={setSelectedChapter}
+                  disabled={currentChapters.length === 0}
+                >
+                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-foreground hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
+                    <SelectValue placeholder="Select chapter..." />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+                    {currentChapters.length > 0 ? (
+                      currentChapters.map((chapter) => (
+                        <SelectItem 
+                          key={chapter.value} 
+                          value={chapter.value}
+                          className="text-foreground hover:bg-[hsl(var(--sidebar-hover))] cursor-pointer font-medium"
+                        >
+                          {chapter.label}
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <div className="px-2 py-6 text-center text-muted-foreground text-sm">
+                        No chapters available for this subject yet
+                      </div>
+                    )}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Guidebook Button */}
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-[hsl(var(--main-bg))]/10 backdrop-blur-sm border-[hsl(var(--main-bg))]/30 text-[hsl(var(--main-bg))] hover:bg-[hsl(var(--main-bg))]/20 font-bold uppercase tracking-wide px-6 h-12"
+              >
+                <BookOpen className="w-5 h-5 mr-2" />
+                Guidebook
+              </Button>
             </div>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-[hsl(var(--main-bg))]/10 backdrop-blur-sm border-[hsl(var(--main-bg))]/30 text-[hsl(var(--main-bg))] hover:bg-[hsl(var(--main-bg))]/20 font-bold uppercase tracking-wide px-6"
-            >
-              <BookOpen className="w-5 h-5 mr-2" />
-              Guidebook
-            </Button>
+
+            {/* Selected Info */}
+            {selectedSubjectData && selectedChapterData && (
+              <div className="text-[hsl(var(--main-bg))]/80 text-sm font-medium">
+                Currently Learning: {selectedSubjectData.label} - {selectedChapterData.label}
+              </div>
+            )}
           </div>
         </Card>
       </div>

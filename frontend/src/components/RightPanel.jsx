@@ -2,12 +2,63 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Sparkles, Lock, Zap, ArrowRight } from 'lucide-react';
+import { Sparkles, Lock, Zap, ArrowRight, Flag, Flame, Shield, Heart } from 'lucide-react';
 
 export default function RightPanel() {
+  const stats = [
+    { icon: Flag, value: 2, label: 'Lessons', gradient: 'from-blue-400 to-blue-600' },
+    { icon: Flame, value: 2, label: 'Day Streak', gradient: 'from-orange-400 to-red-500' },
+    { icon: Shield, value: 505, label: 'XP', gradient: 'from-cyan-400 to-teal-500' },
+    { icon: Heart, value: 5, label: 'Lives', gradient: 'from-pink-400 to-rose-500' },
+  ];
+
   return (
     <div className="w-96 bg-[hsl(var(--sidebar-bg))] border-l border-[hsl(var(--card-border))] overflow-y-auto">
       <div className="p-6 space-y-6">
+        {/* Stats Card - NEW POSITION */}
+        <Card className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] overflow-hidden">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[hsl(var(--teal-vivid))]" />
+              Your Progress
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <div
+                    key={index}
+                    className="relative group cursor-pointer"
+                  >
+                    {/* Stat Item */}
+                    <div className="bg-[hsl(var(--sidebar-hover))] rounded-xl p-4 border-2 border-[hsl(var(--card-border))] hover:border-[hsl(var(--teal-vivid))]/50 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                      {/* Icon with gradient background */}
+                      <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      
+                      {/* Value */}
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-foreground mb-1">
+                          {stat.value}
+                        </div>
+                        <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                          {stat.label}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Hover glow effect */}
+                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[hsl(var(--teal-vivid))]/10 to-[hsl(var(--green-bright))]/10 -z-10 blur-xl" />
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Premium Card */}
         <Card className="bg-gradient-to-br from-[hsl(var(--purple-accent))]/20 to-[hsl(var(--primary))]/20 border-[hsl(var(--primary))]/30 overflow-hidden relative">
           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[hsl(var(--primary))]/30 to-transparent rounded-full blur-2xl" />
