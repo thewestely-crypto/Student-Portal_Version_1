@@ -195,7 +195,7 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
           {showNotes ? (
             /* Notes View with Floating Icons */
             <div className="relative">
-              <div className="p-8 space-y-6">
+              <div ref={notesRef} className="p-8 space-y-6">
                 <h1 className="text-3xl font-bold text-foreground mb-8 border-b border-[hsl(var(--card-border))] pb-4">
                   {notesContent.title}
                 </h1>
@@ -215,6 +215,26 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
                   </div>
                 ))}
               </div>
+
+              {/* Ask Homie Button - Shows on text selection */}
+              {showAskHomieButton && (
+                <div
+                  className="fixed z-50"
+                  style={{
+                    top: `${buttonPosition.top}px`,
+                    left: `${buttonPosition.left}px`
+                  }}
+                >
+                  <Button
+                    onClick={handleAskHomieClick}
+                    size="sm"
+                    className="bg-gradient-to-r from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] hover:from-[hsl(var(--teal-vivid))] hover:to-[hsl(var(--green-bright))] text-[hsl(var(--main-bg))] font-bold shadow-lg animate-pulse"
+                  >
+                    <Sparkles className="w-3 h-3 mr-1" />
+                    Ask Homie
+                  </Button>
+                </div>
+              )}
 
               {/* Floating Activity Icons for Notes View */}
               {learningPack?.items.map((item) => (
