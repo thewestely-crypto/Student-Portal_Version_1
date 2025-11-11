@@ -1,6 +1,6 @@
-import { ArrowLeft, BookText, RotateCcw } from 'lucide-react';
+import { ArrowLeft, BookText, RotateCcw, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import FloatingActivityIcon from './FloatingActivityIcon';
 import ActivityModal from './ActivityModal';
 import { useLearningPack } from '@/hooks/useLearningPack';
