@@ -231,7 +231,7 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
                 </Select>
               </div>
 
-              {!journeyMode && (
+              {!isCompactMode && (
                 <Button
                   size="lg"
                   variant="outline"
