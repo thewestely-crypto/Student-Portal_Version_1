@@ -202,7 +202,7 @@ export default function ActivityModal({ item, isOpen, onClose, onComplete, isAlr
                     );
                   })}
                 </div>
-                <div className="mt-4 text-center text-muted-foreground">
+                <div className="mt-4 text-center text-gray-300">
                   {clickedElements.size} / 3 interactions completed
                 </div>
               </div>
