@@ -136,7 +136,7 @@ export default function ActivityModal({ item, isOpen, onClose, onComplete, isAlr
 
         {/* Activity Content */}
         <div className="space-y-6">
-          <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+          <p className="text-gray-300 leading-relaxed">{item.description}</p>
 
           {/* WATCH: Video Player Mockup */}
           {item.type === 'Watch' && (
