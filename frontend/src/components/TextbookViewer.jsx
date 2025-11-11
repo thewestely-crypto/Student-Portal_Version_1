@@ -1,6 +1,11 @@
 import { ArrowLeft, BookText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import FloatingActivityIcon from './FloatingActivityIcon';
+import ActivityModal from './ActivityModal';
+import { useLearningPack } from '@/hooks/useLearningPack';
+import { toast } from 'sonner';
+import { chapterContent } from '@/data/chapterContent';
 
 export default function TextbookViewer({ lesson, onClose }) {
   const [showNotes, setShowNotes] = useState(false);
