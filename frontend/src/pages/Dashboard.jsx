@@ -25,8 +25,13 @@ export default function Dashboard() {
   };
 
   const handleStartJourney = () => {
-    setJourneyMode(true);
-    setCurrentJourneyIndex(0);
+    // Check if valid selection (Physics Chapter 8)
+    if (currentSelection.subject === 'physics' && currentSelection.chapter === 'ch8') {
+      setJourneyMode(true);
+      setCurrentJourneyIndex(0);
+      return true;
+    }
+    return false; // Invalid selection
   };
 
   const handleJourneyModeChange = (isActive) => {
