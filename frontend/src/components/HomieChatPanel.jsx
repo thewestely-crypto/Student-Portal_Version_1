@@ -241,8 +241,8 @@ export default function HomieChatPanel({ totalXP = 0, onClose }) {
                   </div>
                 )}
 
-                {(conversation.activeTab === 'all' || conversation.activeTab === 'videos') && (
-                  /* Videos Section */
+                {conversation.activeTab === 'videos' && (
+                  /* Videos Section - Only show when Videos tab is clicked */
                   <div className="space-y-2">
                     {conversation.videos.map((video, idx) => (
                       <div key={idx} className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-3 flex items-center gap-3 hover:bg-[hsl(var(--sidebar-hover))] cursor-pointer transition-colors">
@@ -258,8 +258,8 @@ export default function HomieChatPanel({ totalXP = 0, onClose }) {
                   </div>
                 )}
 
-                {(conversation.activeTab === 'all' || conversation.activeTab === 'sources') && (
-                  /* Sources Section */
+                {conversation.activeTab === 'sources' && (
+                  /* Sources Section - Only show when Sources tab is clicked */
                   <div className="space-y-2">
                     {conversation.sources.map((source, idx) => (
                       <div key={idx} className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-3 hover:bg-[hsl(var(--sidebar-hover))] cursor-pointer transition-colors">
@@ -269,8 +269,8 @@ export default function HomieChatPanel({ totalXP = 0, onClose }) {
                   </div>
                 )}
 
-                {(conversation.activeTab === 'all') && (
-                  /* Answer Section */
+                {conversation.activeTab === 'all' && (
+                  /* Answer Section - Show in All tab (directly after images) */
                   <div className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-4">
                     <p className="text-sm text-gray-200 leading-relaxed">
                       {conversation.answer}
