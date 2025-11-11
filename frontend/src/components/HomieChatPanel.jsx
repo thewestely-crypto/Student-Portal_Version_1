@@ -21,11 +21,22 @@ const mockSources = [
   // Sources removed as per requirement
 ];
 
-export default function HomieChatPanel({ totalXP = 0, onClose }) {
+export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '', onClearPrefilledText }) {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const messagesEndRef = useRef(null);
+
+  // Handle prefilled text from text selection
+  useEffect(() => {
+    if (prefilledText) {
+      setInputText(prefilledText);
+      // Clear prefilled text after setting
+      if (onClearPrefilledText) {
+        onClearPrefilledText();
+      }
+    }
+  }, [prefilledText, onClearPrefilledText]);
 
   const baseGems = 505;
   const currentGems = baseGems + totalXP;
