@@ -34,7 +34,7 @@ const chaptersBySubject = {
   mathematics: [],
 };
 
-export default function LearningPath() {
+export default function LearningPath({ onXPEarned }) {
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedChapter, setSelectedChapter] = useState('');
   const [selectedLesson, setSelectedLesson] = useState(null);
