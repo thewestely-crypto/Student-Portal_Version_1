@@ -55,11 +55,15 @@ export default function FloatingActivityIcon({ item, isCompleted, onClick, posit
         )}
       </Button>
       
-      {/* Duration label */}
+      {/* Duration label with dark background */}
       <div className={`
-        mt-2 text-center text-xs font-bold
-        ${isCompleted ? 'text-gray-400' : 'text-white'}
-        drop-shadow-lg
+        mt-2 mx-auto w-fit px-2 py-1 rounded-full
+        text-center text-xs font-bold
+        ${isCompleted 
+          ? 'text-gray-400 bg-gray-800/60' 
+          : 'text-white bg-black/70'
+        }
+        backdrop-blur-sm
       `}>
         {item.duration}
       </div>
