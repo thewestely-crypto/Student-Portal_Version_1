@@ -5,6 +5,11 @@ import RightPanel from '@/components/RightPanel';
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('learn');
+  const [totalXP, setTotalXP] = useState(0);
+
+  const handleXPEarned = (xpAmount) => {
+    setTotalXP(prev => prev + xpAmount);
+  };
 
   return (
     <div className="flex h-screen bg-[hsl(var(--main-bg))] overflow-hidden">
