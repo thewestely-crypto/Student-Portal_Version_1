@@ -97,7 +97,7 @@ export default function Dashboard() {
       </div>
       
       {/* Right Panel */}
-      <RightPanel />
+      <RightPanel totalXP={totalXP} />
     </div>
   );
 }
