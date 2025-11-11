@@ -81,6 +81,7 @@ export default function Dashboard() {
               learningPackData={learningPackData}
               onSelectionChange={handleSelectionChange}
               onToggleChatMode={handleToggleChatMode}
+              onAskHomie={handleAskHomie}
             />
           )}
           {activeSection === 'chat' && (
