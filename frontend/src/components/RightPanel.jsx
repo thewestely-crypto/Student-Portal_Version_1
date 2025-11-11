@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import ActivityProgressList from './ActivityProgressList';
 import HomieChatPanel from './HomieChatPanel';
 
-export default function RightPanel({ totalXP = 0, journeyMode = false, learningPackData = null, onStartJourney, currentSelection = { subject: '', chapter: '' }, chatMode = false, onChatClose }) {
+export default function RightPanel({ totalXP = 0, journeyMode = false, learningPackData = null, onStartJourney, currentSelection = { subject: '', chapter: '' }, chatMode = false, onChatClose, prefilledText = '', onClearPrefilledText }) {
   const baseGems = 505;
   const currentGems = baseGems + totalXP;
   const [animateGems, setAnimateGems] = useState(false);
