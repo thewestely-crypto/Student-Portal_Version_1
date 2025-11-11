@@ -123,7 +123,7 @@ export default function LearningPath() {
   return (
     <div className="relative min-h-full p-8">
       {/* Subject & Chapter Selection Card */}
-      <div className="max-w-3xl mx-auto mb-12">
+      <div className="max-w-3xl mx-auto mb-6">
         <Card className="bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] border-0 p-6 shadow-2xl">
           <div className="space-y-4">
             <h2 className="text-xl font-bold text-[hsl(var(--main-bg))] mb-4">
