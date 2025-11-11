@@ -73,6 +73,15 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
     setSelectedSubject(value);
     setSelectedChapter('');
     setShowTextbook(false); // Reset textbook view when subject changes
+    
+    // Notify parent of selection change
+    if (onJourneyModeChange) {
+      onJourneyModeChange(false);
+    }
+  };
+
+  const handleChapterChange = (value) => {
+    setSelectedChapter(value);
   };
 
   const currentChapters = chaptersBySubject[selectedSubject] || [];
