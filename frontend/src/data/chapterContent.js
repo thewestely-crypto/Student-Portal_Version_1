@@ -75,7 +75,7 @@ export const chapterContent = {
                 correctIndex: 2
               }
             ],
-            textbookPosition: { top: '68%', left: '22%' },
+            textbookPosition: { top: '62%', left: '22%' },
             notesPosition: { top: '78%', right: '18%' }
           },
           {
