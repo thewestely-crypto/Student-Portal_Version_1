@@ -200,6 +200,7 @@ export default function LearningPath({ onXPEarned }) {
         <TextbookViewer 
           lesson={currentTextbookLesson} 
           onClose={handleCloseTextbook}
+          onXPEarned={onXPEarned}
         />
       ) : (
         <>
