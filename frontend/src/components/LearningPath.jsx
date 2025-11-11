@@ -211,21 +211,39 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
                 </Select>
               </div>
 
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-[hsl(var(--main-bg))]/10 backdrop-blur-sm border-[hsl(var(--main-bg))]/30 text-[hsl(var(--main-bg))] hover:bg-[hsl(var(--main-bg))]/20 font-bold uppercase tracking-wide px-6 h-12"
-              >
-                <BookOpen className="w-5 h-5 mr-2" />
-                Guidebook
-              </Button>
+              {!journeyMode && (
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-[hsl(var(--main-bg))]/10 backdrop-blur-sm border-[hsl(var(--main-bg))]/30 text-[hsl(var(--main-bg))] hover:bg-[hsl(var(--main-bg))]/20 font-bold uppercase tracking-wide px-6 h-12"
+                >
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Guidebook
+                </Button>
+              )}
             </div>
           </div>
         </Card>
       </div>
 
-      {/* Conditional Rendering: Textbook Viewer OR Learning Path */}
-      {showTextbook && currentTextbookLesson ? (
+      {/* Floating XP Notification */}
+      {floatingXP && (
+        <div className="fixed top-24 right-1/2 transform translate-x-1/2 z-50 animate-float-up">
+          <div className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white font-bold text-2xl px-6 py-3 rounded-full shadow-2xl">
+            +{floatingXP.amount} XP
+          </div>
+        </div>
+      )}
+
+      {/* Conditional Rendering: Journey Mode OR Textbook OR Learning Path */}
+      {journeyMode && learningPack ? (
+        <CardJourneyView
+          items={learningPack.items}
+          onExit={() => onJourneyModeChange(false)}
+          onComplete={handleActivityComplete}
+          isItemCompleted={packState.isItemCompleted}
+        />
+      ) : showTextbook && currentTextbookLesson ? (
         <TextbookViewer 
           lesson={currentTextbookLesson} 
           onClose={handleCloseTextbook}
