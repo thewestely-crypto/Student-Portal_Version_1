@@ -146,6 +146,7 @@ export default function Dashboard() {
         journeyMode={journeyMode}
         learningPackData={learningPackData}
         onStartJourney={handleStartJourney}
+        currentSelection={currentSelection}
       />
     </div>
   );
