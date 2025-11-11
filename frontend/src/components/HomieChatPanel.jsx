@@ -162,25 +162,121 @@ export default function HomieChatPanel({ totalXP = 0, onClose }) {
             </div>
           </div>
         ) : (
-          /* Chat Messages */
+          /* Chat Messages - New Format */
           <>
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
-                    message.type === 'user'
-                      ? 'bg-[hsl(var(--primary))] text-white'
-                      : 'bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] text-foreground'
-                  }`}
-                >
-                  <p className="text-sm leading-relaxed">{message.text}</p>
-                  <span className="text-xs opacity-60 mt-1 block">
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            {messages.map((conversation) => (
+              <div key={conversation.id} className="space-y-4 mb-6 pb-6 border-b border-[hsl(var(--card-border))]">
+                {/* Question - Left Aligned */}
+                <div className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-4">
+                  <p className="text-white font-semibold text-base leading-relaxed">
+                    {conversation.question}
+                  </p>
+                  <span className="text-xs text-muted-foreground mt-2 block">
+                    {conversation.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
+
+                {/* Filter Tabs */}
+                <div className="flex items-center gap-2">
+                  <Button
+                    size="sm"
+                    variant={conversation.activeTab === 'all' ? 'default' : 'outline'}
+                    onClick={() => handleTabChange(conversation.id, 'all')}
+                    className={conversation.activeTab === 'all' 
+                      ? 'bg-[hsl(var(--primary))] text-white' 
+                      : 'bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-gray-300 hover:bg-[hsl(var(--sidebar-hover))]'
+                    }
+                  >
+                    All
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={conversation.activeTab === 'images' ? 'default' : 'outline'}
+                    onClick={() => handleTabChange(conversation.id, 'images')}
+                    className={conversation.activeTab === 'images' 
+                      ? 'bg-[hsl(var(--primary))] text-white' 
+                      : 'bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-gray-300 hover:bg-[hsl(var(--sidebar-hover))]'
+                    }
+                  >
+                    Images
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={conversation.activeTab === 'videos' ? 'default' : 'outline'}
+                    onClick={() => handleTabChange(conversation.id, 'videos')}
+                    className={conversation.activeTab === 'videos' 
+                      ? 'bg-[hsl(var(--primary))] text-white' 
+                      : 'bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-gray-300 hover:bg-[hsl(var(--sidebar-hover))]'
+                    }
+                  >
+                    Videos
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={conversation.activeTab === 'sources' ? 'default' : 'outline'}
+                    onClick={() => handleTabChange(conversation.id, 'sources')}
+                    className={conversation.activeTab === 'sources' 
+                      ? 'bg-[hsl(var(--primary))] text-white' 
+                      : 'bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-gray-300 hover:bg-[hsl(var(--sidebar-hover))]'
+                    }
+                  >
+                    Sources
+                  </Button>
+                </div>
+
+                {/* Content based on active tab */}
+                {(conversation.activeTab === 'all' || conversation.activeTab === 'images') && (
+                  /* Images Section */
+                  <div className="overflow-x-auto">
+                    <div className="flex gap-3 pb-2">
+                      {conversation.images.map((imgUrl, idx) => (
+                        <img
+                          key={idx}
+                          src={imgUrl}
+                          alt={`Result ${idx + 1}`}
+                          className="w-32 h-24 object-cover rounded-lg border border-[hsl(var(--card-border))] flex-shrink-0 hover:scale-105 transition-transform cursor-pointer"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {(conversation.activeTab === 'all' || conversation.activeTab === 'videos') && (
+                  /* Videos Section */
+                  <div className="space-y-2">
+                    {conversation.videos.map((video, idx) => (
+                      <div key={idx} className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-3 flex items-center gap-3 hover:bg-[hsl(var(--sidebar-hover))] cursor-pointer transition-colors">
+                        <div className="w-16 h-12 bg-gray-700 rounded flex items-center justify-center">
+                          <span className="text-2xl">▶️</span>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm text-white font-medium">{video.title}</p>
+                          <p className="text-xs text-muted-foreground">{video.duration}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {(conversation.activeTab === 'all' || conversation.activeTab === 'sources') && (
+                  /* Sources Section */
+                  <div className="space-y-2">
+                    {conversation.sources.map((source, idx) => (
+                      <div key={idx} className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-3 hover:bg-[hsl(var(--sidebar-hover))] cursor-pointer transition-colors">
+                        <p className="text-sm text-[hsl(var(--primary))] font-medium hover:underline">{source.title}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {(conversation.activeTab === 'all') && (
+                  /* Answer Section */
+                  <div className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-4">
+                    <p className="text-sm text-gray-200 leading-relaxed">
+                      {conversation.answer}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
             <div ref={messagesEndRef} />
