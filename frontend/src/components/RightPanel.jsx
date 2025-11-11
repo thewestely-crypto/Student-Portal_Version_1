@@ -4,8 +4,9 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Sparkles, Lock, Zap, ArrowRight, Flag, Flame, Diamond, Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import ActivityProgressList from './ActivityProgressList';
 
-export default function RightPanel({ totalXP = 0 }) {
+export default function RightPanel({ totalXP = 0, journeyMode = false, learningPackData = null, onStartJourney }) {
   const baseGems = 505;
   const currentGems = baseGems + totalXP;
   const [animateGems, setAnimateGems] = useState(false);
