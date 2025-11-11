@@ -10,10 +10,15 @@ export default function Dashboard() {
   const [totalXP, setTotalXP] = useState(0);
   const [journeyMode, setJourneyMode] = useState(false);
   const [currentJourneyIndex, setCurrentJourneyIndex] = useState(0);
+  const [currentSelection, setCurrentSelection] = useState({ subject: '', chapter: '' });
 
   // Learning pack state for right panel
   const learningPack = chapterContent.physics?.ch8?.learningPack;
   const packState = useLearningPack(learningPack?.packId);
+
+  const handleSelectionChange = (selection) => {
+    setCurrentSelection(selection);
+  };
 
   const handleXPEarned = (xpAmount) => {
     setTotalXP(prev => prev + xpAmount);
