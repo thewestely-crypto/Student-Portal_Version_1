@@ -11,6 +11,7 @@ export default function Dashboard() {
   const [journeyMode, setJourneyMode] = useState(false);
   const [currentJourneyIndex, setCurrentJourneyIndex] = useState(0);
   const [currentSelection, setCurrentSelection] = useState({ subject: '', chapter: '' });
+  const [chatMode, setChatMode] = useState(false);
 
   // Learning pack state for right panel
   const learningPack = chapterContent.physics?.ch8?.learningPack;
