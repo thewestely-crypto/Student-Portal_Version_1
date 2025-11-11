@@ -3,10 +3,25 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Sparkles, Lock, Zap, ArrowRight, Flag, Flame, Diamond, Heart } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function RightPanel({ totalXP = 0 }) {
   const baseGems = 505;
   const currentGems = baseGems + totalXP;
+  const [animateGems, setAnimateGems] = useState(false);
+  const [xpIncrement, setXpIncrement] = useState(0);
+
+  // Trigger animation when totalXP changes
+  useEffect(() => {
+    if (totalXP > 0) {
+      setAnimateGems(true);
+      setXpIncrement(totalXP);
+      const timer = setTimeout(() => {
+        setAnimateGems(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [totalXP]);
 
   const stats = [
     { icon: Flag, value: 2, label: 'Lessons', gradient: 'from-blue-400 via-blue-500 to-blue-600', shine: false },
