@@ -96,7 +96,7 @@ Without friction, a ball would roll forever! In space, where there's no air resi
 Fun fact: Ice is slippery because it has very low friction. That's why hockey pucks glide so smoothly!`,
             xpReward: 10,
             textbookPosition: { top: '82%', right: '20%' },
-            notesPosition: { top: '42%', left: '15%' }
+            notesPosition: { top: '42%', left: '20%' }
           }
         ]
       },
