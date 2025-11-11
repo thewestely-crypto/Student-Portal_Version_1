@@ -309,27 +309,22 @@ export default function HomieChatPanel({ totalXP = 0, onClose }) {
         <div className="flex items-center gap-2">
           <Button
             onClick={handleVoiceToText}
+            size="icon"
             variant="outline"
-            className={`flex-1 ${
+            className={`${
               isRecording
                 ? 'bg-red-600 border-red-600 text-white animate-pulse'
                 : 'bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-foreground hover:bg-[hsl(var(--sidebar-hover))]'
             }`}
           >
-            <Mic className="w-4 h-4 mr-2" />
-            {isRecording ? 'Recording...' : 'Voice-to-Text'}
+            <Mic className="w-4 h-4" />
           </Button>
           <Button
-            onClick={handleVoiceChat}
+            onClick={handleTalkToHomie}
             variant="outline"
-            className={`flex-1 ${
-              isVoiceChatActive
-                ? 'bg-[hsl(var(--primary))] border-[hsl(var(--primary))] text-white'
-                : 'bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-foreground hover:bg-[hsl(var(--sidebar-hover))]'
-            }`}
+            className="flex-1 bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-foreground hover:bg-[hsl(var(--sidebar-hover))]"
           >
-            <Volume2 className="w-4 h-4 mr-2" />
-            Voice Chat
+            Talk to Homie
           </Button>
         </div>
       </div>
