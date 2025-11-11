@@ -128,7 +128,7 @@ export default function RightPanel({ totalXP = 0, journeyMode = false, learningP
                 </div>
               </div>
               <Button 
-                onClick={onStartJourney}
+                onClick={handleStartJourneyClick}
                 className="w-full bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-[hsl(var(--main-bg))] font-bold uppercase py-6 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 Start My Journey
