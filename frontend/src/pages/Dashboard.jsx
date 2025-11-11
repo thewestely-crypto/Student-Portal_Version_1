@@ -20,7 +20,7 @@ export default function Dashboard() {
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Content based on active section */}
         <div className="flex-1 overflow-y-auto">
-          {activeSection === 'learn' && <LearningPath />}
+          {activeSection === 'learn' && <LearningPath onXPEarned={handleXPEarned} />}
           {activeSection === 'chat' && (
             <div className="flex items-center justify-center h-full">
               <div className="text-center space-y-4">
