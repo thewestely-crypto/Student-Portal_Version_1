@@ -42,6 +42,18 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned }) {
     }
   };
 
+  const handleResetProgress = () => {
+    if (window.confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+      packState.resetProgress();
+      toast.success('Progress reset successfully!');
+      // Reset XP in parent
+      if (onXPEarned) {
+        const currentXP = packState.getTotalXP();
+        onXPEarned(-currentXP); // Subtract current XP to reset
+      }
+    }
+  };
+
   const notesContent = {
     title: "Chapter 8: Force and Laws of Motion",
     sections: [
