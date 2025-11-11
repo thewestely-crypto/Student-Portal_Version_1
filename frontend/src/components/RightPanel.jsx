@@ -4,11 +4,14 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Sparkles, Lock, Zap, ArrowRight, Flag, Flame, Diamond, Heart } from 'lucide-react';
 
-export default function RightPanel() {
+export default function RightPanel({ totalXP = 0 }) {
+  const baseGems = 505;
+  const currentGems = baseGems + totalXP;
+
   const stats = [
     { icon: Flag, value: 2, label: 'Lessons', gradient: 'from-blue-400 via-blue-500 to-blue-600', shine: false },
     { icon: Flame, value: 2, label: 'Day Streak', gradient: 'from-orange-400 via-orange-500 to-red-500', shine: false },
-    { icon: Diamond, value: 505, label: 'Gems', gradient: 'from-purple-400 via-fuchsia-500 to-pink-500', shine: true },
+    { icon: Diamond, value: currentGems, label: 'Gems', gradient: 'from-purple-400 via-fuchsia-500 to-pink-500', shine: true },
     { icon: Heart, value: 5, label: 'Lives', gradient: 'from-pink-400 via-rose-500 to-rose-600', shine: false },
   ];
 
