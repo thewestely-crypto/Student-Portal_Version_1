@@ -188,7 +188,7 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
                   onValueChange={setSelectedChapter}
                   disabled={!selectedSubject || currentChapters.length === 0}
                 >
-                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
+                  <SelectTrigger className={`bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold ${journeyMode ? 'text-sm h-9' : 'text-base h-12'}`}>
                     <SelectValue placeholder="Chapter" />
                   </SelectTrigger>
                   <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
