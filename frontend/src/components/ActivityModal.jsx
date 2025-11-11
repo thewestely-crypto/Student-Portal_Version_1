@@ -214,7 +214,7 @@ export default function ActivityModal({ item, isOpen, onClose, onComplete, isAlr
             <div className="space-y-6">
               {item.questions?.map((question, qIdx) => (
                 <div key={question.id} className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-6">
-                  <h3 className="font-bold text-foreground mb-4">
+                  <h3 className="font-bold text-white mb-4">
                     Q{qIdx + 1}: {question.question}
                   </h3>
                   <div className="space-y-2">
