@@ -130,7 +130,12 @@ export default function Dashboard() {
       </div>
       
       {/* Right Panel */}
-      <RightPanel totalXP={totalXP} />
+      <RightPanel 
+        totalXP={totalXP}
+        journeyMode={journeyMode}
+        learningPackData={learningPackData}
+        onStartJourney={handleStartJourney}
+      />
     </div>
   );
 }
