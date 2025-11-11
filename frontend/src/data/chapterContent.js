@@ -30,7 +30,7 @@ export const chapterContent = {
             description: 'Try interacting with virtual objects to see how force makes them move or stop.',
             xpReward: 15,
             textbookPosition: { top: '42%', right: '15%' },
-            notesPosition: { top: '55%', left: '8%' }
+            notesPosition: { top: '55%', left: '13%' }
           },
           {
             id: 'practice-force',
