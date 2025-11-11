@@ -303,9 +303,12 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
         </>
       )}
 
-      {/* Mascot - Always Visible (smaller, touching right panel) */}
-      <div className="fixed bottom-8 right-[384px] z-20">
-        <div className="relative animate-float">
+      {/* Mascot - Always Visible (smaller, touching right panel) - Clickable */}
+      <div 
+        className="fixed bottom-8 right-[384px] z-20 cursor-pointer"
+        onClick={onToggleChatMode}
+      >
+        <div className="relative animate-float hover:scale-110 transition-transform duration-300">
           <div className="w-24 h-24 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl glow-green">
             <Star className="w-12 h-12 text-[hsl(var(--main-bg))]" />
           </div>
