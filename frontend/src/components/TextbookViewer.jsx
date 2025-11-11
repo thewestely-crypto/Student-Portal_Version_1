@@ -7,8 +7,40 @@ import { useLearningPack } from '@/hooks/useLearningPack';
 import { toast } from 'sonner';
 import { chapterContent } from '@/data/chapterContent';
 
-export default function TextbookViewer({ lesson, onClose }) {
+export default function TextbookViewer({ lesson, onClose, onXPEarned }) {
   const [showNotes, setShowNotes] = useState(false);
+  const [selectedActivity, setSelectedActivity] = useState(null);
+  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
+  const [floatingXP, setFloatingXP] = useState(null);
+
+  // Get learning pack data for Physics Chapter 8
+  const learningPack = chapterContent.physics?.ch8?.learningPack;
+  const packState = useLearningPack(learningPack?.packId);
+
+  const handleActivityClick = (item) => {
+    setSelectedActivity(item);
+    setIsActivityModalOpen(true);
+  };
+
+  const handleActivityComplete = (itemId, xpReward) => {
+    const earnedXP = packState.completeItem(itemId, xpReward);
+    
+    if (earnedXP > 0) {
+      // Show floating XP text
+      setFloatingXP({ amount: earnedXP, timestamp: Date.now() });
+      setTimeout(() => setFloatingXP(null), 3000);
+
+      // Show toast notification
+      toast.success(`🎉 +${earnedXP} Gems earned!`, {
+        duration: 3000
+      });
+
+      // Notify parent to update gems counter
+      if (onXPEarned) {
+        onXPEarned(earnedXP);
+      }
+    }
+  };
 
   const notesContent = {
     title: "Chapter 8: Force and Laws of Motion",
