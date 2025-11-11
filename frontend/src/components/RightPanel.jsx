@@ -62,9 +62,16 @@ export default function RightPanel({ totalXP = 0 }) {
                     </div>
                     
                     {/* Value only (no label) */}
-                    <div className="text-lg font-bold text-foreground drop-shadow-sm">
+                    <div className={`text-lg font-bold text-foreground drop-shadow-sm transition-all duration-300 ${isGems && animateGems ? 'scale-125 text-yellow-400' : ''}`}>
                       {stat.value}
                     </div>
+                    
+                    {/* XP increment badge */}
+                    {isGems && animateGems && xpIncrement > 0 && (
+                      <div className="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full animate-bounce shadow-lg">
+                        +{xpIncrement}
+                      </div>
+                    )}
                     
                     {/* Hover glow effect */}
                     <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[hsl(var(--teal-vivid))]/10 to-[hsl(var(--green-bright))]/10 -z-10 blur-xl" />
