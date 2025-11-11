@@ -228,7 +228,7 @@ export default function ActivityModal({ item, isOpen, onClose, onComplete, isAlr
                           className={`w-full justify-start text-left h-auto py-3 px-4 ${
                             isSelected
                               ? 'bg-[hsl(var(--primary))] border-[hsl(var(--primary))] text-white'
-                              : 'bg-[hsl(var(--card-bg))] hover:bg-[hsl(var(--sidebar-hover))]'
+                              : 'bg-[hsl(var(--card-bg))] hover:bg-[hsl(var(--sidebar-hover))] text-gray-200'
                           }`}
                         >
                           <div className="flex items-center gap-3">
