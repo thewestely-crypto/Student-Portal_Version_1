@@ -168,6 +168,8 @@ export default function Dashboard() {
         currentSelection={currentSelection}
         chatMode={chatMode}
         onChatClose={handleCloseChatMode}
+        prefilledText={prefilledText}
+        onClearPrefilledText={() => setPrefilledText('')}
       />
     </div>
   );
