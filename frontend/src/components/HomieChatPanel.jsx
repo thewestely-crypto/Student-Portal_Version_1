@@ -46,26 +46,20 @@ export default function HomieChatPanel({ totalXP = 0, onClose }) {
   const handleSendMessage = () => {
     if (!inputText.trim()) return;
 
-    // Add user message
-    const userMessage = {
+    // Add conversation (question + answer with resources)
+    const conversation = {
       id: Date.now(),
-      type: 'user',
-      text: inputText,
+      question: inputText,
+      answer: 'Force is a push or pull that changes an object\'s motion or shape. It can make things start moving, stop moving, speed up, slow down, or change direction. Forces are measured in Newtons (N) and are described by Newton\'s Laws of Motion.',
+      images: mockImages,
+      videos: mockVideos,
+      sources: mockSources,
+      activeTab: 'all', // all, images, videos, sources
       timestamp: new Date()
     };
-    setMessages(prev => [...prev, userMessage]);
+    
+    setMessages(prev => [...prev, conversation]);
     setInputText('');
-
-    // Simulate Homie response (replace with actual AI integration later)
-    setTimeout(() => {
-      const homieMessage = {
-        id: Date.now() + 1,
-        type: 'homie',
-        text: 'I\'m here to help you learn! This is a demo response. AI integration coming soon! 🌟',
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, homieMessage]);
-    }, 1000);
   };
 
   const handleKeyPress = (e) => {
