@@ -117,11 +117,11 @@ export default function ActivityModal({ item, isOpen, onClose, onComplete, isAlr
               <Icon className="w-8 h-8 text-white" />
             </div>
             <div>
-              <div className="text-sm font-bold text-[hsl(var(--primary))] uppercase tracking-wide">
+              <div className="text-sm font-bold text-[hsl(var(--teal-vivid))] uppercase tracking-wide">
                 {item.type}
               </div>
-              <h2 className="text-2xl font-bold text-foreground">{item.title}</h2>
-              <p className="text-muted-foreground text-sm">{item.duration}</p>
+              <h2 className="text-2xl font-bold text-white">{item.title}</h2>
+              <p className="text-gray-300 text-sm">{item.duration}</p>
             </div>
           </div>
           <Button
