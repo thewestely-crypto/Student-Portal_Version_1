@@ -57,6 +57,13 @@ export default function Dashboard() {
     setChatMode(false);
   };
 
+  const handleAskHomie = (selectedText) => {
+    // Open chat mode if not already open
+    setChatMode(true);
+    // Set prefilled text for input field
+    setPrefilledText(selectedText);
+  };
+
   return (
     <div className="flex h-screen bg-[hsl(var(--main-bg))] overflow-hidden">
       {/* Left Sidebar */}
