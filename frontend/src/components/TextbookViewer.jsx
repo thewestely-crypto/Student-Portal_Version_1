@@ -58,6 +58,48 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
     }
   };
 
+  // Handle text selection in notes view
+  useEffect(() => {
+    if (!showNotes || !notesRef.current) return;
+
+    const handleTextSelection = () => {
+      const selection = window.getSelection();
+      const text = selection?.toString().trim();
+
+      if (text && text.length > 0) {
+        // Get selection position
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        
+        setSelectedText(text);
+        setButtonPosition({
+          top: rect.bottom + window.scrollY + 5,
+          left: rect.left + window.scrollX
+        });
+        setShowAskHomieButton(true);
+      } else {
+        setShowAskHomieButton(false);
+      }
+    };
+
+    // Listen for mouseup events (when user finishes selecting)
+    document.addEventListener('mouseup', handleTextSelection);
+    
+    return () => {
+      document.removeEventListener('mouseup', handleTextSelection);
+    };
+  }, [showNotes]);
+
+  const handleAskHomieClick = () => {
+    if (selectedText && onAskHomie) {
+      onAskHomie(selectedText); // Pass selected text to parent
+      setShowAskHomieButton(false);
+      setSelectedText('');
+      // Clear selection
+      window.getSelection()?.removeAllRanges();
+    }
+  };
+
   const notesContent = {
     title: "Chapter 8: Force and Laws of Motion",
     sections: [
