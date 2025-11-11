@@ -266,7 +266,7 @@ export default function ActivityModal({ item, isOpen, onClose, onComplete, isAlr
               <div className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-6 max-h-96 overflow-y-auto">
                 <div className="prose prose-invert max-w-none">
                   {item.content?.split('\n\n').map((paragraph, idx) => (
-                    <p key={idx} className="text-muted-foreground leading-relaxed mb-4">
+                    <p key={idx} className="text-gray-200 leading-relaxed mb-4">
                       {paragraph}
                     </p>
                   ))}
