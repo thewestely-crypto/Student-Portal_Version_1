@@ -1,4 +1,4 @@
-import { ArrowLeft, BookText } from 'lucide-react';
+import { ArrowLeft, BookText, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import FloatingActivityIcon from './FloatingActivityIcon';
