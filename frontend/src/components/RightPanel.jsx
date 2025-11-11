@@ -6,8 +6,9 @@ import { Sparkles, Lock, Zap, ArrowRight, Flag, Flame, Diamond, Heart } from 'lu
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import ActivityProgressList from './ActivityProgressList';
+import HomieChatPanel from './HomieChatPanel';
 
-export default function RightPanel({ totalXP = 0, journeyMode = false, learningPackData = null, onStartJourney, currentSelection = { subject: '', chapter: '' } }) {
+export default function RightPanel({ totalXP = 0, journeyMode = false, learningPackData = null, onStartJourney, currentSelection = { subject: '', chapter: '' }, chatMode = false, onChatClose }) {
   const baseGems = 505;
   const currentGems = baseGems + totalXP;
   const [animateGems, setAnimateGems] = useState(false);
