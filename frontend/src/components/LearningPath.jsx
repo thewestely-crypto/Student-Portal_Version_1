@@ -36,7 +36,7 @@ const chaptersBySubject = {
   mathematics: [],
 };
 
-export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeChange, learningPackData, onSelectionChange }) {
+export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeChange, learningPackData, onSelectionChange, onToggleChatMode }) {
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedChapter, setSelectedChapter] = useState('');
   const [selectedLesson, setSelectedLesson] = useState(null);
