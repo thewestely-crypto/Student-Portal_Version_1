@@ -157,6 +157,8 @@ export default function Dashboard() {
         learningPackData={learningPackData}
         onStartJourney={handleStartJourney}
         currentSelection={currentSelection}
+        chatMode={chatMode}
+        onChatClose={handleCloseChatMode}
       />
     </div>
   );
