@@ -18,8 +18,7 @@ const mockVideos = [
 ];
 
 const mockSources = [
-  { title: 'Physics Textbook - Chapter 8', url: '#' },
-  { title: 'Khan Academy: Forces', url: '#' }
+  // Sources removed as per requirement
 ];
 
 export default function HomieChatPanel({ totalXP = 0, onClose }) {
