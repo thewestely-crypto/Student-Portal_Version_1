@@ -7,11 +7,15 @@ import { useLearningPack } from '@/hooks/useLearningPack';
 import { toast } from 'sonner';
 import { chapterContent } from '@/data/chapterContent';
 
-export default function TextbookViewer({ lesson, onClose, onXPEarned }) {
+export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie }) {
   const [showNotes, setShowNotes] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
   const [floatingXP, setFloatingXP] = useState(null);
+  const [selectedText, setSelectedText] = useState('');
+  const [showAskHomieButton, setShowAskHomieButton] = useState(false);
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 });
+  const notesRef = useRef(null);
 
   // Get learning pack data for Physics Chapter 8
   const learningPack = chapterContent.physics?.ch8?.learningPack;
