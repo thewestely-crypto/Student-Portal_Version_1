@@ -62,6 +62,7 @@ export default function Dashboard() {
               journeyMode={journeyMode}
               onJourneyModeChange={handleJourneyModeChange}
               learningPackData={learningPackData}
+              onSelectionChange={handleSelectionChange}
             />
           )}
           {activeSection === 'chat' && (
