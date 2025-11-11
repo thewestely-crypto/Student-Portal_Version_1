@@ -2,14 +2,40 @@ import { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import LearningPath from '@/components/LearningPath';
 import RightPanel from '@/components/RightPanel';
+import { useLearningPack } from '@/hooks/useLearningPack';
+import { chapterContent } from '@/data/chapterContent';
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('learn');
   const [totalXP, setTotalXP] = useState(0);
+  const [journeyMode, setJourneyMode] = useState(false);
+  const [currentJourneyIndex, setCurrentJourneyIndex] = useState(0);
+
+  // Learning pack state for right panel
+  const learningPack = chapterContent.physics?.ch8?.learningPack;
+  const packState = useLearningPack(learningPack?.packId);
 
   const handleXPEarned = (xpAmount) => {
     setTotalXP(prev => prev + xpAmount);
   };
+
+  const handleStartJourney = () => {
+    setJourneyMode(true);
+    setCurrentJourneyIndex(0);
+  };
+
+  const handleJourneyModeChange = (isActive) => {
+    setJourneyMode(isActive);
+    if (!isActive) {
+      setCurrentJourneyIndex(0);
+    }
+  };
+
+  const learningPackData = journeyMode && learningPack ? {
+    items: learningPack.items,
+    currentIndex: currentJourneyIndex,
+    completedItems: packState.completedItems
+  } : null;
 
   return (
     <div className="flex h-screen bg-[hsl(var(--main-bg))] overflow-hidden">
