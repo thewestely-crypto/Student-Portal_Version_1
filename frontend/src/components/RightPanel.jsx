@@ -39,14 +39,15 @@ export default function RightPanel({ totalXP = 0 }) {
             <div className="flex items-center justify-between gap-2">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
+                const isGems = stat.label === 'Gems';
                 return (
                   <div
                     key={index}
                     className="relative group cursor-pointer flex items-center gap-2"
                   >
                     {/* Icon with gradient background */}
-                    <div className={`relative w-9 h-9 rounded-full bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-md group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 ${stat.shine ? 'animate-pulse' : ''}`}>
-                      <Icon className={`w-4 h-4 text-white drop-shadow-lg ${stat.shine ? 'animate-pulse' : ''}`} />
+                    <div className={`relative w-9 h-9 rounded-full bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-md group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 ${stat.shine || (isGems && animateGems) ? 'animate-pulse' : ''} ${isGems && animateGems ? 'scale-125' : ''}`}>
+                      <Icon className={`w-4 h-4 text-white drop-shadow-lg ${stat.shine || (isGems && animateGems) ? 'animate-pulse' : ''}`} />
                       
                       {/* Sparkle effect for Gems */}
                       {stat.shine && (
