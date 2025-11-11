@@ -48,6 +48,14 @@ export default function Dashboard() {
     completedItems: packState.completedItems
   } : null;
 
+  const handleToggleChatMode = () => {
+    setChatMode(!chatMode);
+  };
+
+  const handleCloseChatMode = () => {
+    setChatMode(false);
+  };
+
   return (
     <div className="flex h-screen bg-[hsl(var(--main-bg))] overflow-hidden">
       {/* Left Sidebar */}
