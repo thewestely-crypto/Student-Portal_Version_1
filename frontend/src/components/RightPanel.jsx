@@ -83,31 +83,42 @@ export default function RightPanel({ totalXP = 0, journeyMode = false, learningP
           </CardContent>
         </Card>
 
-        {/* Start Fresh Card */}
-        <Card className="bg-gradient-to-br from-[hsl(var(--purple-accent))]/20 to-[hsl(var(--primary))]/20 border-[hsl(var(--primary))]/30 overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[hsl(var(--primary))]/30 to-transparent rounded-full blur-2xl" />
-          <CardHeader>
-            <Badge className="w-fit bg-gradient-to-r from-[hsl(var(--purple-accent))] to-[hsl(var(--primary))] text-foreground border-0 font-bold uppercase text-xs px-3 py-1">
-              START FRESH
-            </Badge>
-            <CardTitle className="text-xl font-bold text-foreground mt-3">
-              Learn this chapter from start
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground">
-              Let Homie guide you step by step — from basics to mastery.
-            </p>
-            <div className="flex items-center justify-center my-4">
-              <div className="w-24 h-24 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--purple-accent))] rounded-2xl flex items-center justify-center shadow-xl glow-teal transform rotate-12">
-                <Sparkles className="w-12 h-12 text-[hsl(var(--main-bg))]" />
+        {/* Start Fresh Card OR Activity Progress List */}
+        {journeyMode && learningPackData ? (
+          <ActivityProgressList
+            items={learningPackData.items}
+            currentIndex={learningPackData.currentIndex}
+            completedItems={learningPackData.completedItems}
+          />
+        ) : (
+          <Card className="bg-gradient-to-br from-[hsl(var(--purple-accent))]/20 to-[hsl(var(--primary))]/20 border-[hsl(var(--primary))]/30 overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[hsl(var(--primary))]/30 to-transparent rounded-full blur-2xl" />
+            <CardHeader>
+              <Badge className="w-fit bg-gradient-to-r from-[hsl(var(--purple-accent))] to-[hsl(var(--primary))] text-foreground border-0 font-bold uppercase text-xs px-3 py-1">
+                START FRESH
+              </Badge>
+              <CardTitle className="text-xl font-bold text-foreground mt-3">
+                Learn this chapter from start
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                Let Homie guide you step by step — from basics to mastery.
+              </p>
+              <div className="flex items-center justify-center my-4">
+                <div className="w-24 h-24 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--purple-accent))] rounded-2xl flex items-center justify-center shadow-xl glow-teal transform rotate-12">
+                  <Sparkles className="w-12 h-12 text-[hsl(var(--main-bg))]" />
+                </div>
               </div>
-            </div>
-            <Button className="w-full bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-[hsl(var(--main-bg))] font-bold uppercase py-6 shadow-lg hover:shadow-xl transition-all duration-300">
-              Start My Journey
-            </Button>
-          </CardContent>
-        </Card>
+              <Button 
+                onClick={onStartJourney}
+                className="w-full bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-[hsl(var(--main-bg))] font-bold uppercase py-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Start My Journey
+              </Button>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Unlock Leaderboards Card */}
         <Card className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
