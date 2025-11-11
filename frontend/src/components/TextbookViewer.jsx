@@ -1,10 +1,66 @@
-import { X, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, BookText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
 export default function TextbookViewer({ lesson, onClose }) {
+  const [showNotes, setShowNotes] = useState(false);
+
+  const notesContent = {
+    title: "Chapter 8: Force and Laws of Motion",
+    sections: [
+      {
+        heading: "1. Introduction",
+        points: [
+          "Previous chapter discussed motion in terms of position, velocity, and acceleration.",
+          "This chapter explores what causes motion and why speed changes with time.",
+          "Main question: Do all motions require a cause? If yes, what is its nature?"
+        ]
+      },
+      {
+        heading: "2. Historical Background",
+        points: [
+          "For centuries, scientists and philosophers debated the cause of motion.",
+          "Old belief: Rest is the natural state of an object.",
+          "Example: A ball stops rolling after a while.",
+          "Galileo Galilei and Isaac Newton challenged this belief.",
+          "They developed a new understanding of motion — introducing the concept of force."
+        ]
+      },
+      {
+        heading: "3. Concept of Force",
+        points: [
+          "Everyday observation: Effort is needed to move or stop an object.",
+          "Example: Pushing a trolley, pulling a drawer.",
+          "Force is described as a push or pull that changes an object's state of motion.",
+          "No one can see or taste force — it is only recognized by its effect."
+        ]
+      },
+      {
+        heading: "4. Effects of Force",
+        points: [
+          "A force can:",
+          "• Change the state of motion (start, stop, speed up, slow down, change direction).",
+          "• Change the shape or size of objects.",
+          "Examples:",
+          "• Pushing a cart (starts moving).",
+          "• Kicking a ball (changes direction and speed).",
+          "• Squeezing a rubber ball (changes shape)."
+        ]
+      },
+      {
+        heading: "5. Key Diagrams",
+        points: [
+          "(a) A boy pushes a trolley → motion due to force.",
+          "(b) Drawer is pulled → change in position.",
+          "(c) Deformation example → change in shape due to force."
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="relative w-full h-full px-8 py-6">
-      {/* Close/Back Button */}
+      {/* Header with Back and Notes Toggle */}
       <div className="flex items-center justify-between mb-6">
         <Button
           onClick={onClose}
@@ -16,25 +72,49 @@ export default function TextbookViewer({ lesson, onClose }) {
         </Button>
         
         <Button
-          onClick={onClose}
-          variant="ghost"
-          size="icon"
-          className="text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--sidebar-hover))]"
+          onClick={() => setShowNotes(!showNotes)}
+          variant="outline"
+          className="bg-[hsl(var(--primary))] border-[hsl(var(--primary))] text-white hover:bg-[hsl(var(--teal-glow))] hover:border-[hsl(var(--teal-glow))] font-semibold"
         >
-          <X className="w-5 h-5" />
+          <BookText className="w-4 h-4 mr-2" />
+          {showNotes ? 'Back to Textbook' : 'Short Notes'}
         </Button>
       </div>
 
-      {/* Textbook Content - Scrollable */}
+      {/* Content Area - Scrollable */}
       <div className="w-full bg-[hsl(var(--card-bg))] rounded-lg overflow-hidden">
         <div className="overflow-y-auto max-h-[calc(100vh-200px)]">
-          {/* Textbook Image */}
-          <img
-            src={lesson.textbookImage}
-            alt={lesson.fullTitle}
-            className="w-full h-auto"
-            style={{ maxWidth: '100%', display: 'block' }}
-          />
+          {showNotes ? (
+            /* Notes View */
+            <div className="p-8 space-y-6">
+              <h1 className="text-3xl font-bold text-foreground mb-8 border-b border-[hsl(var(--card-border))] pb-4">
+                {notesContent.title}
+              </h1>
+              
+              {notesContent.sections.map((section, index) => (
+                <div key={index} className="space-y-3">
+                  <h2 className="text-xl font-bold text-[hsl(var(--primary))] mb-3">
+                    {section.heading}
+                  </h2>
+                  <ul className="space-y-2 text-muted-foreground leading-relaxed">
+                    {section.points.map((point, idx) => (
+                      <li key={idx} className="pl-4">
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            /* Textbook Image View */
+            <img
+              src={lesson.textbookImage}
+              alt={lesson.fullTitle}
+              className="w-full h-auto"
+              style={{ maxWidth: '100%', display: 'block' }}
+            />
+          )}
         </div>
       </div>
     </div>
