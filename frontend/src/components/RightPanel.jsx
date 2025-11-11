@@ -51,7 +51,14 @@ export default function RightPanel({ totalXP = 0, journeyMode = false, learningP
 
   // If chat mode is active, show HomieChatPanel instead
   if (chatMode) {
-    return <HomieChatPanel totalXP={totalXP} onClose={onChatClose} />;
+    return (
+      <HomieChatPanel 
+        totalXP={totalXP} 
+        onClose={onChatClose}
+        prefilledText={prefilledText}
+        onClearPrefilledText={onClearPrefilledText}
+      />
+    );
   }
 
   return (
