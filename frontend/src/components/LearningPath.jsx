@@ -36,13 +36,38 @@ const chaptersBySubject = {
   mathematics: [],
 };
 
-export default function LearningPath({ onXPEarned }) {
+export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeChange, learningPackData }) {
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedChapter, setSelectedChapter] = useState('');
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showTextbook, setShowTextbook] = useState(false);
   const [currentTextbookLesson, setCurrentTextbookLesson] = useState(null);
+  const [floatingXP, setFloatingXP] = useState(null);
+
+  // Learning pack state
+  const learningPack = chapterContent.physics?.ch8?.learningPack;
+  const packState = useLearningPack(learningPack?.packId);
+
+  const handleActivityComplete = (itemId, xpReward) => {
+    const earnedXP = packState.completeItem(itemId, xpReward);
+    
+    if (earnedXP > 0) {
+      // Show floating XP text
+      setFloatingXP({ amount: earnedXP, timestamp: Date.now() });
+      setTimeout(() => setFloatingXP(null), 3000);
+
+      // Show toast notification
+      toast.success(`🎉 +${earnedXP} Gems earned!`, {
+        duration: 3000
+      });
+
+      // Notify parent to update gems counter
+      if (onXPEarned) {
+        onXPEarned(earnedXP);
+      }
+    }
+  };
 
   const handleSubjectChange = (value) => {
     setSelectedSubject(value);
