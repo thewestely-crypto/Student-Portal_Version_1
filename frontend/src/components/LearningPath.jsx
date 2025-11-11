@@ -300,19 +300,20 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
             </div>
           </div>
 
-          {/* Mascot */}
-          <div className="fixed bottom-8 right-[420px] z-20">
-            <div className="relative animate-float">
-              <div className="w-32 h-32 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl glow-green">
-                <Star className="w-16 h-16 text-[hsl(var(--main-bg))]" />
-              </div>
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-[hsl(var(--orange-warm))] rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-[hsl(var(--main-bg))] text-xs font-bold">Hi!</span>
-              </div>
-            </div>
-          </div>
         </>
       )}
+
+      {/* Mascot - Always Visible (smaller, touching right panel) */}
+      <div className="fixed bottom-8 right-[384px] z-20">
+        <div className="relative animate-float">
+          <div className="w-24 h-24 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl glow-green">
+            <Star className="w-12 h-12 text-[hsl(var(--main-bg))]" />
+          </div>
+          <div className="absolute -top-1 -right-1 w-6 h-6 bg-[hsl(var(--orange-warm))] rounded-full flex items-center justify-center shadow-lg">
+            <span className="text-[hsl(var(--main-bg))] text-[10px] font-bold">Hi!</span>
+          </div>
+        </div>
+      </div>
       
       {/* Lesson Modal */}
       <LessonModal
