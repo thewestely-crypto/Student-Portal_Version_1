@@ -120,40 +120,87 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned }) {
 
       {/* Content Area - Scrollable */}
       <div className="w-full bg-[hsl(var(--card-bg))] rounded-lg overflow-hidden">
-        <div className="overflow-y-auto max-h-[calc(100vh-200px)]">
+        <div className="overflow-y-auto max-h-[calc(100vh-200px)] relative">
           {showNotes ? (
-            /* Notes View */
-            <div className="p-8 space-y-6">
-              <h1 className="text-3xl font-bold text-foreground mb-8 border-b border-[hsl(var(--card-border))] pb-4">
-                {notesContent.title}
-              </h1>
-              
-              {notesContent.sections.map((section, index) => (
-                <div key={index} className="space-y-3">
-                  <h2 className="text-xl font-bold text-[hsl(var(--primary))] mb-3">
-                    {section.heading}
-                  </h2>
-                  <ul className="space-y-2 text-muted-foreground leading-relaxed">
-                    {section.points.map((point, idx) => (
-                      <li key={idx} className="pl-4">
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            /* Notes View with Floating Icons */
+            <div className="relative">
+              <div className="p-8 space-y-6">
+                <h1 className="text-3xl font-bold text-foreground mb-8 border-b border-[hsl(var(--card-border))] pb-4">
+                  {notesContent.title}
+                </h1>
+                
+                {notesContent.sections.map((section, index) => (
+                  <div key={index} className="space-y-3">
+                    <h2 className="text-xl font-bold text-[hsl(var(--primary))] mb-3">
+                      {section.heading}
+                    </h2>
+                    <ul className="space-y-2 text-muted-foreground leading-relaxed">
+                      {section.points.map((point, idx) => (
+                        <li key={idx} className="pl-4">
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              {/* Floating Activity Icons for Notes View */}
+              {learningPack?.items.map((item) => (
+                <FloatingActivityIcon
+                  key={item.id}
+                  item={item}
+                  isCompleted={packState.isItemCompleted(item.id)}
+                  onClick={() => handleActivityClick(item)}
+                  position={item.notesPosition}
+                />
               ))}
             </div>
           ) : (
-            /* Textbook Image View */
-            <img
-              src={lesson.textbookImage}
-              alt={lesson.fullTitle}
-              className="w-full h-auto"
-              style={{ maxWidth: '100%', display: 'block' }}
-            />
+            /* Textbook Image View with Floating Icons */
+            <div className="relative">
+              <img
+                src={lesson.textbookImage}
+                alt={lesson.fullTitle}
+                className="w-full h-auto"
+                style={{ maxWidth: '100%', display: 'block' }}
+              />
+              
+              {/* Floating Activity Icons for Textbook View */}
+              {learningPack?.items.map((item) => (
+                <FloatingActivityIcon
+                  key={item.id}
+                  item={item}
+                  isCompleted={packState.isItemCompleted(item.id)}
+                  onClick={() => handleActivityClick(item)}
+                  position={item.textbookPosition}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Floating XP Notification */}
+          {floatingXP && (
+            <div className="fixed top-24 right-1/2 transform translate-x-1/2 z-50 animate-float-up">
+              <div className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white font-bold text-2xl px-6 py-3 rounded-full shadow-2xl">
+                +{floatingXP.amount} XP
+              </div>
+            </div>
           )}
         </div>
       </div>
+
+      {/* Activity Modal */}
+      <ActivityModal
+        item={selectedActivity}
+        isOpen={isActivityModalOpen}
+        onClose={() => {
+          setIsActivityModalOpen(false);
+          setSelectedActivity(null);
+        }}
+        onComplete={handleActivityComplete}
+        isAlreadyCompleted={selectedActivity ? packState.isItemCompleted(selectedActivity.id) : false}
+      />
     </div>
   );
 }
