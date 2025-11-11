@@ -179,7 +179,7 @@ export default function ActivityModal({ item, isOpen, onClose, onComplete, isAlr
           {item.type === 'Explore' && (
             <div className="space-y-4">
               <div className="bg-gradient-to-br from-[hsl(var(--card-bg))] to-[hsl(var(--card-bg))]/80 border-2 border-[hsl(var(--card-border))] rounded-lg p-8">
-                <h3 className="text-lg font-bold text-foreground mb-6 text-center">
+                <h3 className="text-lg font-bold text-white mb-6 text-center">
                   Click all interactions to complete!
                 </h3>
                 <div className="grid grid-cols-3 gap-4">
