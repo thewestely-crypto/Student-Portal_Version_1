@@ -109,7 +109,7 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned }) {
 
   return (
     <div className="relative w-full h-full px-8 py-6">
-      {/* Header with Back and Notes Toggle */}
+      {/* Header with Back, Reset, and Notes Toggle */}
       <div className="flex items-center justify-between mb-6">
         <Button
           onClick={onClose}
@@ -120,14 +120,27 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned }) {
           Back to Learning Path
         </Button>
         
-        <Button
-          onClick={() => setShowNotes(!showNotes)}
-          variant="outline"
-          className="bg-[hsl(var(--primary))] border-[hsl(var(--primary))] text-white hover:bg-[hsl(var(--teal-glow))] hover:border-[hsl(var(--teal-glow))] font-semibold"
-        >
-          <BookText className="w-4 h-4 mr-2" />
-          {showNotes ? 'Back to Textbook' : 'Short Notes'}
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button
+            onClick={handleResetProgress}
+            variant="outline"
+            size="sm"
+            className="bg-red-600/20 border-red-500/50 text-red-400 hover:bg-red-600/40 hover:border-red-500 hover:text-red-300"
+            title="Reset all activity progress"
+          >
+            <RotateCcw className="w-4 h-4 mr-2" />
+            Reset
+          </Button>
+          
+          <Button
+            onClick={() => setShowNotes(!showNotes)}
+            variant="outline"
+            className="bg-[hsl(var(--primary))] border-[hsl(var(--primary))] text-white hover:bg-[hsl(var(--teal-glow))] hover:border-[hsl(var(--teal-glow))] font-semibold"
+          >
+            <BookText className="w-4 h-4 mr-2" />
+            {showNotes ? 'Back to Textbook' : 'Short Notes'}
+          </Button>
+        </div>
       </div>
 
       {/* Content Area - Scrollable */}
