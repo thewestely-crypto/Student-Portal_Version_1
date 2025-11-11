@@ -25,6 +25,22 @@ export default function RightPanel({ totalXP = 0, journeyMode = false, learningP
     }
   }, [totalXP]);
 
+  const handleStartJourneyClick = () => {
+    // Check if valid selection exists
+    if (currentSelection.subject === 'physics' && currentSelection.chapter === 'ch8') {
+      // Valid selection, start journey
+      if (onStartJourney) {
+        onStartJourney();
+      }
+    } else {
+      // Invalid or no selection, show message
+      toast.info('Select a chapter to start your journey', {
+        duration: 3000,
+        description: 'Please choose a subject and chapter first'
+      });
+    }
+  };
+
   const stats = [
     { icon: Flag, value: 2, label: 'Lessons', gradient: 'from-blue-400 via-blue-500 to-blue-600', shine: false },
     { icon: Flame, value: 2, label: 'Day Streak', gradient: 'from-orange-400 via-orange-500 to-red-500', shine: false },
