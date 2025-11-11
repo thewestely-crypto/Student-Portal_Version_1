@@ -49,6 +49,11 @@ export default function RightPanel({ totalXP = 0, journeyMode = false, learningP
     { icon: Heart, value: 5, label: 'Lives', gradient: 'from-pink-400 via-rose-500 to-rose-600', shine: false },
   ];
 
+  // If chat mode is active, show HomieChatPanel instead
+  if (chatMode) {
+    return <HomieChatPanel totalXP={totalXP} onClose={onChatClose} />;
+  }
+
   return (
     <div className="w-96 bg-[hsl(var(--sidebar-bg))] border-l border-[hsl(var(--card-border))] overflow-y-auto">
       <div className="p-6 space-y-6">
