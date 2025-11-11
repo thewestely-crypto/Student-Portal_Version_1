@@ -2,8 +2,25 @@ import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Flag, Flame, Diamond, Heart, Sparkles, Send, Mic, Volume2, X } from 'lucide-react';
+import { Flag, Flame, Diamond, Heart, Sparkles, Send, Mic, X } from 'lucide-react';
 import { toast } from 'sonner';
+
+// Mock images for demo
+const mockImages = [
+  'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=200&h=150&fit=crop',
+  'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=200&h=150&fit=crop',
+  'https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=200&h=150&fit=crop'
+];
+
+const mockVideos = [
+  { title: 'Introduction to Force', duration: '3:45' },
+  { title: 'Newton\'s Laws Explained', duration: '5:20' }
+];
+
+const mockSources = [
+  { title: 'Physics Textbook - Chapter 8', url: '#' },
+  { title: 'Khan Academy: Forces', url: '#' }
+];
 
 export default function HomieChatPanel({ totalXP = 0, onClose }) {
   const [messages, setMessages] = useState([]);
