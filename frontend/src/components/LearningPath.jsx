@@ -5,6 +5,8 @@ import { Card } from '@/components/ui/card';
 import LearningNode from '@/components/LearningNode';
 import LessonModal from '@/components/LessonModal';
 import TextbookViewer from '@/components/TextbookViewer';
+import CardJourneyView from '@/components/CardJourneyView';
+import { useLearningPack } from '@/hooks/useLearningPack';
 import { toast } from 'sonner';
 import {
   Select,
