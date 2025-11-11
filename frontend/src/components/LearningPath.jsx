@@ -194,7 +194,7 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
               <div className="flex-1">
                 <Select 
                   value={selectedChapter} 
-                  onValueChange={setSelectedChapter}
+                  onValueChange={handleChapterChange}
                   disabled={!selectedSubject || currentChapters.length === 0}
                 >
                   <SelectTrigger className={`bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold ${journeyMode ? 'text-sm h-9' : 'text-base h-12'}`}>
