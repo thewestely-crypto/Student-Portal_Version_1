@@ -26,7 +26,6 @@ export default function HomieChatPanel({ totalXP = 0, onClose }) {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
-  const [isVoiceChatActive, setIsVoiceChatActive] = useState(false);
   const messagesEndRef = useRef(null);
 
   const baseGems = 505;
