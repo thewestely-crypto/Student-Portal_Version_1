@@ -149,13 +149,15 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
 
   return (
     <div className="relative min-h-full p-8">
-      {/* Subject & Chapter Selection Card */}
-      <div className="max-w-3xl mx-auto mb-6">
-        <Card className="bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] border-0 p-6 shadow-2xl">
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold text-[hsl(var(--main-bg))] mb-4">
-              Select Your Learning Focus
-            </h2>
+      {/* Subject & Chapter Selection - Compact in Journey Mode */}
+      <div className={`mx-auto ${journeyMode ? 'mb-4' : 'mb-6 max-w-3xl'}`}>
+        <Card className={`bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] border-0 shadow-2xl ${journeyMode ? 'p-3' : 'p-6'}`}>
+          <div className={journeyMode ? 'flex items-center gap-3' : 'space-y-4'}>
+            {!journeyMode && (
+              <h2 className="text-xl font-bold text-[hsl(var(--main-bg))] mb-4">
+                Select Your Learning Focus
+              </h2>
+            )}
             
             <div className="flex items-center gap-4">
               <div className="flex-1">
