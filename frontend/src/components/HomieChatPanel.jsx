@@ -77,21 +77,22 @@ export default function HomieChatPanel({ totalXP = 0, onClose }) {
       });
       // Simulate voice-to-text (replace with actual implementation)
       setTimeout(() => {
-        setInputText('This is a demo voice-to-text input');
+        setInputText('What is force in physics?');
         setIsRecording(false);
       }, 2000);
     }
   };
 
-  const handleVoiceChat = () => {
-    setIsVoiceChatActive(!isVoiceChatActive);
-    if (!isVoiceChatActive) {
-      toast.info('Voice Chat activated! (Demo mode)', {
-        duration: 2000
-      });
-    } else {
-      toast.info('Voice Chat ended');
-    }
+  const handleTalkToHomie = () => {
+    toast.info('Talk to Homie: Voice conversation started! (Demo mode)', {
+      duration: 2000
+    });
+  };
+
+  const handleTabChange = (messageId, tab) => {
+    setMessages(prev => prev.map(msg => 
+      msg.id === messageId ? { ...msg, activeTab: tab } : msg
+    ));
   };
 
   return (
