@@ -17,7 +17,7 @@ export const chapterContent = {
             description: 'Learn how every push or pull causes motion or changes shape.',
             xpReward: 10,
             // Random positions for textbook view
-            textbookPosition: { top: '15%', left: '18%' },
+            textbookPosition: { top: '15%', left: '14%' },
             // Different random positions for notes view
             notesPosition: { top: '25%', right: '12%' }
           },
