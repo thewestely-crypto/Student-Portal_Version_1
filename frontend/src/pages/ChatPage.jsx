@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import StatsBar from '@/components/StatsBar';
 import TextbookViewer from '@/components/TextbookViewer';
+import HomieChatPanel from '@/components/HomieChatPanel';
 import { chapterContent } from '@/data/chapterContent';
 
 export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarned, onAskHomie }) {
