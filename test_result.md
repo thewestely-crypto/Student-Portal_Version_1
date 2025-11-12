@@ -199,7 +199,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Updated Sidebar Navigation Structure"
+    - "Fix Critical Syntax Error in ChatPage.jsx"
+    - "View Full Chapter in CHAT Page"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
