@@ -78,44 +78,9 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
 
   return (
     <div className="flex flex-col h-full bg-[hsl(var(--main-bg))]">
-      {/* Top Stats Bar - Reusing existing design from RightPanel */}
-      <div className="flex items-center justify-end gap-4 px-8 py-4">
-        <div className="flex items-center gap-6 bg-[hsl(var(--card-bg))] px-6 py-3 rounded-2xl border border-[hsl(var(--card-border))]">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M3 6l2-2v10l-2 2V6zm14 0l-2-2v10l2 2V6z"/>
-              </svg>
-            </div>
-            <span className="text-sm font-semibold text-foreground">2</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2c-1.5 0-3 1.5-3 3s1.5 3 3 3 3-1.5 3-3-1.5-3-3-3zm0 10c-2.5 0-5 1.5-5 3v2h10v-2c0-1.5-2.5-3-5-3z"/>
-              </svg>
-            </div>
-            <span className="text-sm font-semibold text-foreground">2</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="relative w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/>
-              </svg>
-              <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full"></div>
-              <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-yellow-400 rounded-full"></div>
-            </div>
-            <span className="text-sm font-semibold text-foreground">{totalXP}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-red-400 to-pink-500 flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 3.5c-3.5 0-6.5 2.5-6.5 5.5 0 4 6.5 8 6.5 8s6.5-4 6.5-8c0-3-3-5.5-6.5-5.5z"/>
-              </svg>
-            </div>
-            <span className="text-sm font-semibold text-foreground">5</span>
-          </div>
-        </div>
+      {/* Top Stats Bar - EXACT same component from RightPanel, positioned top-right */}
+      <div className="flex items-center justify-end px-6 py-6">
+        <StatsBar totalXP={totalXP} />
       </div>
 
       {/* Subject & Chapter Selection - Using gradient card design from LearningPath */}
