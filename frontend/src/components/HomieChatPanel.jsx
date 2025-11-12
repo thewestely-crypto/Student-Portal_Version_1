@@ -315,7 +315,7 @@ export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '
               <Sparkles className="w-4 h-4 text-[hsl(var(--primary))] mt-1 flex-shrink-0" />
               <div className="flex-1">
                 <p className="text-xs font-bold text-[hsl(var(--primary))] mb-1">Selected context:</p>
-                <p className="text-sm text-gray-300 leading-relaxed line-clamp-3">
+                <p className="text-sm text-gray-300 leading-relaxed line-clamp-2">
                   "{contextText}"
                 </p>
               </div>
