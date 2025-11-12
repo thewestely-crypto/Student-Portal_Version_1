@@ -308,6 +308,29 @@ export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '
 
       {/* Input Area */}
       <div className="p-6 pt-2 space-y-3 border-t border-[hsl(var(--card-border))]">
+        {/* Context Box - Shows selected text */}
+        {contextText && (
+          <div className="bg-[hsl(var(--card-bg))] border-2 border-[hsl(var(--primary))]/30 rounded-lg p-3 relative">
+            <div className="flex items-start gap-2">
+              <Sparkles className="w-4 h-4 text-[hsl(var(--primary))] mt-1 flex-shrink-0" />
+              <div className="flex-1">
+                <p className="text-xs font-bold text-[hsl(var(--primary))] mb-1">Selected context:</p>
+                <p className="text-sm text-gray-300 leading-relaxed line-clamp-3">
+                  "{contextText}"
+                </p>
+              </div>
+              <Button
+                onClick={handleCloseContext}
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6 text-muted-foreground hover:text-foreground"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        )}
+
         {/* Text Input + Send */}
         <div className="flex items-center gap-2">
           <Input
