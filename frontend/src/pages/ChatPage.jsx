@@ -389,6 +389,7 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
             </div>
           </div>
         )}
+        </>
       )}
     </div>
   );
