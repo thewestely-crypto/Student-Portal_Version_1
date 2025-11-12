@@ -79,8 +79,10 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
   return (
     <div className="flex flex-col h-full bg-[hsl(var(--main-bg))]">
       {/* Top Stats Bar - EXACT same component from RightPanel, positioned top-right */}
-      <div className="flex items-center justify-end px-6 py-6">
-        <StatsBar totalXP={totalXP} />
+      <div className="flex items-center justify-end">
+        <div className="w-96 p-6">
+          <StatsBar totalXP={totalXP} />
+        </div>
       </div>
 
       {/* Subject & Chapter Selection - Using gradient card design from LearningPath */}
