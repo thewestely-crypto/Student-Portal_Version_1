@@ -114,13 +114,13 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
 
     // Listen for mouseup events (when user finishes selecting)
     document.addEventListener('mouseup', handleTextSelection);
-    notesRef.current.addEventListener('mouseover', handleHighlightHover);
     notesRef.current.addEventListener('click', handleHighlightClick);
+    document.addEventListener('click', handleClickOutside);
     
     return () => {
       document.removeEventListener('mouseup', handleTextSelection);
+      document.removeEventListener('click', handleClickOutside);
       if (notesRef.current) {
-        notesRef.current.removeEventListener('mouseover', handleHighlightHover);
         notesRef.current.removeEventListener('click', handleHighlightClick);
       }
     };
