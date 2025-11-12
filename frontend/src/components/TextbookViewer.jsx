@@ -69,24 +69,31 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
   useEffect(() => {
     if (!showNotes || !notesRef.current) return;
 
-    const handleTextSelection = () => {
-      const selection = window.getSelection();
-      const text = selection?.toString().trim();
+    const handleTextSelection = (e) => {
+      // Small delay to ensure selection is complete
+      setTimeout(() => {
+        const selection = window.getSelection();
+        const text = selection?.toString().trim();
 
-      if (text && text.length > 0) {
-        // Get selection position
-        const range = selection.getRangeAt(0);
-        const rect = range.getBoundingClientRect();
-        
-        setSelectedText(text);
-        setButtonPosition({
-          top: rect.bottom + window.scrollY + 5,
-          left: rect.left + window.scrollX
-        });
-        setShowAskHomieButton(true);
-      } else {
-        setShowAskHomieButton(false);
-      }
+        if (text && text.length > 0) {
+          // Check if selection is within notes area
+          const notesElement = notesRef.current;
+          const range = selection.getRangeAt(0);
+          
+          if (notesElement && notesElement.contains(range.commonAncestorContainer)) {
+            const rect = range.getBoundingClientRect();
+            
+            setSelectedText(text);
+            setButtonPosition({
+              top: rect.bottom + window.scrollY + 5,
+              left: rect.left + window.scrollX
+            });
+            setShowAskHomieButton(true);
+          }
+        } else {
+          setShowAskHomieButton(false);
+        }
+      }, 10);
     };
 
     const handleClickOutside = (e) => {
