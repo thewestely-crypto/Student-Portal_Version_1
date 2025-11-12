@@ -455,23 +455,50 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
           ) : (
             /* Textbook Image View with Floating Icons */
             <div className="relative">
-              <img
-                src={lesson.textbookImage}
-                alt={lesson.fullTitle}
-                className="w-full h-auto"
-                style={{ maxWidth: '100%', display: 'block' }}
-              />
-              
-              {/* Floating Activity Icons for Textbook View */}
-              {learningPack?.items.map((item) => (
-                <FloatingActivityIcon
-                  key={item.id}
-                  item={item}
-                  isCompleted={packState.isItemCompleted(item.id)}
-                  onClick={() => handleActivityClick(item)}
-                  position={item.textbookPosition}
+              {/* Sticky Add Note Button - Top Right inside content */}
+              <div className="sticky top-0 z-50 flex justify-end pr-4 pt-4 pointer-events-none">
+                <Button
+                  onClick={handleAddNote}
+                  className="bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg pointer-events-auto"
+                  size="sm"
+                  title="Add a sticky note"
+                >
+                  <StickyNoteIcon className="w-4 h-4 mr-2" />
+                  Add Note
+                </Button>
+              </div>
+
+              <div className="relative">
+                <img
+                  src={lesson.textbookImage}
+                  alt={lesson.fullTitle}
+                  className="w-full h-auto"
+                  style={{ maxWidth: '100%', display: 'block' }}
                 />
-              ))}
+                
+                {/* Floating Activity Icons for Textbook View */}
+                {learningPack?.items.map((item) => (
+                  <FloatingActivityIcon
+                    key={item.id}
+                    item={item}
+                    isCompleted={packState.isItemCompleted(item.id)}
+                    onClick={() => handleActivityClick(item)}
+                    position={item.textbookPosition}
+                  />
+                ))}
+
+                {/* Sticky Notes */}
+                {notes.map((note) => (
+                  <StickyNote
+                    key={note.id}
+                    note={note}
+                    onUpdate={updateNote}
+                    onDelete={deleteNote}
+                    onPositionChange={updatePosition}
+                    containerRef={notesRef}
+                  />
+                ))}
+              </div>
             </div>
           )}
 
