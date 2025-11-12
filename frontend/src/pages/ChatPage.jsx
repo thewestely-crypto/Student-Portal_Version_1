@@ -1,17 +1,19 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, Mic, Sparkles, Send, BookOpen, FileText, Microscope } from 'lucide-react';
+import { MessageCircle, Mic, Sparkles, Send, BookOpen, FileText, Microscope, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import StatsBar from '@/components/StatsBar';
+import TextbookViewer from '@/components/TextbookViewer';
 import { chapterContent } from '@/data/chapterContent';
 
-export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
+export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarned, onAskHomie }) {
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedChapter, setSelectedChapter] = useState('');
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [viewingChapter, setViewingChapter] = useState(false);
   const messagesEndRef = useRef(null);
 
   // Get available subjects and chapters
