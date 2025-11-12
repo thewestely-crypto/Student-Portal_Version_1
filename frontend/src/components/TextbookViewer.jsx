@@ -89,18 +89,9 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
       }
     };
 
-    const handleHighlightHover = (e) => {
-      const mark = e.target.closest('mark[data-highlight-id]');
-      if (mark) {
-        const highlightId = mark.getAttribute('data-highlight-id');
-        setHoveredHighlight(highlightId);
-        const rect = mark.getBoundingClientRect();
-        setRemoveHighlightPosition({
-          top: rect.bottom + window.scrollY + 5,
-          left: rect.left + window.scrollX
-        });
-        setShowRemoveHighlight(true);
-      } else if (!e.target.closest('button')) {
+    const handleClickOutside = (e) => {
+      // Close remove highlight button if clicking outside of highlighted text and button
+      if (!e.target.closest('mark[data-highlight-id]') && !e.target.closest('button')) {
         setShowRemoveHighlight(false);
         setHoveredHighlight(null);
       }
