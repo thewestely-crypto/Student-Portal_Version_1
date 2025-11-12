@@ -341,8 +341,22 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
           {showNotes ? (
             /* Notes View with Floating Icons */
             <div className="relative">
-              {/* Sticky Add Note Button - Top Right inside content */}
-              <div className="sticky top-0 z-50 flex justify-end pr-4 pt-4 pointer-events-none">
+              {/* Sticky Buttons Row - Top of content */}
+              <div className="sticky top-0 z-50 flex justify-between items-center px-4 pt-4 pb-2 pointer-events-none">
+                <Button
+                  onClick={onStartJourney}
+                  className={`${
+                    journeyMode 
+                      ? 'bg-[hsl(var(--primary))] border-2 border-[hsl(var(--teal-glow))] text-white shadow-xl' 
+                      : 'bg-[hsl(var(--card-bg))] border border-[hsl(var(--primary))] text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))] hover:text-white'
+                  } shadow-lg pointer-events-auto transition-all`}
+                  size="sm"
+                  title="Start guided learning journey"
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Learning Pack: Understanding Force
+                </Button>
+                
                 <Button
                   onClick={handleAddNote}
                   className="bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg pointer-events-auto"
