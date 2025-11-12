@@ -324,6 +324,19 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
             Reset
           </Button>
           
+          {showNotes && (
+            <Button
+              onClick={handleAddNote}
+              variant="outline"
+              size="sm"
+              className="bg-yellow-600/20 border-yellow-500/50 text-yellow-400 hover:bg-yellow-600/40 hover:border-yellow-500 hover:text-yellow-300"
+              title="Add a sticky note"
+            >
+              <StickyNoteIcon className="w-4 h-4 mr-2" />
+              Add Note
+            </Button>
+          )}
+          
           <Button
             onClick={() => setShowNotes(!showNotes)}
             variant="outline"
