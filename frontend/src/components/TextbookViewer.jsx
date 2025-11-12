@@ -107,6 +107,42 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
     }
   };
 
+  const handleHighlightClick = () => {
+    if (selectedText) {
+      addHighlight(selectedText);
+      toast.success('Text highlighted!');
+      setShowAskHomieButton(false);
+      setSelectedText('');
+      // Clear selection
+      window.getSelection()?.removeAllRanges();
+    }
+  };
+
+  const handleRemoveHighlightClick = () => {
+    if (hoveredHighlight) {
+      removeHighlight(hoveredHighlight);
+      toast.success('Highlight removed!');
+      setShowRemoveHighlight(false);
+      setHoveredHighlight(null);
+    }
+  };
+
+  // Wrap highlighted text with mark tags
+  const highlightText = (text) => {
+    if (!highlights.length) return text;
+    
+    let highlightedText = text;
+    highlights.forEach(highlight => {
+      const regex = new RegExp(`(${highlight.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'g');
+      highlightedText = highlightedText.replace(
+        regex,
+        `<mark data-highlight-id="${highlight.id}" class="bg-yellow-300 cursor-pointer hover:bg-yellow-400 transition-colors">$1</mark>`
+      );
+    });
+    
+    return highlightedText;
+  };
+
   const notesContent = {
     title: "Chapter 8: Force and Laws of Motion",
     sections: [
