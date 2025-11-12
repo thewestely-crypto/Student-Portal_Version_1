@@ -137,16 +137,11 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
   };
 
   const handleHighlightClick = () => {
-    if (selectedText) {
-      // Split multi-line selections into individual lines and add each as a separate highlight
-      const lines = selectedText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-      
-      if (lines.length > 0) {
-        lines.forEach(line => {
-          addHighlight(line);
-        });
-        toast.success(`Text highlighted! (${lines.length} segment${lines.length > 1 ? 's' : ''})`);
-      }
+    if (selectedText && selectedText.trim().length > 0) {
+      // Store the exact selected text without splitting
+      // This allows partial selections, multi-line selections, and everything in between
+      addHighlight(selectedText.trim());
+      toast.success('Text highlighted!');
       
       setShowAskHomieButton(false);
       setSelectedText('');
