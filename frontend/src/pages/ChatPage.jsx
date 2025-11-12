@@ -180,10 +180,24 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
         </div>
       </div>
 
-      {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto p-6">
-        <div className="max-w-4xl mx-auto">
-          {messages.length === 0 ? (
+      {/* Main Content Area - Either Chat or Chapter View */}
+      {viewingChapter ? (
+        /* Chapter Viewer - Show textbook/chapter content */
+        <div className="flex-1 overflow-hidden">
+          {getLessonData() && (
+            <TextbookViewer 
+              lesson={getLessonData()}
+              onClose={handleBackToChat}
+              onXPEarned={onXPEarned}
+              onAskHomie={onAskHomie}
+            />
+          )}
+        </div>
+      ) : (
+        /* Chat Area */
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="max-w-4xl mx-auto">
+            {messages.length === 0 ? (
             /* Empty State - Reorganized Layout */
             <div className="space-y-8 py-8">
               {/* Heading - Icon and Text on Same Line */}
