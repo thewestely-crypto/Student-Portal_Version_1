@@ -27,6 +27,22 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
       ]
     : [];
 
+  // Get lesson data for selected chapter
+  const getLessonData = () => {
+    if (selectedSubject === 'physics' && selectedChapter === 'ch8') {
+      return chapterContent.physics.ch8;
+    }
+    return null;
+  };
+
+  const handleViewChapter = () => {
+    setViewingChapter(true);
+  };
+
+  const handleBackToChat = () => {
+    setViewingChapter(false);
+  };
+
   // Suggested queries
   const suggestedQueries = [
     "What is Newton's First Law of Motion?",
