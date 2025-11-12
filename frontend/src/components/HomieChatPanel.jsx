@@ -186,17 +186,39 @@ export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '
         ) : (
           /* Chat Messages - New Format */
           <>
-            {messages.map((conversation) => (
-              <div key={conversation.id} className="space-y-4 mb-6 pb-6 border-b border-[hsl(var(--card-border))]">
-                {/* Question - Left Aligned */}
-                <div className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-4">
-                  <p className="text-white font-semibold text-base leading-relaxed">
-                    {conversation.question}
-                  </p>
-                  <span className="text-xs text-muted-foreground mt-2 block">
-                    {conversation.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </span>
-                </div>
+            {messages.map((conversation) => {
+              // Parse context and question from combined format
+              const hasContext = conversation.question.includes('Context:');
+              let displayContext = '';
+              let displayQuestion = conversation.question;
+              
+              if (hasContext) {
+                const parts = conversation.question.split('\n\nQuestion: ');
+                if (parts.length === 2) {
+                  displayContext = parts[0].replace('Context: ', '').replace(/^"/, '').replace(/"$/, '');
+                  displayQuestion = parts[1];
+                }
+              }
+              
+              return (
+                <div key={conversation.id} className="space-y-4 mb-6 pb-6 border-b border-[hsl(var(--card-border))]">
+                  {/* Question - Left Aligned */}
+                  <div className="bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg p-4">
+                    {hasContext && displayContext && (
+                      <div className="mb-3 pb-3 border-b border-[hsl(var(--card-border))]/50">
+                        <p className="text-xs text-[hsl(var(--primary))] font-bold mb-1">Context:</p>
+                        <p className="text-sm text-gray-400 leading-relaxed line-clamp-2 italic">
+                          "{displayContext}"
+                        </p>
+                      </div>
+                    )}
+                    <p className="text-white font-semibold text-base leading-relaxed">
+                      {displayQuestion}
+                    </p>
+                    <span className="text-xs text-muted-foreground mt-2 block">
+                      {conversation.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
 
                 {/* Filter Tabs */}
                 <div className="flex items-center gap-2">
