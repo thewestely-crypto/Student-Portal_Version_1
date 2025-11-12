@@ -1,10 +1,12 @@
-import { ArrowLeft, BookText, RotateCcw, Sparkles, Highlighter, X } from 'lucide-react';
+import { ArrowLeft, BookText, RotateCcw, Sparkles, Highlighter, X, StickyNote as StickyNoteIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useRef, useEffect } from 'react';
 import FloatingActivityIcon from './FloatingActivityIcon';
 import ActivityModal from './ActivityModal';
+import StickyNote from './StickyNote';
 import { useLearningPack } from '@/hooks/useLearningPack';
 import { useHighlights } from '@/hooks/useHighlights';
+import { useStickyNotes } from '@/hooks/useStickyNotes';
 import { toast } from 'sonner';
 import { chapterContent } from '@/data/chapterContent';
 
