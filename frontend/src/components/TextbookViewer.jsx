@@ -169,12 +169,24 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
     if (!highlights.length) return text;
     
     let highlightedText = text;
-    highlights.forEach(highlight => {
-      const regex = new RegExp(`(${highlight.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'g');
-      highlightedText = highlightedText.replace(
-        regex,
-        `<mark data-highlight-id="${highlight.id}" class="bg-yellow-300 cursor-pointer hover:bg-yellow-400 transition-colors">$1</mark>`
-      );
+    
+    // Sort highlights by length (longest first) to avoid partial matches
+    const sortedHighlights = [...highlights].sort((a, b) => b.text.length - a.text.length);
+    
+    sortedHighlights.forEach(highlight => {
+      // Escape special regex characters
+      const escapedText = highlight.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      
+      // Try exact match first
+      const exactRegex = new RegExp(`(${escapedText})`, 'gi');
+      
+      // Check if text contains this highlight (case-insensitive partial match)
+      if (exactRegex.test(text)) {
+        highlightedText = highlightedText.replace(
+          exactRegex,
+          `<mark data-highlight-id="${highlight.id}" class="bg-yellow-300 cursor-pointer hover:bg-yellow-400 transition-colors">$1</mark>`
+        );
+      }
     });
     
     return highlightedText;
