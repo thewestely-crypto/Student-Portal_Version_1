@@ -132,26 +132,16 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
                 </Select>
               </div>
 
-              {/* Chapter Action Buttons - Only show when chapter is selected */}
+              {/* Chapter Action Button - Only show when chapter is selected */}
               {selectedSubject && selectedSubject !== 'none' && selectedChapter && selectedChapter !== 'none' && (
-                <>
-                  <Button
-                    size="sm"
-                    className="bg-[hsl(var(--main-bg))]/20 border-[hsl(var(--main-bg))]/40 text-white hover:bg-[hsl(var(--main-bg))]/30"
-                    onClick={() => onNavigateToChapter && onNavigateToChapter('textbook')}
-                  >
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    View Full Chapter
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="bg-[hsl(var(--main-bg))]/20 border-[hsl(var(--main-bg))]/40 text-white hover:bg-[hsl(var(--main-bg))]/30"
-                    onClick={() => onNavigateToChapter && onNavigateToChapter('notes')}
-                  >
-                    <FileText className="w-4 h-4 mr-2" />
-                    Short Notes
-                  </Button>
-                </>
+                <Button
+                  size="sm"
+                  className="bg-[hsl(var(--main-bg))]/20 border-[hsl(var(--main-bg))]/40 text-white hover:bg-[hsl(var(--main-bg))]/30"
+                  onClick={() => onNavigateToChapter && onNavigateToChapter('textbook')}
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  View Full Chapter
+                </Button>
               )}
             </div>
           </Card>
