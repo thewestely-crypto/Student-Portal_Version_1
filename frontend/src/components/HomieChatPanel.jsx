@@ -57,10 +57,16 @@ export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '
   const handleSendMessage = () => {
     if (!inputText.trim()) return;
 
+    // Combine context + question seamlessly
+    let finalQuestion = inputText;
+    if (contextText) {
+      finalQuestion = `Context: "${contextText}"\n\nQuestion: ${inputText}`;
+    }
+
     // Add conversation (question + answer with resources)
     const conversation = {
       id: Date.now(),
-      question: inputText,
+      question: finalQuestion,
       answer: 'Force is a push or pull that changes an object\'s motion or shape. It can make things start moving, stop moving, speed up, slow down, or change direction. Forces are measured in Newtons (N) and are described by Newton\'s Laws of Motion.',
       images: mockImages,
       videos: mockVideos,
@@ -71,6 +77,7 @@ export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '
     
     setMessages(prev => [...prev, conversation]);
     setInputText('');
+    setContextText(''); // Clear context after sending
   };
 
   const handleKeyPress = (e) => {
