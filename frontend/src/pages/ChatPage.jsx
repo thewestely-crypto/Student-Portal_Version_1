@@ -167,8 +167,13 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
           {messages.length === 0 ? (
             /* Empty State with Suggestions */
             <div className="space-y-12 py-12">
-              <div className="text-center">
-                <h2 className="text-4xl font-bold text-foreground">What do you want to know?</h2>
+              <div className="text-center space-y-4">
+                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl animate-pulse">
+                  <Sparkles className="w-10 h-10 text-white" />
+                </div>
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] bg-clip-text text-transparent">
+                  Talk to Homie
+                </h2>
               </div>
 
               {/* Suggested Queries - Clean Design */}
