@@ -163,25 +163,21 @@ export default function ChatPage({ onNavigateToChapter }) {
         <div className="max-w-4xl mx-auto space-y-6">
           {messages.length === 0 ? (
             /* Empty State with Suggestions */
-            <div className="space-y-8 py-8">
-              <div className="text-center space-y-2">
-                <h2 className="text-3xl font-bold text-foreground">What do you want to know?</h2>
-                <p className="text-muted-foreground">Ask me anything, and I'll help you learn!</p>
+            <div className="space-y-12 py-12">
+              <div className="text-center">
+                <h2 className="text-4xl font-bold text-foreground">What do you want to know?</h2>
               </div>
 
-              {/* Suggested Queries */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* Suggested Queries - Clean Design */}
+              <div className="grid grid-cols-2 gap-3 max-w-3xl mx-auto">
                 {suggestedQueries.map((query, index) => (
-                  <Card
+                  <div
                     key={index}
-                    className="p-4 cursor-pointer hover:bg-[hsl(var(--sidebar-hover))] transition-colors border-[hsl(var(--card-border))] bg-[hsl(var(--card-bg))]"
+                    className="p-4 rounded-lg cursor-pointer hover:bg-[hsl(var(--card-bg))] transition-all border border-[hsl(var(--card-border))] hover:border-[hsl(var(--primary))] group"
                     onClick={() => handleSuggestedQuery(query)}
                   >
-                    <div className="flex items-start gap-3">
-                      <MessageCircle className="w-5 h-5 text-[hsl(var(--primary))] flex-shrink-0 mt-1" />
-                      <p className="text-sm text-foreground">{query}</p>
-                    </div>
-                  </Card>
+                    <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{query}</p>
+                  </div>
                 ))}
               </div>
             </div>
