@@ -25,12 +25,13 @@ export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
+  const [contextText, setContextText] = useState('');
   const messagesEndRef = useRef(null);
 
-  // Handle prefilled text from text selection
+  // Handle prefilled text from text selection - show as context box, not in input
   useEffect(() => {
     if (prefilledText) {
-      setInputText(prefilledText);
+      setContextText(prefilledText);
       // Clear prefilled text after setting
       if (onClearPrefilledText) {
         onClearPrefilledText();
