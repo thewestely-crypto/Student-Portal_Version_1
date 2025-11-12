@@ -113,6 +113,10 @@ export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '
     ));
   };
 
+  const handleCloseContext = () => {
+    setContextText('');
+  };
+
   return (
     <div className="w-96 bg-[hsl(var(--sidebar-bg))] border-l border-[hsl(var(--card-border))] flex flex-col h-screen">
       {/* Stats Bar - Always Visible */}
