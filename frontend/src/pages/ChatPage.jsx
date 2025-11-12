@@ -269,43 +269,47 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
         </div>
       </div>
 
-      {/* Input Area - Fixed at Bottom - Main Focus */}
-      <div className="border-t border-[hsl(var(--card-border))] bg-[hsl(var(--main-bg))] p-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-3 p-4 bg-[hsl(var(--card-bg))] rounded-xl border-2 border-[hsl(var(--card-border))] focus-within:border-[hsl(var(--primary))] transition-all shadow-lg">
-            <MessageCircle className="w-5 h-5 text-[hsl(var(--primary))] flex-shrink-0" />
-            
-            <textarea
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Ask anything..."
-              className="flex-1 min-h-[40px] max-h-[200px] bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none text-base"
-              rows={1}
-            />
-            
-            <Button
-              variant="ghost"
-              className="h-10 w-10 p-0 hover:bg-[hsl(var(--sidebar-hover))] rounded-full"
-              title="Voice input"
-            >
-              <Mic className="w-5 h-5 text-muted-foreground" />
-            </Button>
+      {/* Input Area - Fixed at Bottom (for conversation view) */}
+      {messages.length > 0 && (
+        <div className="border-t border-[hsl(var(--card-border))] bg-[hsl(var(--main-bg))] p-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-3">
+              <div className="flex-1 flex items-center gap-3 p-4 bg-[hsl(var(--card-bg))] rounded-xl border-2 border-[hsl(var(--card-border))] focus-within:border-[hsl(var(--primary))] transition-all shadow-lg">
+                <MessageCircle className="w-5 h-5 text-[hsl(var(--primary))] flex-shrink-0" />
+                
+                <textarea
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Ask anything..."
+                  className="flex-1 min-h-[40px] max-h-[200px] bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none text-base"
+                  rows={1}
+                />
+                
+                <Button
+                  variant="ghost"
+                  className="h-10 w-10 p-0 hover:bg-[hsl(var(--sidebar-hover))] rounded-full"
+                  title="Voice input"
+                >
+                  <Mic className="w-5 h-5 text-muted-foreground" />
+                </Button>
+              </div>
 
-            <Button
-              onClick={handleSendMessage}
-              disabled={!inputValue.trim() || isLoading}
-              className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-white h-10 w-10 p-0 rounded-full"
-            >
-              <Send className="w-4 h-4" />
-            </Button>
+              <Button
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim() || isLoading}
+                className="bg-gradient-to-r from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] hover:opacity-90 text-white h-[72px] px-8 text-base font-semibold shadow-lg"
+              >
+                Talk to Homie
+              </Button>
+            </div>
+            
+            <p className="text-xs text-muted-foreground mt-3 text-center">
+              Press Enter to send, Shift+Enter for new line
+            </p>
           </div>
-          
-          <p className="text-xs text-muted-foreground mt-3 text-center">
-            Press Enter to send, Shift+Enter for new line
-          </p>
         </div>
-      </div>
+      )}
     </div>
   );
 }
