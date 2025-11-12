@@ -213,8 +213,6 @@ test_plan:
 
 agent_communication:
   - agent: "main"
-    message: "CRITICAL SYNTAX ERROR FIXED: ChatPage.jsx had a syntax error on line 331 causing application crash. The ternary operator's false branch contained multiple sibling elements without a wrapper. Fixed by wrapping the content in a React Fragment. Application now loads successfully."
+    message: "SPLIT-SCREEN LAYOUT IMPLEMENTED: User requested split-screen view in CHAT page when viewing chapters, similar to LEARN page. Reused existing HomieChatPanel component from LEARN page. Layout: Left side (65%) = TextbookViewer with all functionality, Right side (35%) = HomieChatPanel for AI chat. Top section remains unchanged with dropdowns and StatsBar."
   - agent: "main"
-    message: "CONTENT VISIBILITY ISSUE FIXED: User reported chapter content not visible in CHAT page. Root cause: getLessonData() was returning chapter object without textbookImage/fullTitle properties required by TextbookViewer. Fixed by creating properly formatted lesson object with these properties extracted from chapter data structure."
-  - agent: "main"
-    message: "✅ VIEW FULL CHAPTER FEATURE FULLY VERIFIED: Complete testing of all functionality confirmed working: 1) Textbook view displays chapter image correctly. 2) Short notes view shows all content sections. 3) All buttons (Learning Pack, Reset, Short Notes, Add Note, Back to Chat) functional. 4) Navigation between chat and chapter views preserves selections. 5) Floating activity icons render properly. Feature is production-ready with zero issues."
+    message: "✅ IMPLEMENTATION COMPLETE: Split-screen working perfectly. TextbookViewer shows all buttons (Back to Learning Path, Learning Pack, Reset, Short Notes, Add Note), chapter content, and floating activity icons. HomieChatPanel shows stats, chat interface, messages with AI responses, images, filter tabs, and input field. Both 'Close Chat' (in chat panel) and 'Close Chapter View' (top section) buttons return to regular chat interface. Feature matches LEARN page design and is production-ready."
