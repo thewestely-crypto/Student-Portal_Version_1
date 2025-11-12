@@ -78,81 +78,83 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
 
   return (
     <div className="flex flex-col h-full bg-[hsl(var(--main-bg))]">
-      {/* Top Row - Subject, Chapter Dropdowns (left) | Stats Bar (right) */}
+      {/* Top Row - Gradient Card with Dropdowns (left) | Stats Bar (right) */}
       <div className="flex items-center justify-between px-6 py-4">
-        {/* Left side: Dropdowns - EXACT same styling as LEARN page */}
-        <div className="flex items-center gap-4 flex-1 max-w-2xl">
-          <div className="flex-1">
-            <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-              <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
-                <SelectValue placeholder="Subject" />
-              </SelectTrigger>
-              <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
-                <SelectItem value="none" className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white">
-                  No Subject
-                </SelectItem>
-                {subjects.map(subject => (
-                  <SelectItem 
-                    key={subject.value} 
-                    value={subject.value}
-                    className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white"
-                  >
-                    {subject.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+        {/* Left side: Gradient Card with Dropdowns - EXACT same card as LEARN page */}
+        <div className="flex-1 max-w-3xl">
+          <Card className="bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] border-0 shadow-2xl p-6">
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
+                    <SelectValue placeholder="Subject" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+                    <SelectItem value="none" className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white">
+                      No Subject
+                    </SelectItem>
+                    {subjects.map(subject => (
+                      <SelectItem 
+                        key={subject.value} 
+                        value={subject.value}
+                        className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white"
+                      >
+                        {subject.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
 
-          <div className="flex-1">
-            <Select 
-              value={selectedChapter} 
-              onValueChange={setSelectedChapter}
-              disabled={!selectedSubject || selectedSubject === 'none'}
-            >
-              <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
-                <SelectValue placeholder="Chapter" />
-              </SelectTrigger>
-              <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
-                <SelectItem value="none" className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white">
-                  No Chapter
-                </SelectItem>
-                {chapters.map(chapter => (
-                  <SelectItem 
-                    key={chapter.value} 
-                    value={chapter.value}
-                    className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white"
-                  >
-                    {chapter.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+              <div className="flex-1">
+                <Select 
+                  value={selectedChapter} 
+                  onValueChange={setSelectedChapter}
+                  disabled={!selectedSubject || selectedSubject === 'none'}
+                >
+                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-base h-12">
+                    <SelectValue placeholder="Chapter" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+                    <SelectItem value="none" className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white">
+                      No Chapter
+                    </SelectItem>
+                    {chapters.map(chapter => (
+                      <SelectItem 
+                        key={chapter.value} 
+                        value={chapter.value}
+                        className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium focus:bg-[hsl(var(--sidebar-hover))] focus:text-white"
+                      >
+                        {chapter.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Chapter Action Buttons - Only show when chapter is selected */}
-          {selectedSubject && selectedSubject !== 'none' && selectedChapter && selectedChapter !== 'none' && (
-            <>
-              <Button
-                size="sm"
-                variant="outline"
-                className="border-[hsl(var(--card-border))] hover:bg-[hsl(var(--sidebar-hover))]"
-                onClick={() => onNavigateToChapter && onNavigateToChapter('textbook')}
-              >
-                <BookOpen className="w-4 h-4 mr-2" />
-                View Full Chapter
-              </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                className="border-[hsl(var(--card-border))] hover:bg-[hsl(var(--sidebar-hover))]"
-                onClick={() => onNavigateToChapter && onNavigateToChapter('notes')}
-              >
-                <FileText className="w-4 h-4 mr-2" />
-                Short Notes
-              </Button>
-            </>
-          )}
+              {/* Chapter Action Buttons - Only show when chapter is selected */}
+              {selectedSubject && selectedSubject !== 'none' && selectedChapter && selectedChapter !== 'none' && (
+                <>
+                  <Button
+                    size="sm"
+                    className="bg-[hsl(var(--main-bg))]/20 border-[hsl(var(--main-bg))]/40 text-white hover:bg-[hsl(var(--main-bg))]/30"
+                    onClick={() => onNavigateToChapter && onNavigateToChapter('textbook')}
+                  >
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    View Full Chapter
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="bg-[hsl(var(--main-bg))]/20 border-[hsl(var(--main-bg))]/40 text-white hover:bg-[hsl(var(--main-bg))]/30"
+                    onClick={() => onNavigateToChapter && onNavigateToChapter('notes')}
+                  >
+                    <FileText className="w-4 h-4 mr-2" />
+                    Short Notes
+                  </Button>
+                </>
+              )}
+            </div>
+          </Card>
         </div>
 
         {/* Right side: Stats Bar - EXACT same component, position unchanged */}
