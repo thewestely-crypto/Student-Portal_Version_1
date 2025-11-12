@@ -105,10 +105,10 @@
 user_problem_statement: "Fix the critical syntax error in ChatPage.jsx that was causing the application to crash with a white screen. The error was introduced while implementing the 'View Full Chapter' feature that allows users to view chapter content directly within the CHAT page without navigating away."
 
 frontend:
-  - task: "Updated Sidebar Navigation Structure"
+  - task: "Fix Critical Syntax Error in ChatPage.jsx"
     implemented: true
     working: true
-    file: "/app/frontend/src/components/Sidebar.jsx"
+    file: "/app/frontend/src/pages/ChatPage.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
