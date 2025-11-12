@@ -26,6 +26,9 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
   // Highlights management
   const { highlights, addHighlight, removeHighlight, isTextHighlighted } = useHighlights('ch8');
 
+  // Sticky notes management
+  const { notes, addNote, updateNote, deleteNote, updatePosition } = useStickyNotes('ch8');
+
   // Get learning pack data for Physics Chapter 8
   const learningPack = chapterContent.physics?.ch8?.learningPack;
   const packState = useLearningPack(learningPack?.packId);
