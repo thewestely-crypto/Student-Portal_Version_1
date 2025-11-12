@@ -150,15 +150,24 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
                 </Select>
               </div>
 
-              {/* Chapter Action Button - Only show when chapter is selected */}
+              {/* Chapter Action Button - Changes based on viewing state */}
               {selectedSubject && selectedSubject !== 'none' && selectedChapter && selectedChapter !== 'none' && (
                 <Button
                   size="sm"
                   className="bg-[hsl(var(--main-bg))]/20 border-[hsl(var(--main-bg))]/40 text-white hover:bg-[hsl(var(--main-bg))]/30"
-                  onClick={() => onNavigateToChapter && onNavigateToChapter('textbook')}
+                  onClick={viewingChapter ? handleBackToChat : handleViewChapter}
                 >
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  View Full Chapter
+                  {viewingChapter ? (
+                    <>
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back to Chat
+                    </>
+                  ) : (
+                    <>
+                      <BookOpen className="w-4 h-4 mr-2" />
+                      View Full Chapter
+                    </>
+                  )}
                 </Button>
               )}
             </div>
