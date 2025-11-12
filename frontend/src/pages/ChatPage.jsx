@@ -282,8 +282,6 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
             </div>
           </div>
 
-          {/* Chat Content */}
-        <>
           {/* Chat Area */}
           <div className="flex-1 overflow-y-auto p-6">
           <div className="max-w-4xl mx-auto">
