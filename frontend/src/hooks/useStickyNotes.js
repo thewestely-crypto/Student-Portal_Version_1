@@ -28,6 +28,7 @@ export function useStickyNotes(chapterId) {
     const newNote = {
       id: `note-${Date.now()}`,
       chapterId,
+      heading: '', // Optional heading
       content: '',
       position: { x: 100, y: 100 }, // Default position
       isOpen: true, // Start in open/edit mode
