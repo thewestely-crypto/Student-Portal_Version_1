@@ -194,18 +194,29 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
         </div>
       </div>
 
-      {/* Main Content Area - Either Chat or Chapter View */}
+      {/* Main Content Area - Either Chat or Split-Screen Chapter View */}
       {viewingChapter ? (
-        /* Chapter Viewer - Show textbook/chapter content */
-        <div className="flex-1 overflow-hidden">
-          {getLessonData() && (
-            <TextbookViewer 
-              lesson={getLessonData()}
-              onClose={handleBackToChat}
-              onXPEarned={onXPEarned}
-              onAskHomie={onAskHomie}
-            />
-          )}
+        /* Split-Screen: TextbookViewer (Left) + HomieChatPanel (Right) */
+        <div className="flex flex-1 overflow-hidden">
+          {/* Left Side: TextbookViewer */}
+          <div className="flex-1 overflow-hidden">
+            {getLessonData() && (
+              <TextbookViewer 
+                lesson={getLessonData()}
+                onClose={handleCloseChapterView}
+                onXPEarned={onXPEarned}
+                onAskHomie={handleAskHomieWithText}
+              />
+            )}
+          </div>
+          
+          {/* Right Side: HomieChatPanel */}
+          <HomieChatPanel 
+            totalXP={totalXP}
+            onClose={handleCloseChapterView}
+            prefilledText={prefilledText}
+            onClearPrefilledText={() => setPrefilledText('')}
+          />
         </div>
       ) : (
         <>
