@@ -325,11 +325,11 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
               <div ref={messagesEndRef} />
             </div>
           )}
+          </div>
         </div>
-      </div>
 
-      {/* Input Area - Fixed at Bottom (for conversation view) */}
-      {messages.length > 0 && (
+        {/* Input Area - Fixed at Bottom (for conversation view) */}
+        {messages.length > 0 && (
         <div className="border-t border-[hsl(var(--card-border))] bg-[hsl(var(--main-bg))] p-6">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-2">
