@@ -89,13 +89,51 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
       }
     };
 
+    const handleHighlightHover = (e) => {
+      const mark = e.target.closest('mark[data-highlight-id]');
+      if (mark) {
+        const highlightId = mark.getAttribute('data-highlight-id');
+        setHoveredHighlight(highlightId);
+        const rect = mark.getBoundingClientRect();
+        setRemoveHighlightPosition({
+          top: rect.bottom + window.scrollY + 5,
+          left: rect.left + window.scrollX
+        });
+        setShowRemoveHighlight(true);
+      } else if (!e.target.closest('button')) {
+        setShowRemoveHighlight(false);
+        setHoveredHighlight(null);
+      }
+    };
+
+    const handleHighlightClick = (e) => {
+      const mark = e.target.closest('mark[data-highlight-id]');
+      if (mark) {
+        const highlightId = mark.getAttribute('data-highlight-id');
+        setHoveredHighlight(highlightId);
+        const rect = mark.getBoundingClientRect();
+        setRemoveHighlightPosition({
+          top: rect.bottom + window.scrollY + 5,
+          left: rect.left + window.scrollX
+        });
+        setShowRemoveHighlight(true);
+        e.stopPropagation();
+      }
+    };
+
     // Listen for mouseup events (when user finishes selecting)
     document.addEventListener('mouseup', handleTextSelection);
+    notesRef.current.addEventListener('mouseover', handleHighlightHover);
+    notesRef.current.addEventListener('click', handleHighlightClick);
     
     return () => {
       document.removeEventListener('mouseup', handleTextSelection);
+      if (notesRef.current) {
+        notesRef.current.removeEventListener('mouseover', handleHighlightHover);
+        notesRef.current.removeEventListener('click', handleHighlightClick);
+      }
     };
-  }, [showNotes]);
+  }, [showNotes, highlights]);
 
   const handleAskHomieClick = () => {
     if (selectedText && onAskHomie) {
