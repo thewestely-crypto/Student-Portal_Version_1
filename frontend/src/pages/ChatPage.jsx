@@ -172,29 +172,54 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
               {/* Input Field - Clean and Simple */}
               <div className="max-w-2xl mx-auto">
                 <div className="flex items-center gap-2">
-                  <textarea
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Ask Anything..."
-                    className="flex-1 min-h-[48px] max-h-[200px] px-4 py-3 bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[hsl(var(--primary))] resize-none"
-                    rows={1}
-                  />
-                  
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-12 w-12 hover:bg-[hsl(var(--sidebar-hover))]"
-                    title="Voice input"
-                  >
-                    <Mic className="w-5 h-5 text-muted-foreground" />
-                  </Button>
+                  {/* Text field with gradient border and icons inside */}
+                  <div className="flex-1 relative p-[2px] rounded-lg bg-gradient-to-r from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))]">
+                    <div className="flex items-center gap-2 bg-[hsl(var(--card-bg))] rounded-lg px-4 py-3">
+                      <textarea
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        placeholder="Ask Anything..."
+                        className="flex-1 min-h-[32px] max-h-[200px] bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
+                        rows={1}
+                      />
+                      
+                      {/* Microphone icon - Speech to text */}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 p-0 hover:bg-[hsl(var(--sidebar-hover))] flex-shrink-0"
+                        title="Speech to text"
+                      >
+                        <Mic className="w-4 h-4 text-muted-foreground" />
+                      </Button>
 
+                      {/* Voice interaction icon - Voice to voice */}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 p-0 hover:bg-[hsl(var(--sidebar-hover))] flex-shrink-0"
+                        title="Voice conversation"
+                      >
+                        <div className="relative w-8 h-8 rounded-full border-2 border-[hsl(var(--primary))] flex items-center justify-center">
+                          <div className="flex items-center gap-0.5">
+                            <div className="w-0.5 h-2 bg-[hsl(var(--primary))] rounded-full"></div>
+                            <div className="w-0.5 h-3 bg-[hsl(var(--primary))] rounded-full"></div>
+                            <div className="w-0.5 h-4 bg-[hsl(var(--primary))] rounded-full"></div>
+                            <div className="w-0.5 h-3 bg-[hsl(var(--primary))] rounded-full"></div>
+                            <div className="w-0.5 h-2 bg-[hsl(var(--primary))] rounded-full"></div>
+                          </div>
+                        </div>
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Send button outside */}
                   <Button
                     onClick={handleSendMessage}
                     disabled={!inputValue.trim() || isLoading}
                     size="icon"
-                    className="h-12 w-12 bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-white"
+                    className="h-12 w-12 bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-white flex-shrink-0"
                   >
                     <Send className="w-5 h-5" />
                   </Button>
