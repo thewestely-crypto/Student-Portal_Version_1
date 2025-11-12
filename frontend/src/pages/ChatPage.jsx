@@ -76,60 +76,85 @@ export default function ChatPage({ onNavigateToChapter }) {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Header with Context Selectors */}
-      <div className="p-6 border-b border-[hsl(var(--card-border))] bg-[hsl(var(--card-bg))]">
-        <div className="max-w-4xl mx-auto space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">Chat with Homie</h1>
-              <p className="text-sm text-muted-foreground">Your AI learning companion</p>
-            </div>
-          </div>
+    <div className="flex flex-col h-full bg-[hsl(var(--main-bg))]">
+      {/* Top Stats Bar - Only 4 icons */}
+      <div className="flex items-center justify-end gap-6 px-8 py-4 border-b border-[hsl(var(--card-border))]">
+        <div className="flex items-center gap-2 text-sm">
+          <Zap className="w-5 h-5 text-yellow-500" />
+          <span className="font-semibold text-foreground">12</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <Flame className="w-5 h-5 text-orange-500" />
+          <span className="font-semibold text-foreground">7</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <Gem className="w-5 h-5 text-purple-500" />
+          <span className="font-semibold text-foreground">1250</span>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <Heart className="w-5 h-5 text-red-500" />
+          <span className="font-semibold text-foreground">5</span>
+        </div>
+      </div>
 
-          {/* Optional Context Selection */}
-          <div className="flex gap-3">
-            <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-              <SelectTrigger className="w-[200px] bg-[hsl(var(--main-bg))] border-[hsl(var(--card-border))]">
-                <SelectValue placeholder="Subject (Optional)" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">No Subject</SelectItem>
-                {subjects.map(subject => (
-                  <SelectItem key={subject.value} value={subject.value}>
-                    {subject.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+      {/* Context Selection & Actions */}
+      <div className="px-8 py-4 border-b border-[hsl(var(--card-border))]">
+        <div className="max-w-4xl mx-auto flex items-center gap-3">
+          <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+            <SelectTrigger className="w-[200px] bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+              <SelectValue placeholder="Subject" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="none">No Subject</SelectItem>
+              {subjects.map(subject => (
+                <SelectItem key={subject.value} value={subject.value}>
+                  {subject.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-            <Select 
-              value={selectedChapter} 
-              onValueChange={setSelectedChapter}
-              disabled={!selectedSubject || selectedSubject === 'none'}
-            >
-              <SelectTrigger className="w-[280px] bg-[hsl(var(--main-bg))] border-[hsl(var(--card-border))]">
-                <SelectValue placeholder="Chapter (Optional)" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">No Chapter</SelectItem>
-                {chapters.map(chapter => (
-                  <SelectItem key={chapter.value} value={chapter.value}>
-                    {chapter.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <Select 
+            value={selectedChapter} 
+            onValueChange={setSelectedChapter}
+            disabled={!selectedSubject || selectedSubject === 'none'}
+          >
+            <SelectTrigger className="w-[280px] bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+              <SelectValue placeholder="Chapter" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="none">No Chapter</SelectItem>
+              {chapters.map(chapter => (
+                <SelectItem key={chapter.value} value={chapter.value}>
+                  {chapter.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-            {selectedSubject && selectedSubject !== 'none' && selectedChapter && selectedChapter !== 'none' && (
-              <div className="flex items-center px-3 py-2 bg-[hsl(var(--primary))]/10 rounded-md text-sm text-[hsl(var(--primary))]">
-                Context: {chapters.find(c => c.value === selectedChapter)?.label}
-              </div>
-            )}
-          </div>
+          {/* Chapter Action Buttons - Only show when chapter is selected */}
+          {selectedSubject && selectedSubject !== 'none' && selectedChapter && selectedChapter !== 'none' && (
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-[hsl(var(--card-border))] hover:bg-[hsl(var(--sidebar-hover))]"
+                onClick={() => onNavigateToChapter && onNavigateToChapter('textbook')}
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                View Full Chapter
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-[hsl(var(--card-border))] hover:bg-[hsl(var(--sidebar-hover))]"
+                onClick={() => onNavigateToChapter && onNavigateToChapter('notes')}
+              >
+                <FileText className="w-4 h-4 mr-2" />
+                Short Notes
+              </Button>
+            </>
+          )}
         </div>
       </div>
 
