@@ -3,6 +3,7 @@ import { MessageCircle, Mic, Sparkles, Send, BookOpen, FileText, Microscope } fr
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import StatsBar from '@/components/StatsBar';
 import { chapterContent } from '@/data/chapterContent';
 
 export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
