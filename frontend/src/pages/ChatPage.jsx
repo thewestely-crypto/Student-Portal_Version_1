@@ -169,12 +169,12 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
                 <Button
                   size="sm"
                   className="bg-[hsl(var(--main-bg))]/20 border-[hsl(var(--main-bg))]/40 text-white hover:bg-[hsl(var(--main-bg))]/30"
-                  onClick={viewingChapter ? handleBackToChat : handleViewChapter}
+                  onClick={viewingChapter ? handleCloseChapterView : handleViewChapter}
                 >
                   {viewingChapter ? (
                     <>
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Chat
+                      Close Chapter View
                     </>
                   ) : (
                     <>
