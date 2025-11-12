@@ -168,40 +168,61 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
     // Sort highlights by length (longest first) to handle overlapping highlights better
     const sortedHighlights = [...highlights].sort((a, b) => b.text.length - a.text.length);
     
+    // Track which highlights have been applied to avoid duplicates
+    const appliedHighlights = new Set();
+    
     sortedHighlights.forEach(highlight => {
-      const highlightText = highlight.text;
+      const highlightText = highlight.text.trim();
+      
+      // Skip empty highlights
+      if (!highlightText) return;
       
       // Skip if already processed (avoid double-wrapping)
-      if (result.includes(`data-highlight-id="${highlight.id}"`)) {
-        return;
-      }
+      if (appliedHighlights.has(highlight.id)) return;
       
       // Handle multi-line highlights (text might contain newlines from selection)
       // Split the highlight text into lines and try to match each part
       const highlightLines = highlightText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
       
       highlightLines.forEach(line => {
+        if (!line || result.includes(`data-highlight-id="${highlight.id}"`)) return;
+        
         // Escape special regex characters
         const escapedLine = line.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         
-        // Create regex for case-insensitive partial matching
-        // This will match the text even if it's part of a larger string
-        const regex = new RegExp(`(${escapedLine})`, 'gi');
+        // Create regex for case-insensitive matching
+        // Use word boundaries for better matching
+        const regex = new RegExp(`\\b(${escapedLine})\\b`, 'gi');
         
-        // Replace all occurrences
-        result = result.replace(regex, (match) => {
-          // Check if this text is already inside a mark tag
-          const beforeMatch = result.substring(0, result.indexOf(match));
-          const lastMarkOpen = beforeMatch.lastIndexOf('<mark');
-          const lastMarkClose = beforeMatch.lastIndexOf('</mark>');
-          
-          // If we're inside a mark tag, don't highlight again
-          if (lastMarkOpen > lastMarkClose) {
-            return match;
+        // If no word boundary match, try without word boundaries
+        if (!regex.test(result)) {
+          const simpleRegex = new RegExp(`(${escapedLine})`, 'gi');
+          if (simpleRegex.test(result)) {
+            result = result.replace(simpleRegex, (match, p1, offset) => {
+              // Check if we're already inside a mark tag
+              const before = result.substring(0, offset);
+              const openTags = (before.match(/<mark/g) || []).length;
+              const closeTags = (before.match(/<\/mark>/g) || []).length;
+              
+              if (openTags > closeTags) return match;
+              
+              appliedHighlights.add(highlight.id);
+              return `<mark data-highlight-id="${highlight.id}" class="bg-yellow-300 cursor-pointer hover:bg-yellow-400 transition-colors">${match}</mark>`;
+            });
           }
-          
-          return `<mark data-highlight-id="${highlight.id}" class="bg-yellow-300 cursor-pointer hover:bg-yellow-400 transition-colors">${match}</mark>`;
-        });
+        } else {
+          result = result.replace(regex, (match, p1, offset) => {
+            // Check if we're already inside a mark tag
+            const before = result.substring(0, offset);
+            const openTags = (before.match(/<mark/g) || []).length;
+            const closeTags = (before.match(/<\/mark>/g) || []).length;
+            
+            if (openTags > closeTags) return match;
+            
+            appliedHighlights.add(highlight.id);
+            return `<mark data-highlight-id="${highlight.id}" class="bg-yellow-300 cursor-pointer hover:bg-yellow-400 transition-colors">${match}</mark>`;
+          });
+        }
       });
     });
     
