@@ -10,7 +10,7 @@ import { useStickyNotes } from '@/hooks/useStickyNotes';
 import { toast } from 'sonner';
 import { chapterContent } from '@/data/chapterContent';
 
-export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie }) {
+export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie, onStartJourney, journeyMode = false }) {
   const [showNotes, setShowNotes] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState(null);
   const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
