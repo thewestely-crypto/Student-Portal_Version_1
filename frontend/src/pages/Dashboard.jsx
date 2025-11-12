@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import LearningPath from '@/components/LearningPath';
 import RightPanel from '@/components/RightPanel';
+import ChatPage from '@/pages/ChatPage';
 import { useLearningPack } from '@/hooks/useLearningPack';
 import { chapterContent } from '@/data/chapterContent';
 
