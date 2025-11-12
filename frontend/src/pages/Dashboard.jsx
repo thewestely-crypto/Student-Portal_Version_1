@@ -86,7 +86,12 @@ export default function Dashboard() {
             />
           )}
           {activeSection === 'chat' && (
-            <ChatPage />
+            <ChatPage 
+              onNavigateToChapter={(viewType) => {
+                setActiveSection('learn');
+                // Navigate to chapter view (implement based on your navigation logic)
+              }}
+            />
           )}
           {activeSection === 'quests' && (
             <div className="flex items-center justify-center h-full">
