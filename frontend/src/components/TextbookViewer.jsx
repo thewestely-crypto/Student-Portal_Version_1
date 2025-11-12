@@ -310,9 +310,10 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
                 
                 {notesContent.sections.map((section, index) => (
                   <div key={index} className="space-y-3">
-                    <h2 className="text-xl font-bold text-[hsl(var(--primary))] mb-3">
-                      {section.heading}
-                    </h2>
+                    <h2 
+                      className="text-xl font-bold text-[hsl(var(--primary))] mb-3"
+                      dangerouslySetInnerHTML={{ __html: highlightText(section.heading) }}
+                    />
                     <ul className="space-y-2 text-muted-foreground leading-relaxed">
                       {section.points.map((point, idx) => (
                         <li 
