@@ -16,7 +16,13 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
   const [selectedText, setSelectedText] = useState('');
   const [showAskHomieButton, setShowAskHomieButton] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 });
+  const [showRemoveHighlight, setShowRemoveHighlight] = useState(false);
+  const [removeHighlightPosition, setRemoveHighlightPosition] = useState({ top: 0, left: 0 });
+  const [hoveredHighlight, setHoveredHighlight] = useState(null);
   const notesRef = useRef(null);
+
+  // Highlights management
+  const { highlights, addHighlight, removeHighlight, isTextHighlighted } = useHighlights('ch8');
 
   // Get learning pack data for Physics Chapter 8
   const learningPack = chapterContent.physics?.ch8?.learningPack;
