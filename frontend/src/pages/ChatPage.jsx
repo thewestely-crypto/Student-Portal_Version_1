@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, Mic, Sparkles, Send } from 'lucide-react';
+import { MessageCircle, Mic, Sparkles, Send, BookOpen, FileText, Zap, Flame, Gem, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { chapterContent } from '@/data/chapterContent';
 
-export default function ChatPage() {
+export default function ChatPage({ onNavigateToChapter }) {
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedChapter, setSelectedChapter] = useState('');
   const [messages, setMessages] = useState([]);
