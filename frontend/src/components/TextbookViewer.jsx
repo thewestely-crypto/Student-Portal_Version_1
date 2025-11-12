@@ -299,10 +299,10 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
                 ))}
               </div>
 
-              {/* Ask Homie Button - Shows on text selection */}
+              {/* Ask Homie & Highlight Buttons - Shows on text selection */}
               {showAskHomieButton && (
                 <div
-                  className="fixed z-50"
+                  className="fixed z-50 flex items-center gap-2"
                   style={{
                     top: `${buttonPosition.top}px`,
                     left: `${buttonPosition.left}px`
@@ -315,6 +315,36 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
                   >
                     <Sparkles className="w-3 h-3 mr-1" />
                     Ask Homie
+                  </Button>
+                  <Button
+                    onClick={handleHighlightClick}
+                    size="sm"
+                    variant="outline"
+                    className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-foreground hover:bg-[hsl(var(--sidebar-hover))] shadow-lg"
+                  >
+                    <Highlighter className="w-3 h-3 mr-1" />
+                    Highlight
+                  </Button>
+                </div>
+              )}
+
+              {/* Remove Highlight Button - Shows on hover/click of highlighted text */}
+              {showRemoveHighlight && (
+                <div
+                  className="fixed z-50"
+                  style={{
+                    top: `${removeHighlightPosition.top}px`,
+                    left: `${removeHighlightPosition.left}px`
+                  }}
+                >
+                  <Button
+                    onClick={handleRemoveHighlightClick}
+                    size="sm"
+                    variant="outline"
+                    className="bg-red-600/20 border-red-500/50 text-red-400 hover:bg-red-600/40 hover:border-red-500 shadow-lg"
+                  >
+                    <X className="w-3 h-3 mr-1" />
+                    Remove Highlight
                   </Button>
                 </div>
               )}
