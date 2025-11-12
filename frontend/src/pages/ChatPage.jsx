@@ -227,39 +227,39 @@ export default function ChatPage({ onNavigateToChapter }) {
         </div>
       </div>
 
-      {/* Input Area - Fixed at Bottom */}
-      <div className="border-t border-[hsl(var(--card-border))] bg-[hsl(var(--card-bg))] p-6">
+      {/* Input Area - Fixed at Bottom - Main Focus */}
+      <div className="border-t border-[hsl(var(--card-border))] bg-[hsl(var(--main-bg))] p-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-end gap-3">
-            <div className="flex-1 relative">
-              <textarea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Ask anything..."
-                className="w-full min-h-[56px] max-h-[200px] p-4 pr-12 bg-[hsl(var(--main-bg))] border border-[hsl(var(--card-border))] rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] resize-none"
-                rows={1}
-              />
-            </div>
+          <div className="flex items-center gap-3 p-4 bg-[hsl(var(--card-bg))] rounded-xl border-2 border-[hsl(var(--card-border))] focus-within:border-[hsl(var(--primary))] transition-all shadow-lg">
+            <MessageCircle className="w-5 h-5 text-[hsl(var(--primary))] flex-shrink-0" />
+            
+            <textarea
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Ask anything..."
+              className="flex-1 min-h-[40px] max-h-[200px] bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none text-base"
+              rows={1}
+            />
             
             <Button
-              onClick={handleSendMessage}
-              disabled={!inputValue.trim() || isLoading}
-              className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-white h-[56px] px-6"
+              variant="ghost"
+              className="h-10 w-10 p-0 hover:bg-[hsl(var(--sidebar-hover))] rounded-full"
+              title="Voice input"
             >
-              <Send className="w-5 h-5" />
+              <Mic className="w-5 h-5 text-muted-foreground" />
             </Button>
 
             <Button
-              variant="outline"
-              className="h-[56px] w-[56px] p-0 border-[hsl(var(--card-border))] hover:bg-[hsl(var(--sidebar-hover))]"
-              title="Voice input"
+              onClick={handleSendMessage}
+              disabled={!inputValue.trim() || isLoading}
+              className="bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-white h-10 w-10 p-0 rounded-full"
             >
-              <Mic className="w-5 h-5" />
+              <Send className="w-4 h-4" />
             </Button>
           </div>
           
-          <p className="text-xs text-muted-foreground mt-2 text-center">
+          <p className="text-xs text-muted-foreground mt-3 text-center">
             Press Enter to send, Shift+Enter for new line
           </p>
         </div>
