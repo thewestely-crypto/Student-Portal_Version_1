@@ -155,30 +155,72 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
 
       {/* Chat Area */}
       <div className="flex-1 overflow-y-auto p-6">
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className="max-w-4xl mx-auto">
           {messages.length === 0 ? (
-            /* Empty State with Suggestions */
-            <div className="space-y-12 py-12">
-              <div className="text-center space-y-4">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl animate-pulse">
-                  <Sparkles className="w-10 h-10 text-white" />
+            /* Empty State - Reorganized Layout */
+            <div className="space-y-8 py-8">
+              {/* Heading - Icon and Text on Same Line */}
+              <div className="flex items-center justify-center gap-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl animate-pulse">
+                  <Sparkles className="w-8 h-8 text-white" />
                 </div>
                 <h2 className="text-4xl font-bold bg-gradient-to-r from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] bg-clip-text text-transparent">
                   Talk to Homie
                 </h2>
               </div>
 
-              {/* Suggested Queries - Clean Design */}
-              <div className="grid grid-cols-2 gap-3 max-w-3xl mx-auto">
-                {suggestedQueries.map((query, index) => (
-                  <div
-                    key={index}
-                    className="p-4 rounded-lg cursor-pointer hover:bg-[hsl(var(--card-bg))] transition-all border border-[hsl(var(--card-border))] hover:border-[hsl(var(--primary))] group"
-                    onClick={() => handleSuggestedQuery(query)}
-                  >
-                    <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{query}</p>
+              {/* Input Field - Right Below Heading */}
+              <div className="max-w-3xl mx-auto">
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 flex items-center gap-3 p-4 bg-[hsl(var(--card-bg))] rounded-xl border-2 border-[hsl(var(--card-border))] focus-within:border-[hsl(var(--primary))] transition-all shadow-lg">
+                    <MessageCircle className="w-5 h-5 text-[hsl(var(--primary))] flex-shrink-0" />
+                    
+                    <textarea
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Ask anything..."
+                      className="flex-1 min-h-[40px] max-h-[200px] bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none text-base"
+                      rows={1}
+                    />
+                    
+                    <Button
+                      variant="ghost"
+                      className="h-10 w-10 p-0 hover:bg-[hsl(var(--sidebar-hover))] rounded-full"
+                      title="Voice input"
+                    >
+                      <Mic className="w-5 h-5 text-muted-foreground" />
+                    </Button>
                   </div>
-                ))}
+
+                  <Button
+                    onClick={handleSendMessage}
+                    disabled={!inputValue.trim() || isLoading}
+                    className="bg-gradient-to-r from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] hover:opacity-90 text-white h-[72px] px-8 text-base font-semibold shadow-lg"
+                  >
+                    Talk to Homie
+                  </Button>
+                </div>
+                
+                <p className="text-xs text-muted-foreground mt-3 text-center">
+                  Press Enter to send, Shift+Enter for new line
+                </p>
+              </div>
+
+              {/* Suggested Queries - Below Input Field */}
+              <div className="max-w-3xl mx-auto">
+                <h3 className="text-sm font-semibold text-muted-foreground mb-4 text-center">Suggested Questions</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {suggestedQueries.map((query, index) => (
+                    <div
+                      key={index}
+                      className="p-4 rounded-lg cursor-pointer hover:bg-[hsl(var(--card-bg))] transition-all border border-[hsl(var(--card-border))] hover:border-[hsl(var(--primary))] group"
+                      onClick={() => handleSuggestedQuery(query)}
+                    >
+                      <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{query}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
