@@ -2,11 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Sparkles, Lock, Zap, ArrowRight, Flag, Flame, Diamond, Heart } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Sparkles, Lock, Zap, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 import ActivityProgressList from './ActivityProgressList';
 import HomieChatPanel from './HomieChatPanel';
+import StatsBar from './StatsBar';
 
 export default function RightPanel({ totalXP = 0, journeyMode = false, learningPackData = null, onStartJourney, currentSelection = { subject: '', chapter: '' }, chatMode = false, onChatClose, prefilledText = '', onClearPrefilledText }) {
   const baseGems = 505;
