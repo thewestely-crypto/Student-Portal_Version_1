@@ -169,47 +169,40 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250 }) {
                 </h2>
               </div>
 
-              {/* Input Field - Right Below Heading */}
-              <div className="max-w-3xl mx-auto">
-                <div className="flex items-center gap-3">
-                  <div className="flex-1 flex items-center gap-3 p-4 bg-[hsl(var(--card-bg))] rounded-xl border-2 border-[hsl(var(--card-border))] focus-within:border-[hsl(var(--primary))] transition-all shadow-lg">
-                    <MessageCircle className="w-5 h-5 text-[hsl(var(--primary))] flex-shrink-0" />
-                    
-                    <textarea
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                      placeholder="Ask anything..."
-                      className="flex-1 min-h-[40px] max-h-[200px] bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none text-base"
-                      rows={1}
-                    />
-                    
-                    <Button
-                      variant="ghost"
-                      className="h-10 w-10 p-0 hover:bg-[hsl(var(--sidebar-hover))] rounded-full"
-                      title="Voice input"
-                    >
-                      <Mic className="w-5 h-5 text-muted-foreground" />
-                    </Button>
-                  </div>
+              {/* Input Field - Clean and Simple */}
+              <div className="max-w-2xl mx-auto">
+                <div className="flex items-center gap-2">
+                  <textarea
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Ask Anything..."
+                    className="flex-1 min-h-[48px] max-h-[200px] px-4 py-3 bg-[hsl(var(--card-bg))] border border-[hsl(var(--card-border))] rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[hsl(var(--primary))] resize-none"
+                    rows={1}
+                  />
+                  
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-12 w-12 hover:bg-[hsl(var(--sidebar-hover))]"
+                    title="Voice input"
+                  >
+                    <Mic className="w-5 h-5 text-muted-foreground" />
+                  </Button>
 
                   <Button
                     onClick={handleSendMessage}
                     disabled={!inputValue.trim() || isLoading}
-                    className="bg-gradient-to-r from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] hover:opacity-90 text-white h-[72px] px-8 text-base font-semibold shadow-lg"
+                    size="icon"
+                    className="h-12 w-12 bg-[hsl(var(--primary))] hover:bg-[hsl(var(--teal-glow))] text-white"
                   >
-                    Talk to Homie
+                    <Send className="w-5 h-5" />
                   </Button>
                 </div>
-                
-                <p className="text-xs text-muted-foreground mt-3 text-center">
-                  Press Enter to send, Shift+Enter for new line
-                </p>
               </div>
 
-              {/* Suggested Queries - Below Input Field */}
-              <div className="max-w-3xl mx-auto">
-                <h3 className="text-sm font-semibold text-muted-foreground mb-4 text-center">Suggested Questions</h3>
+              {/* Suggested Queries */}
+              <div className="max-w-2xl mx-auto">
                 <div className="grid grid-cols-2 gap-3">
                   {suggestedQueries.map((query, index) => (
                     <div
