@@ -304,9 +304,10 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
             /* Notes View with Floating Icons */
             <div className="relative">
               <div ref={notesRef} className="p-8 space-y-6">
-                <h1 className="text-3xl font-bold text-foreground mb-8 border-b border-[hsl(var(--card-border))] pb-4">
-                  {notesContent.title}
-                </h1>
+                <h1 
+                  className="text-3xl font-bold text-foreground mb-8 border-b border-[hsl(var(--card-border))] pb-4"
+                  dangerouslySetInnerHTML={{ __html: highlightText(notesContent.title) }}
+                />
                 
                 {notesContent.sections.map((section, index) => (
                   <div key={index} className="space-y-3">
