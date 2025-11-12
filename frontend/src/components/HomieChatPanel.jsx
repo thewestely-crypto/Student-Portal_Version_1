@@ -322,7 +322,8 @@ export default function HomieChatPanel({ totalXP = 0, onClose, prefilledText = '
                   </div>
                 )}
               </div>
-            ))}
+              );
+            })}
             <div ref={messagesEndRef} />
           </>
         )}
