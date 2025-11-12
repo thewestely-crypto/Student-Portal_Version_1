@@ -159,18 +159,20 @@ export default function Dashboard() {
         </div>
       </div>
       
-      {/* Right Panel */}
-      <RightPanel 
-        totalXP={totalXP}
-        journeyMode={journeyMode}
-        learningPackData={learningPackData}
-        onStartJourney={handleStartJourney}
-        currentSelection={currentSelection}
-        chatMode={chatMode}
-        onChatClose={handleCloseChatMode}
-        prefilledText={prefilledText}
-        onClearPrefilledText={() => setPrefilledText('')}
-      />
+      {/* Right Panel - Hidden in Chat Section */}
+      {activeSection !== 'chat' && (
+        <RightPanel 
+          totalXP={totalXP}
+          journeyMode={journeyMode}
+          learningPackData={learningPackData}
+          onStartJourney={handleStartJourney}
+          currentSelection={currentSelection}
+          chatMode={chatMode}
+          onChatClose={handleCloseChatMode}
+          prefilledText={prefilledText}
+          onClearPrefilledText={() => setPrefilledText('')}
+        />
+      )}
     </div>
   );
 }
