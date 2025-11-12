@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Fix the critical syntax error in ChatPage.jsx that was causing the application to crash with a white screen. The error was introduced while implementing the 'View Full Chapter' feature that allows users to view chapter content directly within the CHAT page without navigating away."
+user_problem_statement: "Implement split-screen layout in CHAT page when viewing full chapter. Left side should show TextbookViewer with all buttons and functionality, right side should show HomieChatPanel (Talk to Homie). Top section remains the same with dropdowns and stats. Reuse existing components from LEARN page."
 
 frontend:
   - task: "Fix Critical Syntax Error in ChatPage.jsx"
