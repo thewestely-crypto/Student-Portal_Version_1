@@ -87,6 +87,7 @@ export default function Dashboard() {
           )}
           {activeSection === 'chat' && (
             <ChatPage 
+              totalXP={totalXP}
               onNavigateToChapter={(viewType) => {
                 setActiveSection('learn');
                 // Navigate to chapter view (implement based on your navigation logic)
