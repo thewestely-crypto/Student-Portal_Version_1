@@ -188,10 +188,12 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
           </Card>
         </div>
 
-        {/* Right side: Stats Bar - EXACT same component, position unchanged */}
-        <div className="w-96 p-6">
-          <StatsBar totalXP={totalXP} />
-        </div>
+        {/* Right side: Stats Bar - Only show when NOT viewing chapter (to avoid duplication with HomieChatPanel) */}
+        {!viewingChapter && (
+          <div className="w-96 p-6">
+            <StatsBar totalXP={totalXP} />
+          </div>
+        )}
       </div>
 
       {/* Main Content Area - Either Chat or Split-Screen Chapter View */}
