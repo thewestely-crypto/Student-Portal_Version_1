@@ -86,13 +86,7 @@ export default function Dashboard() {
             />
           )}
           {activeSection === 'chat' && (
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center space-y-4">
-                <div className="text-6xl">💬</div>
-                <h2 className="text-3xl font-bold text-foreground">Chat</h2>
-                <p className="text-muted-foreground">AI-powered tutor coming soon</p>
-              </div>
-            </div>
+            <ChatPage />
           )}
           {activeSection === 'quests' && (
             <div className="flex items-center justify-center h-full">
