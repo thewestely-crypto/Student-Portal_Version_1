@@ -9,23 +9,6 @@ import HomieChatPanel from './HomieChatPanel';
 import StatsBar from './StatsBar';
 
 export default function RightPanel({ totalXP = 0, journeyMode = false, learningPackData = null, onStartJourney, currentSelection = { subject: '', chapter: '' }, chatMode = false, onChatClose, prefilledText = '', onClearPrefilledText }) {
-  const baseGems = 505;
-  const currentGems = baseGems + totalXP;
-  const [animateGems, setAnimateGems] = useState(false);
-  const [xpIncrement, setXpIncrement] = useState(0);
-
-  // Trigger animation when totalXP changes
-  useEffect(() => {
-    if (totalXP > 0) {
-      setAnimateGems(true);
-      setXpIncrement(totalXP);
-      const timer = setTimeout(() => {
-        setAnimateGems(false);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [totalXP]);
-
   const handleStartJourneyClick = () => {
     // Check if valid selection exists
     if (currentSelection.subject === 'physics' && currentSelection.chapter === 'ch8') {
@@ -41,13 +24,6 @@ export default function RightPanel({ totalXP = 0, journeyMode = false, learningP
       });
     }
   };
-
-  const stats = [
-    { icon: Flag, value: 2, label: 'Lessons', gradient: 'from-blue-400 via-blue-500 to-blue-600', shine: false },
-    { icon: Flame, value: 2, label: 'Day Streak', gradient: 'from-orange-400 via-orange-500 to-red-500', shine: false },
-    { icon: Diamond, value: currentGems, label: 'Gems', gradient: 'from-purple-400 via-fuchsia-500 to-pink-500', shine: true },
-    { icon: Heart, value: 5, label: 'Lives', gradient: 'from-pink-400 via-rose-500 to-rose-600', shine: false },
-  ];
 
   // If chat mode is active, show HomieChatPanel instead
   if (chatMode) {
