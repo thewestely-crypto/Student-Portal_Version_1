@@ -385,8 +385,9 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
                 <Send className="w-5 h-5" />
               </Button>
             </div>
+            </div>
           </div>
-        </div>
+        )}
       )}
     </div>
   );
