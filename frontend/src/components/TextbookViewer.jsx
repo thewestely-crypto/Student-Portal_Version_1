@@ -341,6 +341,17 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
           {showNotes ? (
             /* Notes View with Floating Icons */
             <div className="relative">
+              {/* Fixed Add Note Button - Top Right inside content */}
+              <Button
+                onClick={handleAddNote}
+                className="fixed top-4 right-8 z-50 bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg"
+                size="sm"
+                title="Add a sticky note"
+              >
+                <StickyNoteIcon className="w-4 h-4 mr-2" />
+                Add Note
+              </Button>
+
               <div ref={notesRef} className="p-8 space-y-6">
                 <h1 
                   className="text-3xl font-bold text-foreground mb-8 border-b border-[hsl(var(--card-border))] pb-4"
