@@ -70,6 +70,11 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
     }
   };
 
+  const handleAddNote = () => {
+    const newNote = addNote();
+    toast.success('New note created!');
+  };
+
   // Handle text selection in notes view
   useEffect(() => {
     if (!showNotes || !notesRef.current) return;
