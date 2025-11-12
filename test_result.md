@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the updated Homie.ai sidebar with new navigation structure including LEARNING section (Learn, Chat, Quests), DISCOVERY section (Curiosity Centre, Leaderboard, Shop), bottom section (Profile, More), and Community in footer with neon gradient effects."
+user_problem_statement: "Fix the critical syntax error in ChatPage.jsx that was causing the application to crash with a white screen. The error was introduced while implementing the 'View Full Chapter' feature that allows users to view chapter content directly within the CHAT page without navigating away."
 
 frontend:
   - task: "Updated Sidebar Navigation Structure"
