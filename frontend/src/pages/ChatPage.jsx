@@ -30,7 +30,15 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
   // Get lesson data for selected chapter
   const getLessonData = () => {
     if (selectedSubject === 'physics' && selectedChapter === 'ch8') {
-      return chapterContent.physics.ch8;
+      const chapter = chapterContent.physics.ch8;
+      // Create a lesson object with the required properties for TextbookViewer
+      return {
+        ...chapter,
+        fullTitle: chapter.title,
+        textbookImage: chapter.subsections && chapter.subsections[0] 
+          ? chapter.subsections[0].textbookImage 
+          : 'https://customer-assets.emergentagent.com/job_smart-edu-portal-9/artifacts/lu9ucc9u_Screenshot%202025-11-10%20180322.png'
+      };
     }
     return null;
   };
