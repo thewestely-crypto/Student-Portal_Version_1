@@ -269,6 +269,8 @@ export default function LearningPath({ onXPEarned, journeyMode, onJourneyModeCha
           onClose={handleCloseTextbook}
           onXPEarned={onXPEarned}
           onAskHomie={onAskHomie}
+          onStartJourney={() => onJourneyModeChange(true)}
+          journeyMode={journeyMode}
         />
       ) : (
         <>
