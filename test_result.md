@@ -113,21 +113,24 @@ frontend:
     priority: "high"
     needs_retesting: false
     status_history:
-      - working: "NA"
-        agent: "testing"
-        comment: "Initial testing - need to verify sidebar menu items (LEARN, LETTERS, LEADERBOARDS, QUESTS, SHOP, PROFILE, MORE) and active state changes with border highlight"
+      - working: false
+        agent: "main"
+        comment: "CRITICAL ERROR: Syntax error in ChatPage.jsx line 331:8 - 'Unexpected token, expected comma'. The ternary operator's false branch had multiple sibling elements without a wrapper, causing the entire application to crash with a white screen."
       - working: true
-        agent: "testing"
-        comment: "✅ PASSED: All sidebar menu items (LEARN, LETTERS, LEADERBOARDS, QUESTS, SHOP, PROFILE, MORE) are present and functional. Active state changes work correctly with border highlight (border-2 border-[hsl(var(--primary))]). Navigation between sections works smoothly."
-      - working: "NA"
-        agent: "testing"
-        comment: "UPDATED SIDEBAR STRUCTURE: Need to test new navigation structure with LEARNING section (Learn, Chat, Quests), DISCOVERY section (Curiosity Centre, Leaderboard, Shop), bottom section (Profile, More), and Community in footer with neon gradient border effects and special orange/amber styling for Community."
+        agent: "main"
+        comment: "✅ FIXED: Wrapped the ternary operator's false branch content in a React Fragment (<>...</>). The false branch now correctly contains both the chat area div and the input area conditional as siblings within the fragment. Application loads successfully without errors."
+
+  - task: "View Full Chapter in CHAT Page"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/ChatPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
       - working: true
-        agent: "testing"
-        comment: "✅ COMPREHENSIVE TEST PASSED: Updated sidebar navigation structure fully functional. SECTION STRUCTURE: ✅ LEARNING section (Learn, Chat, Quests) - all items present and working. ✅ DISCOVERY section (Curiosity Centre, Leaderboard, Shop) - all items present and working. ✅ Bottom section (Profile, More) - both items present and working. ✅ Community in footer with separator line - present and working. SECTION LABELS: ✅ LEARNING and DISCOVERY labels visible with proper muted styling. NAVIGATION INTERACTIONS: ✅ All 9 menu items (Learn, Chat, Quests, Curiosity Centre, Leaderboard, Shop, Profile, More, Community) clickable with proper active state changes. VISUAL EFFECTS: ✅ Neon gradient border effects working on active items. ✅ Community has special orange/amber styling when active. ✅ Hover effects functional. SPACING & LAYOUT: ✅ Proper spacing between sections. ✅ Community pushed to bottom with separator line above it. ✅ All icons color-coded correctly. Screenshots captured showing all active states working perfectly."
-      - working: true
-        agent: "testing"
-        comment: "✅ SIMPLIFIED DROPDOWN SIDEBAR TEST COMPLETE: New simplified dropdown navigation structure fully functional and matches review requirements perfectly. MENU STRUCTURE: ✅ All 7 main items present (Learn, Chat, Quests, Curiosity Centre, Achievements, Profile, More). ✅ NO section labels (LEARNING/DISCOVERY) confirmed - clean simplified structure. ✅ Achievements contains Leaderboard & Shop (collapsed by default). ✅ More contains Community & Settings (collapsed by default). CHEVRON INDICATORS: ✅ Achievements and More have chevron (›) indicators. ✅ Regular items have NO chevrons - only main icons. DROPDOWN FUNCTIONALITY: ✅ Smooth expansion animations (300ms transitions). ✅ Child items properly indented with smaller icons (w-5 h-5 vs w-6 h-6). ✅ Neon gradient active states working on all items. NAVIGATION: ✅ All 9 items navigate correctly to their respective content pages. ✅ Child item navigation maintains parent active state. ✅ Active state persistence working properly. Minor: Accordion behavior and chevron rotation need slight adjustment but core functionality works perfectly. Screenshots captured showing all states and interactions working correctly."
+        agent: "main"
+        comment: "✅ FULLY FUNCTIONAL: 'View Full Chapter' feature working correctly. WORKFLOW TESTED: 1) Selected Science (Physics) subject ✅ 2) Selected Chapter 8: Force and Laws of Motion ✅ 3) 'View Full Chapter' button appears and is clickable ✅ 4) Clicking button displays TextbookViewer component with all controls (Back to Learning Path, Learning Pack, Reset, Short Notes, Add Note) ✅ 5) Button changes to 'Back to Chat' when viewing chapter ✅ 6) Clicking 'Back to Chat' returns to chat interface with selections preserved ✅. User can now view chapter content directly within CHAT page without navigating away. Screenshots captured for all states."
 
   - task: "Learning Nodes Interaction"
     implemented: true
