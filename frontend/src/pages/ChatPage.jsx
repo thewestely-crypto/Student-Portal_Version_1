@@ -15,6 +15,7 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [viewingChapter, setViewingChapter] = useState(false);
+  const [prefilledText, setPrefilledText] = useState('');
   const messagesEndRef = useRef(null);
 
   // Get available subjects and chapters
