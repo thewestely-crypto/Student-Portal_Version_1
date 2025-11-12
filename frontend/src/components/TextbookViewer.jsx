@@ -439,6 +439,18 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
                   position={item.notesPosition}
                 />
               ))}
+
+              {/* Sticky Notes */}
+              {notes.map((note) => (
+                <StickyNote
+                  key={note.id}
+                  note={note}
+                  onUpdate={updateNote}
+                  onDelete={deleteNote}
+                  onPositionChange={updatePosition}
+                  containerRef={notesRef}
+                />
+              ))}
             </div>
           ) : (
             /* Textbook Image View with Floating Icons */
