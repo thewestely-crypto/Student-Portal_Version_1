@@ -160,8 +160,8 @@ export default function Dashboard() {
         </div>
       </div>
       
-      {/* Right Panel - Hidden in Chat Section */}
-      {activeSection !== 'chat' && (
+      {/* Right Panel - Only shown in LEARN section */}
+      {activeSection === 'learn' && (
         <RightPanel 
           totalXP={totalXP}
           journeyMode={journeyMode}
