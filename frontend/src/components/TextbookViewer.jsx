@@ -288,9 +288,11 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
                     </h2>
                     <ul className="space-y-2 text-muted-foreground leading-relaxed">
                       {section.points.map((point, idx) => (
-                        <li key={idx} className="pl-4">
-                          {point}
-                        </li>
+                        <li 
+                          key={idx} 
+                          className="pl-4"
+                          dangerouslySetInnerHTML={{ __html: highlightText(point) }}
+                        />
                       ))}
                     </ul>
                   </div>
