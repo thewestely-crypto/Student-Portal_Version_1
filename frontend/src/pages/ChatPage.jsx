@@ -49,8 +49,12 @@ export default function ChatPage({ onNavigateToChapter, totalXP = 1250, onXPEarn
     setViewingChapter(true);
   };
 
-  const handleBackToChat = () => {
+  const handleCloseChapterView = () => {
     setViewingChapter(false);
+  };
+
+  const handleAskHomieWithText = (selectedText) => {
+    setPrefilledText(selectedText);
   };
 
   // Suggested queries
