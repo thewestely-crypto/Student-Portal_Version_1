@@ -161,30 +161,51 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
 
   // Wrap highlighted text with mark tags
   const highlightText = (text) => {
-    if (!highlights.length) return text;
+    if (!highlights.length || !text) return text;
     
-    let highlightedText = text;
+    let result = text;
     
-    // Sort highlights by length (longest first) to avoid partial matches
+    // Sort highlights by length (longest first) to handle overlapping highlights better
     const sortedHighlights = [...highlights].sort((a, b) => b.text.length - a.text.length);
     
     sortedHighlights.forEach(highlight => {
-      // Escape special regex characters
-      const escapedText = highlight.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const highlightText = highlight.text;
       
-      // Try exact match first
-      const exactRegex = new RegExp(`(${escapedText})`, 'gi');
-      
-      // Check if text contains this highlight (case-insensitive partial match)
-      if (exactRegex.test(text)) {
-        highlightedText = highlightedText.replace(
-          exactRegex,
-          `<mark data-highlight-id="${highlight.id}" class="bg-yellow-300 cursor-pointer hover:bg-yellow-400 transition-colors">$1</mark>`
-        );
+      // Skip if already processed (avoid double-wrapping)
+      if (result.includes(`data-highlight-id="${highlight.id}"`)) {
+        return;
       }
+      
+      // Handle multi-line highlights (text might contain newlines from selection)
+      // Split the highlight text into lines and try to match each part
+      const highlightLines = highlightText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      
+      highlightLines.forEach(line => {
+        // Escape special regex characters
+        const escapedLine = line.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        
+        // Create regex for case-insensitive partial matching
+        // This will match the text even if it's part of a larger string
+        const regex = new RegExp(`(${escapedLine})`, 'gi');
+        
+        // Replace all occurrences
+        result = result.replace(regex, (match) => {
+          // Check if this text is already inside a mark tag
+          const beforeMatch = result.substring(0, result.indexOf(match));
+          const lastMarkOpen = beforeMatch.lastIndexOf('<mark');
+          const lastMarkClose = beforeMatch.lastIndexOf('</mark>');
+          
+          // If we're inside a mark tag, don't highlight again
+          if (lastMarkOpen > lastMarkClose) {
+            return match;
+          }
+          
+          return `<mark data-highlight-id="${highlight.id}" class="bg-yellow-300 cursor-pointer hover:bg-yellow-400 transition-colors">${match}</mark>`;
+        });
+      });
     });
     
-    return highlightedText;
+    return result;
   };
 
   const notesContent = {
