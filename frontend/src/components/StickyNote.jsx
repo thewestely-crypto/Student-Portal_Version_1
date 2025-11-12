@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { StickyNote as StickyNoteIcon, X, Save } from 'lucide-react';
+import { StickyNote as StickyNoteIcon, X, Save, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function StickyNote({ note, onUpdate, onDelete, onPositionChange, containerRef }) {
@@ -54,6 +54,10 @@ export default function StickyNote({ note, onUpdate, onDelete, onPositionChange,
     };
   }, [isDragging, dragOffset, note.id, onPositionChange, containerRef]);
 
+  const handleHeadingChange = (e) => {
+    onUpdate(note.id, { heading: e.target.value });
+  };
+
   const handleContentChange = (e) => {
     onUpdate(note.id, { content: e.target.value });
   };
@@ -62,8 +66,13 @@ export default function StickyNote({ note, onUpdate, onDelete, onPositionChange,
     onUpdate(note.id, { isOpen: false });
   };
 
+  const handleClose = () => {
+    // Just close/minimize without deleting
+    onUpdate(note.id, { isOpen: false });
+  };
+
   const handleDelete = () => {
-    if (window.confirm('Delete this note?')) {
+    if (window.confirm('Delete this note permanently?')) {
       onDelete(note.id);
     }
   };
@@ -75,7 +84,7 @@ export default function StickyNote({ note, onUpdate, onDelete, onPositionChange,
   };
 
   if (note.isOpen) {
-    // Open/Edit mode - larger card with textarea
+    // Open/Edit mode - larger card with heading and textarea
     return (
       <div
         ref={noteRef}
@@ -88,27 +97,46 @@ export default function StickyNote({ note, onUpdate, onDelete, onPositionChange,
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <StickyNoteIcon className="w-5 h-5 text-yellow-700" />
-            <span className="text-sm font-semibold text-yellow-900">Sticky Note</span>
+            {note.heading && (
+              <span className="text-sm font-semibold text-yellow-900">{note.heading}</span>
+            )}
           </div>
           <Button
-            onClick={handleDelete}
+            onClick={handleClose}
             size="sm"
             variant="ghost"
-            className="h-6 w-6 p-0 hover:bg-red-200"
+            className="h-6 w-6 p-0 hover:bg-yellow-200"
           >
-            <X className="w-4 h-4 text-red-600" />
+            <X className="w-4 h-4 text-yellow-800" />
           </Button>
         </div>
+        
+        <input
+          type="text"
+          value={note.heading}
+          onChange={handleHeadingChange}
+          placeholder="Heading (optional)"
+          className="w-full mb-2 p-2 bg-yellow-50 border border-yellow-300 rounded text-sm font-semibold text-gray-800 placeholder:text-gray-500 placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        />
         
         <textarea
           value={note.content}
           onChange={handleContentChange}
           placeholder="Type your note here..."
           className="w-full min-h-[120px] p-2 bg-yellow-50 border border-yellow-300 rounded text-sm text-gray-800 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 resize-y"
-          autoFocus
+          autoFocus={!note.heading}
         />
         
-        <div className="mt-3 flex justify-end">
+        <div className="mt-3 flex justify-between items-center">
+          <Button
+            onClick={handleDelete}
+            size="sm"
+            variant="outline"
+            className="bg-red-100 border-red-300 text-red-700 hover:bg-red-200"
+          >
+            <Trash2 className="w-3 h-3 mr-1" />
+            Delete
+          </Button>
           <Button
             onClick={handleSave}
             size="sm"
@@ -134,7 +162,7 @@ export default function StickyNote({ note, onUpdate, onDelete, onPositionChange,
         }}
         onMouseDown={handleMouseDown}
         onClick={handleIconClick}
-        title="Click to open note"
+        title={note.heading || "Click to open note"}
       >
         <StickyNoteIcon className="w-5 h-5 text-yellow-900" />
       </div>
