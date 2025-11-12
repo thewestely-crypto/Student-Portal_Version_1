@@ -1,4 +1,4 @@
-import { ArrowLeft, BookText, RotateCcw, Sparkles, Highlighter, X, StickyNote as StickyNoteIcon } from 'lucide-react';
+import { ArrowLeft, BookText, RotateCcw, Sparkles, Highlighter, X, StickyNote as StickyNoteIcon, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useRef, useEffect } from 'react';
 import FloatingActivityIcon from './FloatingActivityIcon';
