@@ -311,7 +311,7 @@ export default function TextbookViewer({ lesson, onClose, onXPEarned, onAskHomie
                     onClick={handleHighlightClick}
                     size="sm"
                     variant="outline"
-                    className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-foreground hover:bg-[hsl(var(--sidebar-hover))] shadow-lg"
+                    className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-foreground hover:bg-yellow-400/20 hover:border-yellow-400 hover:text-foreground shadow-lg"
                   >
                     <Highlighter className="w-3 h-3 mr-1" />
                     Highlight
