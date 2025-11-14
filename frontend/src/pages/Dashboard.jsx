@@ -106,13 +106,7 @@ export default function Dashboard() {
             </div>
           )}
           {activeSection === 'curiosity' && (
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center space-y-4">
-                <div className="text-6xl">✨</div>
-                <h2 className="text-3xl font-bold text-foreground">Curiosity Centre</h2>
-                <p className="text-muted-foreground">Extended learning beyond school curriculum</p>
-              </div>
-            </div>
+            <CuriosityCentre />
           )}
           {activeSection === 'leaderboard' && (
             <div className="flex items-center justify-center h-full">
