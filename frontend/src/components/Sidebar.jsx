@@ -90,7 +90,7 @@ export default function Sidebar({ activeSection, setActiveSection }) {
                   if (item.type === 'expandable') {
                     handleParentClick(item.id);
                   } else {
-                    setActiveSection(item.id);
+                    handleItemClick(item.id);
                   }
                 }}
                 className={cn(
