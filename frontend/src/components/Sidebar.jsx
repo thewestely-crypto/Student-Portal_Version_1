@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Home, MessageCircle, Target, Sparkles, Trophy, ShoppingBag, User, MoreHorizontal, Users, Settings, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
