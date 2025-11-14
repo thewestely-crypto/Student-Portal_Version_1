@@ -34,6 +34,8 @@ const menuItems = [
 ];
 
 export default function Sidebar({ activeSection, setActiveSection }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [expandedItem, setExpandedItem] = useState(null);
 
   const handleParentClick = (itemId) => {
@@ -44,6 +46,17 @@ export default function Sidebar({ activeSection, setActiveSection }) {
   const handleChildClick = (childId, parentId) => {
     setActiveSection(childId);
     // Keep parent expanded when child is clicked
+  };
+
+  const handleItemClick = (itemId) => {
+    // Special handling for curiosity - navigate to route
+    if (itemId === 'curiosity') {
+      navigate('/curiosity');
+    } else {
+      // For other sections, use the setActiveSection callback
+      // which will be handled by Dashboard
+      setActiveSection(itemId);
+    }
   };
 
   const isChildActive = (item) => {
