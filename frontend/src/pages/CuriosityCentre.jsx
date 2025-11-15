@@ -226,8 +226,9 @@ export default function CuriosityCentre() {
             {/* Related News removed from here - moved to sidebar */}
           </div>
 
-          {/* Right Sidebar - Explore More Topics */}
+          {/* Right Sidebar - Explore More Topics + Related News */}
           <div className="w-80 space-y-6">
+            {/* Explore More Topics */}
             <Card className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
               <CardContent className="p-6 space-y-4">
                 <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
@@ -265,6 +266,66 @@ export default function CuriosityCentre() {
                 >
                   View All Topics
                   <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Related News - Compact Design */}
+            <Card className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+              <CardContent className="p-6 space-y-4">
+                <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[hsl(var(--primary))]" />
+                  Related News
+                </h3>
+
+                <div className="space-y-3">
+                  {relatedNews.map((news) => (
+                    <Card
+                      key={news.id}
+                      className="bg-[hsl(var(--main-bg))] border-[hsl(var(--card-border))] overflow-hidden hover:border-[hsl(var(--primary))] transition-all cursor-pointer group"
+                      onClick={() => handleNewsClick(news)}
+                    >
+                      <CardContent className="p-3">
+                        {/* Horizontal compact layout */}
+                        <div className="flex gap-3">
+                          {/* Small thumbnail on left */}
+                          <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
+                            <img
+                              src={news.image}
+                              alt={news.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <Badge className="absolute top-1 left-1 bg-[hsl(var(--primary))] text-white text-[10px] px-1.5 py-0.5">
+                              {news.category}
+                            </Badge>
+                          </div>
+                          
+                          {/* Content on right */}
+                          <div className="flex-1 min-w-0 space-y-1">
+                            <h4 className="font-bold text-xs text-foreground group-hover:text-[hsl(var(--primary))] transition-colors line-clamp-2 leading-tight">
+                              {news.title}
+                            </h4>
+                            <p className="text-[10px] text-muted-foreground line-clamp-2 leading-tight">
+                              {news.summary}
+                            </p>
+                            <div className="flex items-center justify-between text-[9px] text-muted-foreground pt-1">
+                              <span className="truncate">{news.source}</span>
+                              <span className="flex-shrink-0 ml-2">{news.readTime}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  className="w-full bg-[hsl(var(--main-bg))] border-[hsl(var(--card-border))] text-[hsl(var(--primary))] hover:bg-[hsl(var(--sidebar-hover))] text-sm"
+                  onClick={() => navigate('/curiosity/news')}
+                >
+                  View All News
+                  <ArrowRight className="w-3 h-3 ml-2" />
                 </Button>
               </CardContent>
             </Card>
