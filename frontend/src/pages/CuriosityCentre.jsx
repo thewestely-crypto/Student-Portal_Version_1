@@ -42,15 +42,8 @@ export default function CuriosityCentre({ totalXP = 1250 }) {
     book: { icon: Book, color: 'from-orange-500 to-amber-600', buttonText: 'Read Now' }
   };
 
-  // Category tabs (CORE / GO DEEPER)
-  const categoryTabs = [
-    { id: 'all', label: 'All', icon: Sparkles },
-    { id: 'core', label: 'CORE', icon: CheckCircle },
-    { id: 'go-deeper', label: 'GO DEEPER', icon: Rocket }
-  ];
-
   // Content type tabs
-  const contentTypeTabs = [
+  const tabs = [
     { id: 'all', label: 'All', icon: Sparkles },
     { id: 'video', label: 'Videos', icon: Video },
     { id: 'tool', label: 'Tools', icon: Wrench },
