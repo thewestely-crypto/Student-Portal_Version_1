@@ -33,7 +33,7 @@ function App() {
           } />
           <Route path="/curiosity/topics/:id" element={
             <Layout activeSection="curiosity">
-              <GeneralTopicsPage />
+              <TopicContentPage />
             </Layout>
           } />
           <Route path="/curiosity/news" element={
