@@ -11,7 +11,8 @@ export default function TopicContentPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [activeCategory, setActiveCategory] = useState('all'); // CORE, GO DEEPER filter
+  const [showCore, setShowCore] = useState(true); // Show CORE checkbox
+  const [showGoDeeper, setShowGoDeeper] = useState(true); // Show GO DEEPER checkbox
   const [activeTab, setActiveTab] = useState('all'); // Content type filter
   const [searchQuery, setSearchQuery] = useState('');
 
