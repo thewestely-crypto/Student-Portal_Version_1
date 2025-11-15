@@ -168,6 +168,108 @@ export const generalTopics = [
   }
 ];
 
+// Topic-specific content (Astrophysics)
+export const topicContent = {
+  'topic-1': { // Astrophysics
+    title: 'Astrophysics',
+    description: 'Explore the mysteries of the cosmos - from black holes to the birth of galaxies',
+    items: [
+      {
+        id: 'astro-video-1',
+        type: 'video',
+        category: 'core',
+        title: 'Introduction to Black Holes',
+        description: 'Understanding the most mysterious objects in the universe',
+        duration: '8 min',
+        thumbnail: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=400&h=300&fit=crop',
+        youtubeUrl: 'https://www.youtube.com/watch?v=example1'
+      },
+      {
+        id: 'astro-simulation-1',
+        type: 'simulation',
+        category: 'core',
+        title: 'Galaxy Formation Simulator',
+        description: 'Watch galaxies form and evolve over billions of years',
+        duration: '10 min',
+        thumbnail: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400&h=300&fit=crop',
+        url: '/simulations/galaxy-formation'
+      },
+      {
+        id: 'astro-video-2',
+        type: 'video',
+        category: 'go-deeper',
+        title: 'Dark Matter and Dark Energy',
+        description: 'Exploring the invisible forces shaping our universe',
+        duration: '12 min',
+        thumbnail: 'https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=400&h=300&fit=crop',
+        youtubeUrl: 'https://www.youtube.com/watch?v=example2'
+      },
+      {
+        id: 'astro-tool-1',
+        type: 'tool',
+        category: 'core',
+        title: 'Star Life Cycle Calculator',
+        description: 'Calculate the lifespan and evolution of different star types',
+        duration: '5 min',
+        thumbnail: 'https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=400&h=300&fit=crop',
+        url: '/tools/star-lifecycle'
+      },
+      {
+        id: 'astro-course-1',
+        type: 'course',
+        category: 'go-deeper',
+        title: 'Cosmology Fundamentals',
+        description: 'From the Big Bang to the fate of the universe',
+        duration: '15 min',
+        thumbnail: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop',
+        lessons: 8,
+        url: '/courses/cosmology-fundamentals'
+      },
+      {
+        id: 'astro-simulation-2',
+        type: 'simulation',
+        category: 'go-deeper',
+        title: 'Gravitational Lensing Lab',
+        description: 'Experiment with how massive objects bend spacetime and light',
+        duration: '9 min',
+        thumbnail: 'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=400&h=300&fit=crop',
+        url: '/simulations/gravitational-lensing'
+      },
+      {
+        id: 'astro-book-1',
+        type: 'book',
+        category: 'go-deeper',
+        title: 'A Brief History of Time',
+        description: 'Stephen Hawking\'s classic guide to the universe',
+        duration: '60 min read',
+        thumbnail: 'https://images.unsplash.com/photo-1531685250784-7569952593d2?w=400&h=300&fit=crop',
+        pages: 256,
+        url: '/books/brief-history-time'
+      },
+      {
+        id: 'astro-video-3',
+        type: 'video',
+        category: 'core',
+        title: 'The Life and Death of Stars',
+        description: 'From stellar birth in nebulae to supernova explosions',
+        duration: '10 min',
+        thumbnail: 'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=400&h=300&fit=crop',
+        youtubeUrl: 'https://www.youtube.com/watch?v=example3'
+      },
+      {
+        id: 'astro-tool-2',
+        type: 'tool',
+        category: 'core',
+        title: 'Exoplanet Discovery Tool',
+        description: 'Analyze data to discover planets around distant stars',
+        duration: '7 min',
+        thumbnail: 'https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=400&h=300&fit=crop',
+        url: '/tools/exoplanet-discovery'
+      }
+    ]
+  }
+};
+
 // Related News Articles
 export const relatedNews = [
   {
