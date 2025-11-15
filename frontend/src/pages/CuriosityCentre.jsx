@@ -155,7 +155,7 @@ export default function CuriosityCentre({ totalXP = 1250 }) {
             />
             <span className="text-sm font-semibold text-foreground group-hover:text-[hsl(var(--orange-warm))] transition-colors flex items-center gap-2">
               <CheckCircle className="w-4 h-4" />
-              Show CORE
+              CORE
             </span>
           </label>
 
@@ -168,7 +168,7 @@ export default function CuriosityCentre({ totalXP = 1250 }) {
             />
             <span className="text-sm font-semibold text-foreground group-hover:text-purple-400 transition-colors flex items-center gap-2">
               <Rocket className="w-4 h-4" />
-              Show GO DEEPER
+              GO DEEPER
             </span>
           </label>
         </div>
