@@ -4,6 +4,7 @@ import Dashboard from '@/pages/Dashboard';
 import CuriosityCentre from '@/pages/CuriosityCentre';
 import ContentDetailPage from '@/pages/ContentDetailPage';
 import GeneralTopicsPage from '@/pages/GeneralTopicsPage';
+import TopicContentPage from '@/pages/TopicContentPage';
 import NewsDetailPage from '@/pages/NewsDetailPage';
 import AllNewsPage from '@/pages/AllNewsPage';
 import Layout from '@/components/Layout';
