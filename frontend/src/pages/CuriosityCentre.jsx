@@ -20,12 +20,13 @@ export default function CuriosityCentre({ totalXP = 1250 }) {
   // Get content items
   const contentItems = curiosityCentreContent.physics?.ch8?.items || [];
 
-  // Filter content based on active tab and search
+  // Filter content based on category, content type, and search
   const filteredContent = contentItems.filter(item => {
+    const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
     const matchesTab = activeTab === 'all' || item.type === activeTab;
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesTab && matchesSearch;
+    return matchesCategory && matchesTab && matchesSearch;
   });
 
   // Content type config
