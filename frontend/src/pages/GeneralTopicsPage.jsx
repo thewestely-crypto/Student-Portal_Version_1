@@ -102,7 +102,26 @@ export default function GeneralTopicsPage() {
               </CardContent>
             </Card>
           ))}
-        </div>
+          </div>
+        ) : (
+          /* No Results Message */
+          <div className="text-center py-16">
+            <div className="space-y-4">
+              <div className="text-6xl">🔍</div>
+              <h2 className="text-2xl font-bold text-foreground">No topics found</h2>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                We couldn't find any topics matching "{searchQuery}". Try a different search term.
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => setSearchQuery('')}
+                className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-[hsl(var(--primary))] hover:bg-[hsl(var(--sidebar-hover))]"
+              >
+                Clear Search
+              </Button>
+            </div>
+          </div>
+        )}
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
