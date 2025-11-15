@@ -147,13 +147,47 @@ export default function CuriosityCentre({ totalXP = 1250 }) {
           />
         </div>
 
-        {/* Filter Tabs */}
+        {/* Filter Tabs - Category + Content Type */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2">
-          {tabs.map((tab) => {
+          {/* Category Filters */}
+          {categoryTabs.map((tab) => {
             const Icon = tab.icon;
+            const isActive = activeCategory === tab.id;
+            
+            // Special styling for CORE and GO DEEPER
+            let activeStyles = 'bg-[hsl(var(--primary))] text-white border-[hsl(var(--primary))]';
+            if (isActive && tab.id === 'core') {
+              activeStyles = 'bg-[hsl(var(--orange-warm))] text-white border-[hsl(var(--orange-warm))]';
+            } else if (isActive && tab.id === 'go-deeper') {
+              activeStyles = 'bg-gradient-to-r from-purple-500 to-pink-600 text-white border-transparent';
+            }
+            
             return (
               <Button
                 key={tab.id}
+                onClick={() => setActiveCategory(tab.id)}
+                variant={isActive ? 'default' : 'outline'}
+                className={`${
+                  isActive
+                    ? activeStyles
+                    : 'bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-gray-300 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white'
+                } flex items-center gap-2 whitespace-nowrap`}
+              >
+                <Icon className="w-4 h-4" />
+                {tab.label}
+              </Button>
+            );
+          })}
+
+          {/* Visual Separator */}
+          <div className="h-8 w-px bg-[hsl(var(--card-border))] mx-1"></div>
+
+          {/* Content Type Filters */}
+          {contentTypeTabs.map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <Button
+                key={`type-${tab.id}`}
                 onClick={() => setActiveTab(tab.id)}
                 variant={activeTab === tab.id ? 'default' : 'outline'}
                 className={`${
