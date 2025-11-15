@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Search, Video, Wrench, FlaskConical, BookOpen, Book, ArrowRight, Clock, Sparkles, ArrowLeft } from 'lucide-react';
+import { Search, Video, Wrench, FlaskConical, BookOpen, Book, ArrowRight, Clock, Sparkles, ArrowLeft, Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
