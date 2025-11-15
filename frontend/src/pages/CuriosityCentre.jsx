@@ -72,49 +72,57 @@ export default function CuriosityCentre({ totalXP = 1250 }) {
 
   return (
     <div className="flex flex-col h-full bg-[hsl(var(--main-bg))] overflow-y-auto">
-      {/* Top Section - Compact Gradient Card with Dropdowns */}
-      <div className="px-6 py-4">
-        <Card className="bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] border-0 shadow-xl p-4">
-          <div className="flex items-center gap-4">
-            <div className="flex-1">
-              <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-sm h-10">
-                  <SelectValue placeholder="Subject" />
-                </SelectTrigger>
-                <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
-                  {subjects.map(subject => (
-                    <SelectItem 
-                      key={subject.value} 
-                      value={subject.value}
-                      className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium"
-                    >
-                      {subject.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+      {/* Top Section - Gradient Card with Dropdowns (left) + Stats Bar (right) */}
+      <div className="flex items-center justify-between px-6 py-4">
+        {/* Left: Gradient Card with Dropdowns */}
+        <div className="flex-1 max-w-3xl">
+          <Card className="bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--teal-vivid))] border-0 shadow-xl p-4">
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-sm h-10">
+                    <SelectValue placeholder="Subject" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+                    {subjects.map(subject => (
+                      <SelectItem 
+                        key={subject.value} 
+                        value={subject.value}
+                        className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium"
+                      >
+                        {subject.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
 
-            <div className="flex-1">
-              <Select value={selectedChapter} onValueChange={setSelectedChapter}>
-                <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-sm h-10">
-                  <SelectValue placeholder="Chapter" />
-                </SelectTrigger>
-                <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
-                  {chapters.map(chapter => (
-                    <SelectItem 
-                      key={chapter.value} 
-                      value={chapter.value}
-                      className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium"
-                    >
-                      {chapter.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="flex-1">
+                <Select value={selectedChapter} onValueChange={setSelectedChapter}>
+                  <SelectTrigger className="bg-[hsl(var(--main-bg))]/90 border-[hsl(var(--main-bg))]/30 text-white hover:bg-[hsl(var(--main-bg))] font-semibold text-sm h-10">
+                    <SelectValue placeholder="Chapter" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))]">
+                    {chapters.map(chapter => (
+                      <SelectItem 
+                        key={chapter.value} 
+                        value={chapter.value}
+                        className="text-gray-200 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white cursor-pointer font-medium"
+                      >
+                        {chapter.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </div>
+
+        {/* Right: Stats Bar - Exact copy from CHAT page */}
+        <div className="w-96 p-6">
+          <StatsBar totalXP={totalXP} />
+        </div>
       </div>
 
       {/* Search and Tabs Section */}
