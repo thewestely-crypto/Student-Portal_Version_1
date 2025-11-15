@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Video, Wrench, FlaskConical, BookOpen, Book, ArrowRight, Clock, Sparkles } from 'lucide-react';
+import { Search, Video, Wrench, FlaskConical, BookOpen, Book, ArrowRight, Clock, Sparkles, Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
