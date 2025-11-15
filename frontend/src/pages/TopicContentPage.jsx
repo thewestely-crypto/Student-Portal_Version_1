@@ -11,7 +11,8 @@ export default function TopicContentPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('all'); // CORE, GO DEEPER filter
+  const [activeTab, setActiveTab] = useState('all'); // Content type filter
   const [searchQuery, setSearchQuery] = useState('');
 
   // Get topic data
