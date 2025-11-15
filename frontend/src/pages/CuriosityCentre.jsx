@@ -223,56 +223,7 @@ export default function CuriosityCentre() {
               })}
             </div>
 
-            {/* Related News Section */}
-            <div className="mt-12">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                  <Sparkles className="w-6 h-6 text-[hsl(var(--primary))]" />
-                  Related News
-                </h2>
-                <Button
-                  variant="outline"
-                  className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-[hsl(var(--primary))] hover:bg-[hsl(var(--sidebar-hover))]"
-                  onClick={() => navigate('/curiosity/news')}
-                >
-                  View All News
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {relatedNews.map((news) => (
-                  <Card
-                    key={news.id}
-                    className="bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] overflow-hidden hover:border-[hsl(var(--primary))] transition-all duration-300 hover:shadow-xl cursor-pointer group"
-                    onClick={() => handleNewsClick(news)}
-                  >
-                    <div className="relative h-40 overflow-hidden">
-                      <img
-                        src={news.image}
-                        alt={news.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <Badge className="absolute top-3 left-3 bg-[hsl(var(--primary))] text-white text-xs">
-                        {news.category}
-                      </Badge>
-                    </div>
-                    <CardContent className="p-4 space-y-2">
-                      <h3 className="text-base font-bold text-foreground group-hover:text-[hsl(var(--primary))] transition-colors line-clamp-2">
-                        {news.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground line-clamp-2">
-                        {news.summary}
-                      </p>
-                      <div className="flex items-center justify-between text-xs text-muted-foreground pt-2">
-                        <span>{news.source}</span>
-                        <span>{news.readTime}</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
+            {/* Related News removed from here - moved to sidebar */}
           </div>
 
           {/* Right Sidebar - Explore More Topics */}
