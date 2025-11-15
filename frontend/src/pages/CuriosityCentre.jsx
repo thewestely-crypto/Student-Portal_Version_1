@@ -13,7 +13,8 @@ export default function CuriosityCentre({ totalXP = 1250 }) {
   const navigate = useNavigate();
   const [selectedSubject, setSelectedSubject] = useState('physics');
   const [selectedChapter, setSelectedChapter] = useState('ch8');
-  const [activeCategory, setActiveCategory] = useState('all'); // CORE, GO DEEPER filter
+  const [showCore, setShowCore] = useState(true); // Show CORE checkbox
+  const [showGoDeeper, setShowGoDeeper] = useState(true); // Show GO DEEPER checkbox
   const [activeTab, setActiveTab] = useState('all'); // Content type filter
   const [searchQuery, setSearchQuery] = useState('');
 
