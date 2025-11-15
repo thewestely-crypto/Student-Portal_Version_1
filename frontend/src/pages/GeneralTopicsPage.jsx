@@ -143,6 +143,23 @@ export default function GeneralTopicsPage() {
           </Card>
         </div>
       </div>
+
+      {/* Floating Homie Mascot - Bottom Right Corner */}
+      <div 
+        className="fixed bottom-8 right-8 z-20 cursor-pointer"
+        onClick={() => {
+          console.log('Homie clicked!');
+        }}
+      >
+        <div className="relative animate-float hover:scale-110 transition-transform duration-300">
+          <div className="w-20 h-20 bg-gradient-to-br from-[hsl(var(--green-bright))] to-[hsl(var(--accent))] rounded-full flex items-center justify-center shadow-2xl glow-green">
+            <Sparkles className="w-10 h-10 text-[hsl(var(--main-bg))]" />
+          </div>
+          <div className="absolute -top-1 -right-1 w-6 h-6 bg-[hsl(var(--orange-warm))] rounded-full flex items-center justify-center shadow-lg">
+            <span className="text-[hsl(var(--main-bg))] text-[10px] font-bold">Hi!</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
