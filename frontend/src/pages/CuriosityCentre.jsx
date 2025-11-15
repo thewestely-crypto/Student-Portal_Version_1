@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import StatsBar from '@/components/StatsBar';
 import { curiosityCentreContent, generalTopics, relatedNews } from '@/data/curiosityCentreContent';
 import { useNavigate } from 'react-router-dom';
 
-export default function CuriosityCentre() {
+export default function CuriosityCentre({ totalXP = 1250 }) {
   const navigate = useNavigate();
   const [selectedSubject, setSelectedSubject] = useState('physics');
   const [selectedChapter, setSelectedChapter] = useState('ch8');
