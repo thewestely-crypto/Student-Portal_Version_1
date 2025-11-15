@@ -115,47 +115,42 @@ export default function TopicContentPage() {
           />
         </div>
 
-        {/* Filter Tabs - Category + Content Type */}
+        {/* Category Checkboxes */}
+        <div className="flex items-center gap-6">
+          <label className="flex items-center gap-2 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={showCore}
+              onChange={(e) => setShowCore(e.target.checked)}
+              className="w-5 h-5 rounded border-2 border-[hsl(var(--card-border))] bg-[hsl(var(--card-bg))] checked:bg-[hsl(var(--orange-warm))] checked:border-[hsl(var(--orange-warm))] cursor-pointer transition-all"
+            />
+            <span className="text-sm font-semibold text-foreground group-hover:text-[hsl(var(--orange-warm))] transition-colors flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              Show CORE
+            </span>
+          </label>
+
+          <label className="flex items-center gap-2 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={showGoDeeper}
+              onChange={(e) => setShowGoDeeper(e.target.checked)}
+              className="w-5 h-5 rounded border-2 border-[hsl(var(--card-border))] bg-[hsl(var(--card-bg))] checked:bg-gradient-to-r checked:from-purple-500 checked:to-pink-600 checked:border-transparent cursor-pointer transition-all"
+            />
+            <span className="text-sm font-semibold text-foreground group-hover:text-purple-400 transition-colors flex items-center gap-2">
+              <Rocket className="w-4 h-4" />
+              Show GO DEEPER
+            </span>
+          </label>
+        </div>
+
+        {/* Content Type Filter Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2">
-          {/* Category Filters */}
-          {categoryTabs.map((tab) => {
+          {tabs.map((tab) => {
             const Icon = tab.icon;
-            const isActive = activeCategory === tab.id;
-            
-            // Special styling for CORE and GO DEEPER
-            let activeStyles = 'bg-[hsl(var(--primary))] text-white border-[hsl(var(--primary))]';
-            if (isActive && tab.id === 'core') {
-              activeStyles = 'bg-[hsl(var(--orange-warm))] text-white border-[hsl(var(--orange-warm))]';
-            } else if (isActive && tab.id === 'go-deeper') {
-              activeStyles = 'bg-gradient-to-r from-purple-500 to-pink-600 text-white border-transparent';
-            }
-            
             return (
               <Button
                 key={tab.id}
-                onClick={() => setActiveCategory(tab.id)}
-                variant={isActive ? 'default' : 'outline'}
-                className={`${
-                  isActive
-                    ? activeStyles
-                    : 'bg-[hsl(var(--card-bg))] border-[hsl(var(--card-border))] text-gray-300 hover:bg-[hsl(var(--sidebar-hover))] hover:text-white'
-                } flex items-center gap-2 whitespace-nowrap`}
-              >
-                <Icon className="w-4 h-4" />
-                {tab.label}
-              </Button>
-            );
-          })}
-
-          {/* Visual Separator */}
-          <div className="h-8 w-px bg-[hsl(var(--card-border))] mx-1"></div>
-
-          {/* Content Type Filters */}
-          {contentTypeTabs.map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <Button
-                key={`type-${tab.id}`}
                 onClick={() => setActiveTab(tab.id)}
                 variant={activeTab === tab.id ? 'default' : 'outline'}
                 className={`${
